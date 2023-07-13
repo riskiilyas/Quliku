@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:quliku/screen/welcome_screen.dart';
 
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: WelcomeScreen(title: 'Flutter Demo Home Page'),
+        home: const WelcomeScreen(),
         // home: MultiBlocProvider(
         //     providers: [],
         //     child: const WelcomeScreen(title: 'Flutter Demo Home Page')
