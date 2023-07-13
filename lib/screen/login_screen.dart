@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:quliku/screen/register_screen.dart';
 import 'package:quliku/util/Constants.dart';
 import 'package:quliku/widget/custom_button.dart';
 import 'package:quliku/widget/custom_text_field.dart';
@@ -28,107 +30,112 @@ class _MyHomePageState extends State<LoginScreen> {
     return Scaffold(
       body: SafeArea(
           child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-            child: Column(
-              children: [
-                Expanded(
-                  child: ListView(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                'Masuk',
+        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          Text(
+                            'Masuk',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 24,
+                                color: Constants.COLOR_TITLE),
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Text(
+                            'Gunakan akun yang telah didaftarkan!',
+                            style: TextStyle(color: Constants.COLOR_TEXT),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 48,
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: Center(
+                      child: SizedBox(
+                        width: 280,
+                        child: Image.asset(
+                          'assets/login_img.png',
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 48,
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      children: const [
+                        CustomTextField(
+                            hint: "Email/Username", icon: Icons.email),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        CustomTextField(hint: "Password", icon: Icons.password),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      children: [
+                        CustomButton(
+                            text: "MASUK",
+                            textColor: Colors.white,
+                            buttonColor: Constants.COLOR_MAIN,
+                            onPressed: () => {}),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        Row(
+                          children: [
+                            const Text(
+                              'Belum Punya Akun? ',
+                              style: TextStyle(
+                                  color: Constants.COLOR_HINT_TEXT,
+                                  fontSize: 16),
+                            ),
+                            InkWell(
+                              onTap: () => {Get.to(const RegisterScreen())},
+                              child: const Text(
+                                'Yuk Daftar!',
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 24,
-                                    color: Constants.COLOR_TITLE),
+                                    color: Constants.COLOR_MAIN,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
                               ),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Text(
-                                'Gunakan akun yang telah didaftarkan!',
-                                style: TextStyle(color: Constants.COLOR_TEXT),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 48,
-                      ),
-                      Expanded(
-                        flex: 3,
-                        child: Center(
-                          child: SizedBox(
-                            width: 280,
-                            child: Image.asset(
-                              'assets/login_img.png',
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 48,
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: Column(
-                          children: [
-                            CustomTextField(hint: "Email/Username", icon: Icons.email),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            CustomTextField(hint: "Password", icon: Icons.password),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 32,
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          children: [
-                            CustomButton(text: "DAFTAR", textColor: Colors.white, buttonColor: Constants.COLOR_MAIN, onPressed: () => {}),
-                            const SizedBox(
-                              height: 12,
-                            ),
-                            Row(
-                              children: [
-                                const Text(
-                                  'Belum Punya Akun? ',
-                                  style: TextStyle(
-                                      color: Constants.COLOR_HINT_TEXT,
-                                      fontSize: 16),
-                                ),
-                                InkWell(
-                                  onTap: () => {},
-                                  child: const Text(
-                                    'Yuk Daftar!',
-                                    style: TextStyle(
-                                        color: Constants.COLOR_MAIN,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                )
-                              ],
                             )
                           ],
-                        ),
-                      ),
-                    ],
+                        )
+                      ],
+                    ),
                   ),
-                )
-              ],
-            ),
-          )),
+                ],
+              ),
+            )
+          ],
+        ),
+      )),
     );
   }
 }

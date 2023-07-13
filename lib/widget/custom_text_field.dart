@@ -6,7 +6,7 @@ class CustomTextField extends StatefulWidget {
   final String hint;
   final IconData icon;
 
-  CustomTextField({Key? key, required this.hint, required this.icon})
+  const CustomTextField({Key? key, required this.hint, required this.icon})
       : super(key: key);
 
   @override

@@ -7,7 +7,11 @@ class CustomButton extends StatelessWidget {
   final Function() onPressed;
 
   const CustomButton(
-      {Key? key, required this.text, required this.textColor, required this.buttonColor, required this.onPressed})
+      {Key? key,
+      required this.text,
+      required this.textColor,
+      required this.buttonColor,
+      required this.onPressed})
       : super(key: key);
 
   @override
@@ -21,15 +25,12 @@ class CustomButton extends StatelessWidget {
           child: Container(
             alignment: Alignment.center,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-                color: buttonColor),
+                borderRadius: BorderRadius.circular(4), color: buttonColor),
             height: 40,
             child: Text(
               text,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: textColor),
+              style: TextStyle(fontWeight: FontWeight.bold, color: textColor),
             ),
           ),
         ),

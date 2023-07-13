@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:quliku/screen/login_screen.dart';
 import 'package:quliku/util/Constants.dart';
 import 'package:quliku/widget/custom_button.dart';
 import 'package:quliku/widget/custom_text_field.dart';
@@ -83,21 +85,21 @@ class _MyHomePageState extends State<RegisterScreen> {
                   Expanded(
                     flex: 5,
                     child: Column(
-                      children: [
+                      children: const [
                         CustomTextField(hint: "Nama Lengkap", icon: Icons.abc),
-                        const SizedBox(
+                        SizedBox(
                           height: 8,
                         ),
                         CustomTextField(hint: "Username", icon: Icons.person),
-                        const SizedBox(
+                        SizedBox(
                           height: 8,
                         ),
                         CustomTextField(hint: "Email", icon: Icons.email),
-                        const SizedBox(
+                        SizedBox(
                           height: 8,
                         ),
                         CustomTextField(hint: "Password", icon: Icons.password),
-                        const SizedBox(
+                        SizedBox(
                           height: 8,
                         ),
                         CustomTextField(
@@ -114,7 +116,11 @@ class _MyHomePageState extends State<RegisterScreen> {
                     flex: 1,
                     child: Column(
                       children: [
-                        CustomButton(text: "DAFTAR", textColor: Colors.white, buttonColor: Constants.COLOR_MAIN, onPressed: () => {}),
+                        CustomButton(
+                            text: "DAFTAR",
+                            textColor: Colors.white,
+                            buttonColor: Constants.COLOR_MAIN,
+                            onPressed: () => {}),
                         const SizedBox(
                           height: 12,
                         ),
@@ -127,7 +133,7 @@ class _MyHomePageState extends State<RegisterScreen> {
                                   fontSize: 16),
                             ),
                             InkWell(
-                              onTap: () => {},
+                              onTap: () => {Get.to(const LoginScreen())},
                               child: const Text(
                                 'Masuk',
                                 style: TextStyle(
