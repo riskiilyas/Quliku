@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:quliku/screen/home_screens/home_page.dart';
 import 'package:quliku/screen/home_screens/profil_page.dart';
-import 'package:quliku/util/Constants.dart';
+import 'package:quliku/screen/wishlist_screen.dart';
+import 'package:quliku/util/constants.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -30,7 +32,9 @@ class _MyHomePageState extends State<HomeScreen> {
               color: Constants.COLOR_TITLE, fontWeight: FontWeight.bold),
         ),
         actions: <Widget>[
-          IconButton(icon: const Icon(Icons.favorite), onPressed: () {}),
+          IconButton(icon: const Icon(Icons.favorite), onPressed: () {
+            Get.to(()=>WishListScreen());
+          }),
           IconButton(icon: const Icon(Icons.location_city), onPressed: () {}),
         ],
       ),

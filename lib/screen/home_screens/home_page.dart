@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quliku/widget/custom_mandor_item.dart';
 
-import '../../util/Constants.dart';
+import '../../util/constants.dart';
 import '../../widget/custom_klasifikasi_button.dart';
 
 class HomePage extends StatelessWidget {
@@ -124,39 +124,23 @@ class HomePage extends StatelessWidget {
                   color: Constants.COLOR_TEXT,
                 ),
               ),
-              MandorItem(
-                  fullname: "Muhammad Faris Akbar",
-                  rating: 4.5,
-                  experience: 12,
-                  rangeKuli: "40 - 70 kuli",
-                  location: "Sidoarjo",
-                  imgUrl: "assets/dummy-profile.png",
-                  onPressed: () => {}),
-              MandorItem(
-                  fullname: "Muhammad Faris Akbar",
-                  rating: 4.5,
-                  experience: 12,
-                  rangeKuli: "40 - 70 kuli",
-                  location: "Sidoarjo",
-                  imgUrl: "assets/dummy-profile.png",
-                  onPressed: () => {}),
-              MandorItem(
-                  fullname:
-                      "Muhammad Faris Akbar aasasfasefesfseesfafaesessafaesfasfasefesfasefaesfsaefaf",
-                  rating: 4.5,
-                  experience: 12,
-                  rangeKuli: "40 - 70 kuli",
-                  location: "Sidoarjo",
-                  imgUrl: "assets/dummy-profile.png",
-                  onPressed: () => {}),
-              MandorItem(
-                  fullname: "Muhammad Faris Akbar",
-                  rating: 4.5,
-                  experience: 12,
-                  rangeKuli: "40 - 70 kuli",
-                  location: "Sidoarjo",
-                  imgUrl: "assets/dummy-profile.png",
-                  onPressed: () => {}),
+              const SizedBox(
+                height: 8,
+              ),
+              Column(
+                children: List.generate(
+                    5,
+                    (index) => MandorItem(
+                          fullname:
+                              "Muhammad Faris Akbar lailatul qadrin azhari $index",
+                          rating: 4.5,
+                          experience: 12,
+                          rangeKuli: "40 - 70 kuli",
+                          location: "Sidoarjo",
+                          imgUrl: "assets/dummy-profile.png",
+                          onPressed: () => {},
+                        )),
+              ),
               const SizedBox(
                 height: 24,
               ),

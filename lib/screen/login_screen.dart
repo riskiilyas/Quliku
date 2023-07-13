@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quliku/screen/home_screen.dart';
 import 'package:quliku/screen/register_screen.dart';
-import 'package:quliku/util/Constants.dart';
+import 'package:quliku/util/constants.dart';
 import 'package:quliku/widget/custom_button.dart';
 import 'package:quliku/widget/custom_text_field.dart';
 

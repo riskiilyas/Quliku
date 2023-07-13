@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../util/Constants.dart';
+import '../../util/constants.dart';
 import '../../widget/custom_button.dart';
 import '../../widget/custom_profile_item.dart';
 
