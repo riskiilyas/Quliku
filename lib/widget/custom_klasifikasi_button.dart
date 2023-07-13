@@ -8,9 +8,9 @@ class KlasifikasiButton extends StatelessWidget {
 
   const KlasifikasiButton(
       {Key? key,
-        required this.text,
-        required this.imgUrl,
-        required this.onPressed})
+      required this.text,
+      required this.imgUrl,
+      required this.onPressed})
       : super(key: key);
 
   @override
@@ -30,14 +30,15 @@ class KlasifikasiButton extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 4,),
+          const SizedBox(
+            height: 4,
+          ),
           Text(
             text,
             style: const TextStyle(
-              color: Constants.COLOR_TEXT,
-              fontWeight: FontWeight.bold,
-              fontSize: 12
-            ),
+                color: Constants.COLOR_TEXT,
+                fontWeight: FontWeight.bold,
+                fontSize: 12),
           )
         ],
       ),
