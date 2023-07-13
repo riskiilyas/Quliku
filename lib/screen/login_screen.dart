@@ -20,11 +20,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<LoginScreen> {
-  String fullname = "";
-  String username = "";
-  String email = "";
+  String usernameOrEmail = "";
   String password = "";
-  String confirmPassword = "";
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +42,7 @@ class _MyHomePageState extends State<LoginScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: const [
                               Text(
-                                'Daftar',
+                                'Masuk',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 24,
@@ -55,7 +52,7 @@ class _MyHomePageState extends State<LoginScreen> {
                                 height: 8,
                               ),
                               Text(
-                                'Yuk segera daftarkan dirimu!',
+                                'Gunakan akun yang telah didaftarkan!',
                                 style: TextStyle(color: Constants.COLOR_TEXT),
                               )
                             ],
@@ -63,52 +60,37 @@ class _MyHomePageState extends State<LoginScreen> {
                         ),
                       ),
                       const SizedBox(
-                        height: 16,
+                        height: 48,
                       ),
                       Expanded(
                         flex: 3,
                         child: Center(
                           child: SizedBox(
-                            width: 160,
+                            width: 280,
                             child: Image.asset(
-                              'assets/register_img.png',
+                              'assets/login_img.png',
                               fit: BoxFit.fill,
                             ),
                           ),
                         ),
                       ),
                       const SizedBox(
-                        height: 16,
+                        height: 48,
                       ),
                       Expanded(
-                        flex: 5,
+                        flex: 2,
                         child: Column(
                           children: [
-                            CustomTextField(hint: "Nama Lengkap", icon: Icons.abc),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            CustomTextField(hint: "Username", icon: Icons.person),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            CustomTextField(hint: "Email", icon: Icons.email),
+                            CustomTextField(hint: "Email/Username", icon: Icons.email),
                             const SizedBox(
                               height: 8,
                             ),
                             CustomTextField(hint: "Password", icon: Icons.password),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            CustomTextField(
-                              hint: "Confirm Password",
-                              icon: Icons.password,
-                            )
                           ],
                         ),
                       ),
                       const SizedBox(
-                        height: 24,
+                        height: 32,
                       ),
                       Expanded(
                         flex: 1,
@@ -121,7 +103,7 @@ class _MyHomePageState extends State<LoginScreen> {
                             Row(
                               children: [
                                 const Text(
-                                  'Sudah Punya Akun? ',
+                                  'Belum Punya Akun? ',
                                   style: TextStyle(
                                       color: Constants.COLOR_HINT_TEXT,
                                       fontSize: 16),
@@ -129,7 +111,7 @@ class _MyHomePageState extends State<LoginScreen> {
                                 InkWell(
                                   onTap: () => {},
                                   child: const Text(
-                                    'Masuk',
+                                    'Yuk Daftar!',
                                     style: TextStyle(
                                         color: Constants.COLOR_MAIN,
                                         fontSize: 16,
