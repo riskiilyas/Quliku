@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:quliku/util/Constants.dart';
+import 'package:quliku/widget/custom_button.dart';
 import 'package:quliku/widget/custom_klasifikasi_button.dart';
 import 'package:quliku/widget/custom_mandor_item.dart';
+import 'package:quliku/widget/custom_profile_item.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -133,12 +135,19 @@ class _MyHomePageState extends State<ProfileScreen> {
                   ),
                   Card(
                     elevation: 1,
-                    child: Column(
-                      children: [
-
-                      ],
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        children: [
+                          ProfileItem(title: "Proyek Saya", icon: Icons.location_city, onPressed: ()=>{}),
+                          SizedBox(height: 12,),
+                          ProfileItem(title: "Wishllist Saya", icon: Icons.favorite, onPressed: ()=>{}),
+                        ],
+                      ),
                     ),
                   ),
+                  SizedBox(height: 24,),
+                  CustomButton(text: "Keluar", textColor: Colors.white, buttonColor: Constants.COLOR_MAIN, onPressed: ()=>{})
                 ],
               ),
             )
