@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quliku/screen/login_screen.dart';
+import 'package:quliku/screen/register_screen.dart';
 import 'package:quliku/util/Constants.dart';
 import 'package:quliku/widget/custom_button.dart';
 import 'package:quliku/widget/custom_text_field.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -18,15 +18,12 @@ class RegisterScreen extends StatefulWidget {
   // always marked "final".
 
   @override
-  State<RegisterScreen> createState() => _MyHomePageState();
+  State<LoginScreen> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<RegisterScreen> {
-  String fullname = "";
-  String username = "";
-  String email = "";
+class _MyHomePageState extends State<LoginScreen> {
+  String usernameOrEmail = "";
   String password = "";
-  String confirmPassword = "";
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +44,7 @@ class _MyHomePageState extends State<RegisterScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [
                           Text(
-                            'Daftar',
+                            'Masuk',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 24,
@@ -57,7 +54,7 @@ class _MyHomePageState extends State<RegisterScreen> {
                             height: 8,
                           ),
                           Text(
-                            'Yuk segera daftarkan dirimu!',
+                            'Gunakan akun yang telah didaftarkan!',
                             style: TextStyle(color: Constants.COLOR_TEXT),
                           )
                         ],
@@ -65,59 +62,45 @@ class _MyHomePageState extends State<RegisterScreen> {
                     ),
                   ),
                   const SizedBox(
-                    height: 16,
+                    height: 48,
                   ),
                   Expanded(
                     flex: 3,
                     child: Center(
                       child: SizedBox(
-                        width: 160,
+                        width: 280,
                         child: Image.asset(
-                          'assets/register_img.png',
+                          'assets/login_img.png',
                           fit: BoxFit.fill,
                         ),
                       ),
                     ),
                   ),
                   const SizedBox(
-                    height: 16,
+                    height: 48,
                   ),
                   Expanded(
-                    flex: 5,
+                    flex: 2,
                     child: Column(
                       children: const [
-                        CustomTextField(hint: "Nama Lengkap", icon: Icons.abc),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        CustomTextField(hint: "Username", icon: Icons.person),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        CustomTextField(hint: "Email", icon: Icons.email),
+                        CustomTextField(
+                            hint: "Email/Username", icon: Icons.email),
                         SizedBox(
                           height: 8,
                         ),
                         CustomTextField(hint: "Password", icon: Icons.password),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        CustomTextField(
-                          hint: "Confirm Password",
-                          icon: Icons.password,
-                        )
                       ],
                     ),
                   ),
                   const SizedBox(
-                    height: 24,
+                    height: 32,
                   ),
                   Expanded(
                     flex: 1,
                     child: Column(
                       children: [
                         CustomButton(
-                            text: "DAFTAR",
+                            text: "MASUK",
                             textColor: Colors.white,
                             buttonColor: Constants.COLOR_MAIN,
                             onPressed: () => {}),
@@ -127,15 +110,15 @@ class _MyHomePageState extends State<RegisterScreen> {
                         Row(
                           children: [
                             const Text(
-                              'Sudah Punya Akun? ',
+                              'Belum Punya Akun? ',
                               style: TextStyle(
                                   color: Constants.COLOR_HINT_TEXT,
                                   fontSize: 16),
                             ),
                             InkWell(
-                              onTap: () => {Get.to(const LoginScreen())},
+                              onTap: () => {Get.to(const RegisterScreen())},
                               child: const Text(
-                                'Masuk',
+                                'Yuk Daftar!',
                                 style: TextStyle(
                                     color: Constants.COLOR_MAIN,
                                     fontSize: 16,
