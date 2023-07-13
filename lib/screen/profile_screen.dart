@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quliku/util/Constants.dart';
 import 'package:quliku/widget/custom_button.dart';
-import 'package:quliku/widget/custom_klasifikasi_button.dart';
-import 'package:quliku/widget/custom_mandor_item.dart';
 import 'package:quliku/widget/custom_profile_item.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -55,7 +53,7 @@ class _MyHomePageState extends State<ProfileScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 16,
                           ),
                           Expanded(
@@ -63,16 +61,16 @@ class _MyHomePageState extends State<ProfileScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                const Text(
                                   "Husin Muhammad Assegaff Arrabbanii",
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       color: Constants.COLOR_TITLE,
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 2,
                                 ),
                                 Row(
@@ -90,25 +88,27 @@ class _MyHomePageState extends State<ProfileScreen> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 2,
                                 ),
                                 Row(
-                                  children: [
+                                  children: const [
                                     Icon(
                                       Icons.check,
                                       size: 12,
                                     ),
                                     Text(
                                       "2 Proyek Berjalan",
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         color: Constants.COLOR_TEXT,
                                         fontSize: 12,
                                       ),
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 16,),
+                                const SizedBox(
+                                  height: 16,
+                                ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -139,15 +139,29 @@ class _MyHomePageState extends State<ProfileScreen> {
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
                         children: [
-                          ProfileItem(title: "Proyek Saya", icon: Icons.location_city, onPressed: ()=>{}),
-                          SizedBox(height: 12,),
-                          ProfileItem(title: "Wishllist Saya", icon: Icons.favorite, onPressed: ()=>{}),
+                          ProfileItem(
+                              title: "Proyek Saya",
+                              icon: Icons.location_city,
+                              onPressed: () => {}),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          ProfileItem(
+                              title: "Wishllist Saya",
+                              icon: Icons.favorite,
+                              onPressed: () => {}),
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(height: 24,),
-                  CustomButton(text: "Keluar", textColor: Colors.white, buttonColor: Constants.COLOR_MAIN, onPressed: ()=>{})
+                  const SizedBox(
+                    height: 24,
+                  ),
+                  CustomButton(
+                      text: "Keluar",
+                      textColor: Colors.white,
+                      buttonColor: Constants.COLOR_MAIN,
+                      onPressed: () => {})
                 ],
               ),
             )

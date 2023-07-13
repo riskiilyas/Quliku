@@ -12,13 +12,13 @@ class MandorItem extends StatelessWidget {
 
   const MandorItem(
       {Key? key,
-        required this.fullname,
-        required this.rating,
-        required this.experience,
-        required this.rangeKuli,
-        required this.location,
-        required this.imgUrl,
-        required this.onPressed})
+      required this.fullname,
+      required this.rating,
+      required this.experience,
+      required this.rangeKuli,
+      required this.location,
+      required this.imgUrl,
+      required this.onPressed})
       : super(key: key);
 
   @override
@@ -43,7 +43,9 @@ class MandorItem extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: 12,),
+              const SizedBox(
+                width: 12,
+              ),
               Expanded(
                 flex: 4,
                 child: Column(
@@ -54,29 +56,42 @@ class MandorItem extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
-                        color: Constants.COLOR_TEXT,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold
-                      ),
+                          color: Constants.COLOR_TEXT,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(height: 4,),
+                    const SizedBox(
+                      height: 4,
+                    ),
                     Row(
                       children: [
-                        const Icon(Icons.star, color: Constants.COLOR_MAIN,size: 14,),
+                        const Icon(
+                          Icons.star,
+                          color: Constants.COLOR_MAIN,
+                          size: 14,
+                        ),
                         Text(
                           "$rating | ",
                           style: const TextStyle(
                             color: Constants.COLOR_TEXT,
                           ),
                         ),
-                        const Icon(Icons.bar_chart, color: Constants.COLOR_TEXT,size: 14,),
+                        const Icon(
+                          Icons.bar_chart,
+                          color: Constants.COLOR_TEXT,
+                          size: 14,
+                        ),
                         Text(
                           "$experience Tahun | ",
                           style: const TextStyle(
                             color: Constants.COLOR_TEXT,
                           ),
                         ),
-                        const Icon(Icons.groups, color: Constants.COLOR_TEXT,size: 14,),
+                        const Icon(
+                          Icons.groups,
+                          color: Constants.COLOR_TEXT,
+                          size: 14,
+                        ),
                         Text(
                           " $rangeKuli",
                           style: const TextStyle(
@@ -85,10 +100,16 @@ class MandorItem extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 4,),
+                    const SizedBox(
+                      height: 4,
+                    ),
                     Row(
                       children: [
-                        const Icon(Icons.pin_drop, color: Constants.COLOR_TEXT,size: 14,),
+                        const Icon(
+                          Icons.pin_drop,
+                          color: Constants.COLOR_TEXT,
+                          size: 14,
+                        ),
                         Text(
                           location,
                           maxLines: 1,

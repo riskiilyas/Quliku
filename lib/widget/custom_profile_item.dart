@@ -24,7 +24,6 @@ class ProfileItem extends StatelessWidget {
             border: Border.all(color: Constants.COLOR_MAIN),
           ),
           child: Row(
-
             children: [
               Expanded(
                 flex: 5,
@@ -35,11 +34,14 @@ class ProfileItem extends StatelessWidget {
                       color: Constants.COLOR_MAIN,
                       size: 32,
                     ),
-                    const SizedBox(width: 8,),
+                    const SizedBox(
+                      width: 8,
+                    ),
                     Text(
                       title,
                       style: const TextStyle(
-                          color: Constants.COLOR_TITLE, fontWeight: FontWeight.bold),
+                          color: Constants.COLOR_TITLE,
+                          fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
