@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../util/constants.dart';
 import '../../widget/custom_button.dart';
 import '../../widget/custom_profile_item.dart';
+import '../wishlist_screen.dart';
 
 class ProfilPage extends StatelessWidget {
   const ProfilPage({Key? key}) : super(key: key);
@@ -80,7 +82,7 @@ class ProfilPage extends StatelessWidget {
                                     size: 12,
                                   ),
                                   Text(
-                                    "2 Proyek Berjalan",
+                                    "2 Proyek Selesai",
                                     style: TextStyle(
                                       color: Constants.COLOR_TEXT,
                                       fontSize: 12,
@@ -131,6 +133,15 @@ class ProfilPage extends StatelessWidget {
                         ProfileItem(
                             title: "Wishllist Saya",
                             icon: Icons.favorite,
+                            onPressed: () => {
+                            Get.to(()=>const WishListScreen())
+                        }),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        ProfileItem(
+                            title: "Cari Mandor",
+                            icon: Icons.search,
                             onPressed: () => {}),
                       ],
                     ),
