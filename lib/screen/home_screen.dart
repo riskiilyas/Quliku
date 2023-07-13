@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:quliku/util/Constants.dart';
 import 'package:quliku/widget/custom_klasifikasi_button.dart';
+import 'package:quliku/widget/custom_mandor_item.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -33,12 +34,13 @@ class _MyHomePageState extends State<HomeScreen> {
       ),
       body: SafeArea(
         child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
           child: Column(
             children: [
               Expanded(
                 child: ListView(
                   children: [
+                    const SizedBox(height: 24,),
                     const Text(
                       "Halo, riskiilyas@gmail.com",
                       style: TextStyle(
@@ -147,6 +149,39 @@ class _MyHomePageState extends State<HomeScreen> {
                         color: Constants.COLOR_TEXT,
                       ),
                     ),
+                    MandorItem(
+                        fullname: "Muhammad Faris Akbar",
+                        rating: 4.5,
+                        experience: 12,
+                        rangeKuli: "40 - 70 kuli",
+                        location: "Sidoarjo",
+                        imgUrl: "assets/dummy-profile.png",
+                        onPressed: () => {}),
+                    MandorItem(
+                        fullname: "Muhammad Faris Akbar",
+                        rating: 4.5,
+                        experience: 12,
+                        rangeKuli: "40 - 70 kuli",
+                        location: "Sidoarjo",
+                        imgUrl: "assets/dummy-profile.png",
+                        onPressed: () => {}),
+                    MandorItem(
+                        fullname: "Muhammad Faris Akbar",
+                        rating: 4.5,
+                        experience: 12,
+                        rangeKuli: "40 - 70 kuli",
+                        location: "Sidoarjo",
+                        imgUrl: "assets/dummy-profile.png",
+                        onPressed: () => {}),
+                    MandorItem(
+                        fullname: "Muhammad Faris Akbar",
+                        rating: 4.5,
+                        experience: 12,
+                        rangeKuli: "40 - 70 kuli",
+                        location: "Sidoarjo",
+                        imgUrl: "assets/dummy-profile.png",
+                        onPressed: () => {}),
+                    const SizedBox(height: 24,),
                   ],
                 ),
               )
