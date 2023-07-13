@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quliku/screen/home_screen.dart';
 import 'package:quliku/screen/register_screen.dart';
 import 'package:quliku/util/Constants.dart';
 import 'package:quliku/widget/custom_button.dart';
@@ -103,7 +104,7 @@ class _MyHomePageState extends State<LoginScreen> {
                             text: "MASUK",
                             textColor: Colors.white,
                             buttonColor: Constants.COLOR_MAIN,
-                            onPressed: () => {}),
+                            onPressed: () => {Get.to(const HomeScreen())}),
                         const SizedBox(
                           height: 12,
                         ),
