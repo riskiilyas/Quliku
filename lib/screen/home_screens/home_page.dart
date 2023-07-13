@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:quliku/screen/cari_mandor_screen.dart';
 import 'package:quliku/widget/custom_mandor_item.dart';
 
 import '../../util/constants.dart';
 import '../../widget/custom_klasifikasi_button.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final Function() onCariMandor;
+  const HomePage({Key? key, required this.onCariMandor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +41,9 @@ class HomePage extends StatelessWidget {
                 height: 16,
               ),
               InkWell(
-                onTap: () => {},
+                onTap: (){
+                  onCariMandor();
+                  },
                 child: Container(
                     padding: const EdgeInsets.all(16.0),
                     decoration: BoxDecoration(
