@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quliku/util/Constants.dart';
+import 'package:quliku/util/constants.dart';
 
 class MandorItem extends StatelessWidget {
   final String fullname;

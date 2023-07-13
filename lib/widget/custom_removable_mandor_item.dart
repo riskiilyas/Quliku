@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quliku/util/Constants.dart';
+import 'package:quliku/util/constants.dart';
 
 class RemovableMandorItem extends StatelessWidget {
   final String fullname;
@@ -13,15 +13,14 @@ class RemovableMandorItem extends StatelessWidget {
 
   const RemovableMandorItem(
       {Key? key,
-        required this.fullname,
-        required this.rating,
-        required this.experience,
-        required this.rangeKuli,
-        required this.location,
-        required this.imgUrl,
-        required this.onPressed,
-        required this.onRemoved
-      })
+      required this.fullname,
+      required this.rating,
+      required this.experience,
+      required this.rangeKuli,
+      required this.location,
+      required this.imgUrl,
+      required this.onPressed,
+      required this.onRemoved})
       : super(key: key);
 
   @override
@@ -126,10 +125,15 @@ class RemovableMandorItem extends StatelessWidget {
                   ],
                 ),
               ),
-              Expanded(flex: 1,child: InkWell(
-                onTap: onRemoved,
-                child: const Icon(Icons.delete_forever, color: Constants.COLOR_MAIN,),
-              ))
+              Expanded(
+                  flex: 1,
+                  child: InkWell(
+                    onTap: onRemoved,
+                    child: const Icon(
+                      Icons.delete_forever,
+                      color: Constants.COLOR_MAIN,
+                    ),
+                  ))
             ],
           ),
         ),

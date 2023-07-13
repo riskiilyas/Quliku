@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quliku/screen/home_screens/home_page.dart';
-import 'package:quliku/screen/home_screens/profil_page.dart';
-import 'package:quliku/util/Constants.dart';
+import 'package:quliku/util/constants.dart';
 import 'package:quliku/widget/custom_removable_mandor_item.dart';
-
-import '../widget/custom_mandor_item.dart';
 
 class WishListScreen extends StatefulWidget {
   const WishListScreen({super.key});
@@ -35,31 +31,33 @@ class _MyHomePageState extends State<WishListScreen> {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: Expanded(
-            child: ListView.builder(
-              itemCount: indices.length,
-              itemBuilder: (BuildContext context, int index) {
-                return RemovableMandorItem(
-                  fullname: "Muhammad Faris Akbar lailatul qadrin azhari ${indices[index]}",
-                  rating: 4.5,
-                  experience: 12,
-                  rangeKuli: "40 - 70 kuli",
-                  location: "Sidoarjo",
-                  imgUrl: "assets/dummy-profile.png",
-                  onPressed: () => {},
-                  onRemoved: () {
-                    Constants.showMyDialog(context, "Ingin Hapus?", (result) {
-                      if(result) {
-                        setState(() {
-                          indices.removeAt(index);
+              child: ListView.builder(
+                  itemCount: indices.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return RemovableMandorItem(
+                      fullname:
+                          "Muhammad Faris Akbar lailatul qadrin azhari ${indices[index]}",
+                      rating: 4.5,
+                      experience: 12,
+                      rangeKuli: "40 - 70 kuli",
+                      location: "Sidoarjo",
+                      imgUrl: "assets/dummy-profile.png",
+                      onPressed: () => {},
+                      onRemoved: () {
+                        Constants.showMyDialog(context, "Ingin Hapus?",
+                            (result) {
+                          if (result) {
+                            setState(() {
+                              indices.removeAt(index);
+                            });
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('Mandor Dihapus')));
+                          }
                         });
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(content: Text('Mandor Dihapus')));
-                      }
-                    });
-                  },
-                );
-              })
-          ),
+                      },
+                    );
+                  })),
         ),
       ),
     );

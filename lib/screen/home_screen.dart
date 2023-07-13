@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:quliku/screen/home_screens/home_page.dart';
 import 'package:quliku/screen/home_screens/profil_page.dart';
 import 'package:quliku/screen/wishlist_screen.dart';
-import 'package:quliku/util/Constants.dart';
+import 'package:quliku/util/constants.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

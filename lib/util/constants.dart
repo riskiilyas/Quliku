@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class Constants {
@@ -8,8 +6,8 @@ class Constants {
   static const COLOR_TITLE = Color(0xFF505050);
   static const COLOR_TEXT = Color(0xFF707070);
 
-
-  static Future<void> showMyDialog(BuildContext context, String message, Function(bool) callback) async {
+  static Future<void> showMyDialog(
+      BuildContext context, String message, Function(bool) callback) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
