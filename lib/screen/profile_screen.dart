@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:quliku/screen/profile_screen.dart';
 import 'package:quliku/util/Constants.dart';
 import 'package:quliku/widget/custom_klasifikasi_button.dart';
 import 'package:quliku/widget/custom_mandor_item.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _MyHomePageState();
+  State<ProfileScreen> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<HomeScreen> {
+class _MyHomePageState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,14 +22,10 @@ class _MyHomePageState extends State<HomeScreen> {
         backgroundColor: Colors.white,
         centerTitle: false,
         title: const Text(
-          "Quliku",
+          "Profile",
           style: TextStyle(
               color: Constants.COLOR_TITLE, fontWeight: FontWeight.bold),
         ),
-        actions: <Widget>[
-          IconButton(icon: const Icon(Icons.favorite), onPressed: () {}),
-          IconButton(icon: const Icon(Icons.location_city), onPressed: () {}),
-        ],
       ),
       body: SafeArea(
         child: Container(
@@ -69,7 +63,7 @@ class _MyHomePageState extends State<HomeScreen> {
                           padding: const EdgeInsets.all(16.0),
                           decoration: BoxDecoration(
                             borderRadius:
-                                const BorderRadius.all(Radius.circular(24)),
+                            const BorderRadius.all(Radius.circular(24)),
                             border: Border.all(
                                 width: 4, color: Constants.COLOR_MAIN),
                           ),
@@ -211,8 +205,7 @@ class _MyHomePageState extends State<HomeScreen> {
             IconButton(
                 onPressed: () => {}, icon: const Icon(Icons.home, size: 30)),
             IconButton(
-                onPressed: () => {Get.to(() => const ProfileScreen())},
-                icon: const Icon(Icons.person, size: 30))
+                onPressed: () => {}, icon: const Icon(Icons.person, size: 30))
           ],
         ),
       ),
