@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:quliku/animation/transitions.dart';
 import 'package:quliku/screen/home_screen.dart';
 import 'package:quliku/screen/register_screen.dart';
 import 'package:quliku/util/constants.dart';
@@ -9,15 +11,6 @@ import 'package:quliku/widget/custom_text_field.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   @override
   State<LoginScreen> createState() => _MyHomePageState();
 }
@@ -25,9 +18,17 @@ class LoginScreen extends StatefulWidget {
 class _MyHomePageState extends State<LoginScreen> {
   String usernameOrEmail = "";
   String password = "";
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      Future.delayed(const Duration(seconds: 3), () {
+        Navigator.of(context)
+            .push(Transitions.welcomeRouteTransition(const HomeScreen()));
+        setState(() => isLoading = false);
+      });
+    }
     return Scaffold(
       body: SafeArea(
           child: Container(
@@ -83,13 +84,24 @@ class _MyHomePageState extends State<LoginScreen> {
                   Expanded(
                     flex: 2,
                     child: Column(
-                      children: const [
+                      children: [
                         CustomTextField(
-                            hint: "Email/Username", icon: Icons.email),
-                        SizedBox(
+                          hint: "Email/Username",
+                          icon: Icons.email,
+                          callback: (_) {
+                            usernameOrEmail = _;
+                          },
+                        ),
+                        const SizedBox(
                           height: 8,
                         ),
-                        CustomTextField(hint: "Password", icon: Icons.password),
+                        CustomTextField(
+                          hint: "Password",
+                          icon: Icons.password,
+                          callback: (_) {
+                            password = _;
+                          },
+                        ),
                       ],
                     ),
                   ),
@@ -104,7 +116,8 @@ class _MyHomePageState extends State<LoginScreen> {
                             text: "MASUK",
                             textColor: Colors.white,
                             buttonColor: Constants.COLOR_MAIN,
-                            onPressed: () => {Get.to(const HomeScreen())}),
+                            onPressed: () =>
+                                {setState(() => isLoading = true)}),
                         const SizedBox(
                           height: 12,
                         ),
@@ -125,8 +138,17 @@ class _MyHomePageState extends State<LoginScreen> {
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold),
                               ),
-                            )
+                            ),
                           ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 24),
+                          child: isLoading
+                              ? const SpinKitFadingCircle(
+                                  color: Constants.COLOR_MAIN,
+                                  size: 50.0,
+                                )
+                              : null,
                         )
                       ],
                     ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quliku/screen/cari_mandor_screen.dart';
 import 'package:quliku/screen/home_screens/home_page.dart';
 import 'package:quliku/screen/home_screens/profil_page.dart';
 import 'package:quliku/screen/wishlist_screen.dart';
@@ -14,7 +15,10 @@ class HomeScreen extends StatefulWidget {
 
 class _MyHomePageState extends State<HomeScreen> {
   int _index = 0;
-  List<Widget> pages = [const HomePage(), const ProfilPage()];
+  List<Widget> pages = [
+    HomePage(
+      onCariMandor: ()=>Get.to(()=>const CariMandorScreen()),
+    ), const ProfilPage()];
 
   @override
   Widget build(BuildContext context) {
