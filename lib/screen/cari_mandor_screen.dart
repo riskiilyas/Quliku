@@ -59,7 +59,7 @@ class _MyHomePageState extends State<CariMandorScreen> {
                                 child: Center(
                                   child: DropdownButton(
                                       icon: const Icon(Icons.construction),
-                                      value: "Infrastruktur",
+                                      value: "All",
                                       items: dropdownKlasifikasi,
                                       onChanged: (_) {}),
                                 ),
@@ -78,7 +78,7 @@ class _MyHomePageState extends State<CariMandorScreen> {
                                 child: Center(
                                   child: DropdownButton(
                                       icon: const Icon(Icons.pin_drop),
-                                      value: "Surabaya",
+                                      value: "All",
                                       items: dropdownLokasi,
                                       onChanged: (_) {}),
                                 ),
@@ -115,6 +115,7 @@ class _MyHomePageState extends State<CariMandorScreen> {
 
   List<DropdownMenuItem<String>> get dropdownKlasifikasi {
     List<DropdownMenuItem<String>> menuItems = [
+      const DropdownMenuItem(value: "All", child: Text("All")),
       const DropdownMenuItem(
           value: "Infrastruktur", child: Text("Infrastruktur")),
       const DropdownMenuItem(
@@ -127,6 +128,7 @@ class _MyHomePageState extends State<CariMandorScreen> {
 
 List<DropdownMenuItem<String>> get dropdownLokasi {
   List<DropdownMenuItem<String>> menuItems = [
+    const DropdownMenuItem(value: "All", child: Text("All")),
     const DropdownMenuItem(value: "Surabaya", child: Text("Surabaya")),
     const DropdownMenuItem(value: "Sidoarjo", child: Text("Sidoarjo")),
     const DropdownMenuItem(value: "Malang", child: Text("Malang")),

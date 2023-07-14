@@ -1,17 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:quliku/model/response/Reccomend_mandor_response.dart';
+import 'package:quliku/model/response/mandor_item.dart';
 import 'package:quliku/screen/cari_mandor_screen.dart';
+import 'package:quliku/util/service_locator.dart';
 import 'package:quliku/widget/custom_mandor_item.dart';
-
+import '../../util/fetch_status.dart';
 import '../../util/constants.dart';
 import '../../widget/custom_klasifikasi_button.dart';
 
 class HomePage extends StatelessWidget {
   final Function() onCariMandor;
-  const HomePage({Key? key, required this.onCariMandor}) : super(key: key);
+  HomePage({Key? key, required this.onCariMandor}) : super(key: key);
+  List<Mandor> reccomendMandor = [];
+  FetchStatus status = FetchStatus.INITIAL;
+
+  void _setup() async {
+    if(status==FetchStatus.INITIAL) {
+      status==FetchStatus.LOADING;
+      ReccomendMandorResponse response = await ServiceLocator.network.getReccomendedMandor();
+      try {
+        reccomendMandor = response.list;
+        status = FetchStatus.FINISH;
+      } catch(e) {
+        status = FetchStatus.ERROR;
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    _setup();
     return SafeArea(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
@@ -141,7 +161,7 @@ class HomePage extends StatelessWidget {
                 const SizedBox(
                   height: 8,
                 ),
-                Column(
+                reccomendMandor != null ? Column(
                   children: List.generate(
                       5,
                       (index) => MandorItem(
@@ -154,6 +174,9 @@ class HomePage extends StatelessWidget {
                             imgUrl: "assets/dummy-profile.png",
                             onPressed: () => {},
                           )),
+                ) : const SpinKitFadingCircle(
+                  color: Constants.COLOR_MAIN,
+                  size: 50.0,
                 ),
                 const SizedBox(
                   height: 24,
