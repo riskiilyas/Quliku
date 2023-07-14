@@ -23,17 +23,17 @@ class Constants {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Iya'),
-              onPressed: () {
-                Navigator.of(context).pop();
-                callback(true);
-              },
-            ),
-            TextButton(
-              child: const Text('Tidak'),
+              child: const Text('Tidak',style: TextStyle(fontWeight: FontWeight.bold, color: COLOR_MAIN),),
               onPressed: () {
                 Navigator.of(context).pop();
                 callback(false);
+              },
+            ),
+            TextButton(
+              child: const Text('Iya',style: TextStyle(fontWeight: FontWeight.bold, color: COLOR_MAIN),),
+              onPressed: () {
+                Navigator.of(context).pop();
+                callback(true);
               },
             ),
           ],

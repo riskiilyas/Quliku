@@ -5,8 +5,9 @@ import '../util/constants.dart';
 class CustomTextField extends StatefulWidget {
   final String hint;
   final IconData icon;
+  final Function(String) callback;
 
-  const CustomTextField({Key? key, required this.hint, required this.icon})
+  const CustomTextField({Key? key, required this.hint, required this.icon, required this.callback})
       : super(key: key);
 
   @override
@@ -14,18 +15,13 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
-  String _text = "";
   bool isHide = true;
-
-  String getText() => _text;
-
-  bool isEmpty() => _text.isEmpty;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
         obscureText: widget.icon == Icons.password && isHide ? true : false,
-        onChanged: (text) => {_text = text},
+        onChanged: widget.callback,
         decoration: InputDecoration(
             hintText: widget.hint,
             hintStyle: const TextStyle(color: Constants.COLOR_HINT_TEXT),

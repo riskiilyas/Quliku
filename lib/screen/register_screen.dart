@@ -85,26 +85,43 @@ class _MyHomePageState extends State<RegisterScreen> {
                   Expanded(
                     flex: 5,
                     child: Column(
-                      children: const [
-                        CustomTextField(hint: "Nama Lengkap", icon: Icons.abc),
-                        SizedBox(
+                      children: [
+                        CustomTextField(
+                          hint: "Nama Lengkap",
+                          icon: Icons.abc,
+                          callback: (_) => fullname = _,
+                        ),
+                        const SizedBox(
                           height: 8,
                         ),
-                        CustomTextField(hint: "Username", icon: Icons.person),
-                        SizedBox(
+                        CustomTextField(
+                          hint: "Username",
+                          icon: Icons.person,
+                          callback: (_) => username = _,
+                        ),
+                        const SizedBox(
                           height: 8,
                         ),
-                        CustomTextField(hint: "Email", icon: Icons.email),
-                        SizedBox(
+                        CustomTextField(
+                          hint: "Email",
+                          icon: Icons.email,
+                          callback: (_) => email = _,
+                        ),
+                        const SizedBox(
                           height: 8,
                         ),
-                        CustomTextField(hint: "Password", icon: Icons.password),
-                        SizedBox(
+                        CustomTextField(
+                          hint: "Password",
+                          icon: Icons.password,
+                          callback: (_) => password = _,
+                        ),
+                        const SizedBox(
                           height: 8,
                         ),
                         CustomTextField(
                           hint: "Confirm Password",
                           icon: Icons.password,
+                          callback: (_) => confirmPassword = _,
                         )
                       ],
                     ),
