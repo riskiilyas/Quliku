@@ -1,6 +1,10 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:quliku/screen/welcome_screen.dart';
+import 'bloc/bloc_reccomend_mandor.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,16 +19,23 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       home: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: const WelcomeScreen(),
-        // home: MultiBlocProvider(
-        //     providers: [],
-        //     child: const WelcomeScreen(title: 'Flutter Demo Home Page')
-        // ),
-      ),
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: AnimatedSplashScreen(
+            duration: 2000,
+            splashIconSize: 180,
+            splash: 'assets/logo_quliku.png',
+            splashTransition: SplashTransition.slideTransition,
+            pageTransitionType: PageTransitionType.bottomToTop,
+            nextScreen: MultiBlocProvider(
+              providers: [
+                BlocProvider(create: (_) => ReccomendMandorBloc()),
+              ],
+              child: const WelcomeScreen(),
+            ),
+          )),
     );
   }
 }

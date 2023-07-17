@@ -9,19 +9,22 @@ import 'package:quliku/util/constants.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+
   @override
   State<HomeScreen> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<HomeScreen> {
   int _index = 0;
-  List<Widget> pages = [
-    HomePage(
-      onCariMandor: ()=>Get.to(()=>const CariMandorScreen()),
-    ), const ProfilPage()];
+  List<Widget> pages = [];
 
   @override
   Widget build(BuildContext context) {
+    pages.add(HomePage(
+      onCariMandor: () => Get.to(() => const CariMandorScreen()),
+      blocContext: context,
+    ));
+    pages.add(const ProfilPage());
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
@@ -36,9 +39,11 @@ class _MyHomePageState extends State<HomeScreen> {
               color: Constants.COLOR_TITLE, fontWeight: FontWeight.bold),
         ),
         actions: <Widget>[
-          IconButton(icon: const Icon(Icons.favorite), onPressed: () {
-            Get.to(()=>WishListScreen());
-          }),
+          IconButton(
+              icon: const Icon(Icons.favorite),
+              onPressed: () {
+                Get.to(() => WishListScreen());
+              }),
           IconButton(icon: const Icon(Icons.location_city), onPressed: () {}),
         ],
       ),

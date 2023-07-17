@@ -1,0 +1,118 @@
+{
+  "status": "success",
+  "list": [
+    {
+      "id": 1,
+      "name": "Sudirman Budiatmono",
+      "rating": 4.5,
+      "experience": 12,
+      "min_kuli": 40,
+      "max_kuli": 70,
+      "location": "Sidoarjo",
+      "skills": [
+        {
+          "name": "Sumber Daya Air"
+        },
+        {
+          "name": "Infrastruktur"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Sudirman Budiatmono",
+      "rating": 4.5,
+      "experience": 12,
+      "min_kuli": 40,
+      "max_kuli": 70,
+      "location": "Sidoarjo",
+      "skills": [
+        {
+          "name": "Sumber Daya Air"
+        },
+        {
+          "name": "Infrastruktur"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Sudirman Budiatmono",
+      "rating": 4.5,
+      "experience": 12,
+      "min_kuli": 40,
+      "max_kuli": 70,
+      "location": "Sidoarjo",
+      "skills": [
+        {
+          "name": "Sumber Daya Air"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Sudirman Budiatmono",
+      "rating": 4.5,
+      "experience": 12,
+      "min_kuli": 40,
+      "max_kuli": 70,
+      "location": "Sidoarjo",
+      "skills": [
+        {
+          "name": "Infrastruktur"
+        },
+        {
+          "name": "Sumber Daya Air"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Sudirman Budiatmono",
+      "rating": 4.5,
+      "experience": 12,
+      "min_kuli": 40,
+      "max_kuli": 70,
+      "location": "Sidoarjo",
+      "skills": [
+        {
+          "name": "Sumber Daya Air"
+        },
+        {
+          "name": "Karya Cipta"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Sudirman Budiatmono",
+      "rating": 4.5,
+      "experience": 12,
+      "min_kuli": 40,
+      "max_kuli": 70,
+      "location": "Sidoarjo",
+      "skills": [
+        {
+          "name": "Sumber Daya Air"
+        },
+        {
+          "name": "Infrastruktur"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Sudirman Budiatmono",
+      "rating": 4.5,
+      "experience": 12,
+      "min_kuli": 40,
+      "max_kuli": 70,
+      "location": "Sidoarjo",
+      "skills": [
+        {
+          "name": "Karya Cipta"
+        }
+      ]
+    }
+  ]
+}
