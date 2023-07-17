@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
+import 'package:quliku/notifier/notifier_reccomend_mandor.dart';
 import 'package:quliku/screen/welcome_screen.dart';
 import 'bloc/bloc_reccomend_mandor.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  runApp(MultiBlocProvider(providers: [
+    ChangeNotifierProvider(create: (_) => ReccomendMandorNotifier()),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -29,12 +33,7 @@ class MyApp extends StatelessWidget {
             splash: 'assets/logo_quliku.png',
             splashTransition: SplashTransition.slideTransition,
             pageTransitionType: PageTransitionType.bottomToTop,
-            nextScreen: MultiBlocProvider(
-              providers: [
-                BlocProvider(create: (_) => ReccomendMandorBloc()),
-              ],
-              child: const WelcomeScreen(),
-            ),
+            nextScreen: const WelcomeScreen(),
           )),
     );
   }

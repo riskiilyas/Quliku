@@ -10,10 +10,10 @@ class Constants {
   static const COLOR_TEXT = Color(0xFF707070);
 
   static void goto(BuildContext context, Widget page) {
-    Get.to(MultiBlocProvider(providers: [
-          BlocProvider.value(
-              value: BlocProvider.of<ReccomendMandorBloc>(context)),
-        ], child: page));
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => page),
+    );
   }
 
   static Future<void> showMyDialog(

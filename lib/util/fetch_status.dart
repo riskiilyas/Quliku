@@ -1,6 +1,6 @@
 enum FetchStatus {
   INITIAL,
   LOADING,
-  FINISH,
+  SUCCESS,
   ERROR
 }

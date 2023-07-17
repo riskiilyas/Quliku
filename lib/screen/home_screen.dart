@@ -22,7 +22,6 @@ class _MyHomePageState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     pages.add(HomePage(
       onCariMandor: () => Get.to(() => const CariMandorScreen()),
-      blocContext: context,
     ));
     pages.add(const ProfilPage());
     return Scaffold(
