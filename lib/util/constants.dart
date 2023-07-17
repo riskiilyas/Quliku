@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:quliku/bloc/bloc_reccomend_mandor.dart';
 
 class Constants {
@@ -14,6 +15,11 @@ class Constants {
       context,
       MaterialPageRoute(builder: (context) => page),
     );
+  }
+
+  static void showSnackbar(BuildContext context, String msg) {
+    var snackBar = SnackBar(content: Text(msg));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   static Future<void> showMyDialog(

@@ -5,13 +5,14 @@ import 'package:get/get.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:quliku/notifier/notifier_reccomend_mandor.dart';
+import 'package:quliku/notifier/register_notifier.dart';
 import 'package:quliku/screen/welcome_screen.dart';
-import 'bloc/bloc_reccomend_mandor.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MultiBlocProvider(providers: [
     ChangeNotifierProvider(create: (_) => ReccomendMandorNotifier()),
+    ChangeNotifierProvider(create: (_) => RegisterNotifier()),
   ], child: const MyApp()));
 }
 
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
           ),
           home: AnimatedSplashScreen(
-            duration: 2000,
+            duration: 500,
             splashIconSize: 180,
             splash: 'assets/logo_quliku.png',
             splashTransition: SplashTransition.slideTransition,

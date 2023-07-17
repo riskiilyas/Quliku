@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:quliku/screen/login_screen.dart';
 import 'package:quliku/util/constants.dart';
+import 'package:quliku/util/fetch_status.dart';
 import 'package:quliku/widget/custom_button.dart';
 import 'package:quliku/widget/custom_text_field.dart';
+import 'package:quliku/notifier/register_notifier.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -28,9 +32,25 @@ class _MyHomePageState extends State<RegisterScreen> {
   String email = "";
   String password = "";
   String confirmPassword = "";
+  FetchStatus status = FetchStatus.INITIAL;
+
+  void _init() async {
+    context.watch<RegisterNotifier>();
+    status = context.read<RegisterNotifier>().status;
+    Future.delayed(const Duration(seconds: 1), () {
+      if (status == FetchStatus.SUCCESS) {
+        context.read<RegisterNotifier>().init();
+        Constants.showSnackbar(context, "Successfully Register!");
+        Navigator.pop(context);
+      } else if (status == FetchStatus.ERROR) {
+        Constants.showSnackbar(context, "Failed to Register!");
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    _init();
     return Scaffold(
       body: SafeArea(
           child: Container(
@@ -134,11 +154,19 @@ class _MyHomePageState extends State<RegisterScreen> {
                     flex: 1,
                     child: Column(
                       children: [
-                        CustomButton(
-                            text: "DAFTAR",
-                            textColor: Colors.white,
-                            buttonColor: Constants.COLOR_MAIN,
-                            onPressed: () => {}),
+                        status != FetchStatus.LOADING &&
+                                status != FetchStatus.SUCCESS
+                            ? CustomButton(
+                                text: "DAFTAR",
+                                textColor: Colors.white,
+                                buttonColor: Constants.COLOR_MAIN,
+                                onPressed: () {
+                                  context.read<RegisterNotifier>().fetch();
+                                })
+                            : const SpinKitFadingCircle(
+                                color: Constants.COLOR_MAIN,
+                                size: 50.0,
+                              ),
                         const SizedBox(
                           height: 12,
                         ),
