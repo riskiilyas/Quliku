@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:quliku/animation/transitions.dart';
@@ -59,9 +60,7 @@ class _MyHomePageState extends State<WelcomeScreen> {
                   textColor: Colors.white,
                   buttonColor: Constants.COLOR_MAIN,
                   onPressed: () => {
-                        Navigator.of(context).push(
-                            Transitions.welcomeRouteTransition(
-                                const LoginScreen()))
+                    Constants.goto(context, const LoginScreen())
                       })
             ])),
             const SizedBox(
@@ -72,10 +71,8 @@ class _MyHomePageState extends State<WelcomeScreen> {
                 textColor: Constants.COLOR_MAIN,
                 buttonColor: Colors.white,
                 onPressed: () => {
-                  Navigator.of(context).push(
-                      Transitions.welcomeRouteTransition(
-                          const RegisterScreen()))
-            })
+                  Constants.goto(context, const RegisterScreen())
+                })
           ],
         ),
       ),

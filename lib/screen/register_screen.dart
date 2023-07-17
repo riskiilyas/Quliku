@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:quliku/screen/login_screen.dart';
 import 'package:quliku/util/constants.dart';
@@ -150,7 +151,9 @@ class _MyHomePageState extends State<RegisterScreen> {
                                   fontSize: 16),
                             ),
                             InkWell(
-                              onTap: () => {Get.to(const LoginScreen())},
+                              onTap: () => {
+                                // Constants.goto(LoginScreen(blocContext: widget.blocContext))
+                              },
                               child: const Text(
                                 'Masuk',
                                 style: TextStyle(

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:quliku/animation/transitions.dart';
+import 'package:quliku/bloc/bloc_reccomend_mandor.dart';
 import 'package:quliku/screen/home_screen.dart';
 import 'package:quliku/screen/register_screen.dart';
+import 'package:quliku/screen/welcome_screen.dart';
 import 'package:quliku/util/constants.dart';
 import 'package:quliku/widget/custom_button.dart';
 import 'package:quliku/widget/custom_text_field.dart';
@@ -22,13 +25,6 @@ class _MyHomePageState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (isLoading) {
-      Future.delayed(const Duration(seconds: 3), () {
-        Navigator.of(context)
-            .push(Transitions.welcomeRouteTransition(const HomeScreen()));
-        setState(() => isLoading = false);
-      });
-    }
     return Scaffold(
       body: SafeArea(
           child: Container(
@@ -116,8 +112,9 @@ class _MyHomePageState extends State<LoginScreen> {
                             text: "MASUK",
                             textColor: Colors.white,
                             buttonColor: Constants.COLOR_MAIN,
-                            onPressed: () =>
-                                {setState(() => isLoading = true)}),
+                            onPressed: () => {
+                              Constants.goto(context, const HomeScreen())
+                                }),
                         const SizedBox(
                           height: 12,
                         ),
@@ -130,7 +127,9 @@ class _MyHomePageState extends State<LoginScreen> {
                                   fontSize: 16),
                             ),
                             InkWell(
-                              onTap: () => {Get.to(const RegisterScreen())},
+                              onTap: () => {
+                                // Constants.goto(RegisterScreen(blocContext: widget.blocContext,))
+                              },
                               child: const Text(
                                 'Yuk Daftar!',
                                 style: TextStyle(
