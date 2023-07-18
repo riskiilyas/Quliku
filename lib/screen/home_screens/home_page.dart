@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
-import 'package:quliku/model/response/mandor_item.dart';
+import 'package:quliku/model/model/mandor_data.dart';
 import 'package:quliku/notifier/notifier_reccomend_mandor.dart';
 import 'package:quliku/util/fetch_status.dart';
+import 'package:quliku/util/service_locator.dart';
 import 'package:quliku/widget/custom_mandor_item.dart';
 import '../../util/constants.dart';
 import '../../widget/custom_klasifikasi_button.dart';
@@ -12,7 +13,7 @@ class HomePage extends StatelessWidget {
   final Function() onCariMandor;
 
   HomePage({Key? key, required this.onCariMandor}) : super(key: key);
-  List<Mandor> reccomendMandor = [];
+  List<MandorData> reccomendMandor = [];
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,11 @@ class HomePage extends StatelessWidget {
           child: RefreshIndicator(
             color: Constants.COLOR_MAIN,
             onRefresh: () {
-              return context.read<ReccomendMandorNotifier>().fetch();
+              return ServiceLocator.prefs.then((pref) {
+                context
+                    .read<ReccomendMandorNotifier>()
+                    .fetch(pref.getString(Constants.PREF_TOKEN) ?? "");
+              });
             },
             child: ListView(
               children: [
@@ -165,17 +170,21 @@ class HomePage extends StatelessWidget {
             (index) => MandorItem(
                   fullname: reccomendMandor[index].name,
                   rating: reccomendMandor[index].rating,
-                  experience: reccomendMandor[index].experience,
+                  experience: reccomendMandor[index].details.experience,
                   rangeKuli:
-                      "${reccomendMandor[index].minKuli} - ${reccomendMandor[index].maxKuli} kuli",
-                  location: reccomendMandor[index].location,
+                      "${reccomendMandor[index].details.minPeople} - ${reccomendMandor[index].details.maxPeople} kuli",
+                  location: reccomendMandor[index].details.city,
                   imgUrl: "assets/dummy-profile.png",
                   onPressed: () => {},
                 )),
       );
     } else {
       if (status == FetchStatus.INITIAL) {
-        context.read<ReccomendMandorNotifier>().fetch();
+        ServiceLocator.prefs.then((pref) {
+          context
+              .read<ReccomendMandorNotifier>()
+              .fetch(pref.getString(Constants.PREF_TOKEN) ?? "");
+        });
         var response = context.watch<ReccomendMandorNotifier>().data;
         if (response != null) {
           reccomendMandor = response;

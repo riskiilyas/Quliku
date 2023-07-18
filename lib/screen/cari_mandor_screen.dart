@@ -97,8 +97,8 @@ class _MyHomePageState extends State<CariMandorScreen> {
                           (index) => MandorItem(
                         fullname:
                         "Muhammad Faris Akbar lailatul qadrin azhari $index",
-                        rating: 4.5,
-                        experience: 12,
+                        rating: 4,
+                        experience: "12",
                         rangeKuli: "40 - 70 kuli",
                         location: "Sidoarjo",
                         imgUrl: "assets/dummy-profile.png",

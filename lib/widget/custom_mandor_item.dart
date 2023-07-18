@@ -3,8 +3,8 @@ import 'package:quliku/util/constants.dart';
 
 class MandorItem extends StatelessWidget {
   final String fullname;
-  final double rating;
-  final int experience;
+  final int rating;
+  final String experience;
   final String rangeKuli;
   final String location;
   final String imgUrl;

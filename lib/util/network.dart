@@ -1,16 +1,20 @@
 import 'dart:convert';
 
-import 'package:flutter/services.dart';
-import 'package:quliku/model/response/Reccomend_mandor_response.dart';
 import 'package:quliku/model/response/login/login_response.dart';
+import 'package:quliku/model/response/mandor_reccomend/mandor_reccomendation_response.dart';
 import 'package:quliku/model/response/register/register_response.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class Network {
-  Future<ReccomendMandorResponse> getReccomendedMandor() async {
-    var jsonText = await rootBundle.loadString('assets/json/list_mandor.json');
-    return ReccomendMandorResponse.fromJson(json.decode(jsonText));
+  Future<MandorReccomendationResponse> getReccomendedMandor(String token) async {
+    var baseurl = dotenv.env['BASE_URL'] ?? "";
+
+    final response = await http.Client().get(Uri.parse('$baseurl/api/contractor/foreman/recommendation'), headers: {
+      "Authorization": "Bearer $token"
+    });
+    if (response.statusCode >= 400) throw Exception();
+    return MandorReccomendationResponse.fromJson(json.decode(response.body));
   }
 
   Future<RegisterResponse> register(name, username, email, password, password_conf) async {
