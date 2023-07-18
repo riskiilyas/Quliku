@@ -10,7 +10,9 @@ class MandorDetailResponse {
   MandorDetailResponse.fromJson(dynamic json) {
     success = json['success'];
     message = json['message'];
-    data = (json['data'] != null ? MandorDetailData.fromJson(json['data']) : null)!;
+    data = (json['data'] != null
+        ? MandorDetailData.fromJson(json['data'])
+        : null)!;
   }
 
   late bool success;
@@ -21,9 +23,7 @@ class MandorDetailResponse {
     final map = <String, dynamic>{};
     map['success'] = success;
     map['message'] = message;
-    if (data != null) {
-      map['data'] = data.toJson();
-    }
+    map['data'] = data.toJson();
     return map;
   }
 }

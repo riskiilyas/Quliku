@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quliku/model/response/login/data.dart';
 import 'package:quliku/util/constants.dart';
 import 'package:quliku/util/fetch_status.dart';
-import 'package:quliku/util/network.dart';
 import 'package:quliku/util/service_locator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

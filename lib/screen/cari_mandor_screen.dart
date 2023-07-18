@@ -13,7 +13,6 @@ class CariMandorScreen extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<CariMandorScreen> {
-
   @override
   Widget build(BuildContext context) {
     context.watch<SearchMandorNotifier>();
@@ -45,8 +44,11 @@ class _MyHomePageState extends State<CariMandorScreen> {
                         child: CustomSearchBar(
                             hint: "Cari Mandor...",
                             callback: (keyword) {
-                              String classification = context.read<SearchMandorNotifier>().classification;
-                              String city = context.read<SearchMandorNotifier>().city;
+                              String classification = context
+                                  .read<SearchMandorNotifier>()
+                                  .classification;
+                              String city =
+                                  context.read<SearchMandorNotifier>().city;
                               context
                                   .read<SearchMandorNotifier>()
                                   .fetch(keyword, classification, city);
@@ -72,10 +74,15 @@ class _MyHomePageState extends State<CariMandorScreen> {
                                 child: Center(
                                   child: DropdownButton(
                                       icon: const Icon(Icons.construction),
-                                      value: context.read<SearchMandorNotifier>().classification,
+                                      value: context
+                                          .read<SearchMandorNotifier>()
+                                          .classification,
                                       items: dropdownKlasifikasi,
                                       onChanged: (_) {
-                                        if (_ != null) context.read<SearchMandorNotifier>().classification = _;
+                                        if (_ != null)
+                                          context
+                                              .read<SearchMandorNotifier>()
+                                              .classification = _;
                                       }),
                                 ),
                               )),
@@ -93,10 +100,14 @@ class _MyHomePageState extends State<CariMandorScreen> {
                             child: Center(
                               child: DropdownButton(
                                   icon: const Icon(Icons.pin_drop),
-                                  value: context.read<SearchMandorNotifier>().city,
+                                  value:
+                                      context.read<SearchMandorNotifier>().city,
                                   items: dropdownLokasi,
                                   onChanged: (_) {
-                                    if (_ != null) context.read<SearchMandorNotifier>().city = _;
+                                    if (_ != null)
+                                      context
+                                          .read<SearchMandorNotifier>()
+                                          .city = _;
                                   }),
                             ),
                           )),
@@ -127,8 +138,15 @@ class _MyHomePageState extends State<CariMandorScreen> {
                                 .experience,
                             rangeKuli:
                                 "${context.read<SearchMandorNotifier>().data[index].details.minPeople} - ${context.read<SearchMandorNotifier>().data[index].details.maxPeople} kuli",
-                            location: context.read<SearchMandorNotifier>().data[index].details.city,
-                            imgUrl: context.read<SearchMandorNotifier>().data[index].profileUrl,
+                            location: context
+                                .read<SearchMandorNotifier>()
+                                .data[index]
+                                .details
+                                .city,
+                            imgUrl: context
+                                .read<SearchMandorNotifier>()
+                                .data[index]
+                                .profileUrl,
                             onPressed: () => {},
                           )),
                 ),

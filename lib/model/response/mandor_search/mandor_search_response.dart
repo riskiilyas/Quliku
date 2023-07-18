@@ -26,9 +26,7 @@ class MandorSearchResponse {
     final map = <String, dynamic>{};
     map['success'] = success;
     map['message'] = message;
-    if (data != null) {
-      map['data'] = data.map((v) => v.toJson()).toList();
-    }
+    map['data'] = data.map((v) => v.toJson()).toList();
     return map;
   }
 }

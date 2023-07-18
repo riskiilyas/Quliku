@@ -13,14 +13,15 @@ class SearchMandorNotifier with ChangeNotifier {
   String _city = "Surabaya";
 
   String get classification => _classification;
+
   String get city => _city;
 
-  set classification(String _)  {
+  set classification(String _) {
     _classification = _;
     notifyListeners();
   }
 
-  set city(String _)  {
+  set city(String _) {
     _city = _;
     notifyListeners();
   }
@@ -30,7 +31,7 @@ class SearchMandorNotifier with ChangeNotifier {
   FetchStatus get status => _status;
 
   Future<void> fetch(String name, String classification, String city) async {
-    if(_status==FetchStatus.LOADING) return;
+    if (_status == FetchStatus.LOADING) return;
     _status = FetchStatus.LOADING;
     notifyListeners();
     try {

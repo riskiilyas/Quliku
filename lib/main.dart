@@ -15,7 +15,7 @@ import 'package:quliku/util/service_locator.dart';
 import 'package:quliku/notifier/pref_notifier.dart';
 import 'package:quliku/notifier/search_mandor_notifier.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
 
@@ -31,12 +31,13 @@ void main() async{
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
-  Widget page = WelcomeScreen();
+
+  Widget page = const WelcomeScreen();
 
   void checkLoggedIn() async {
     var prefs = ServiceLocator.prefs;
     prefs.then((value) {
-      if(value.getString(Constants.PREF_TOKEN)!=null){
+      if (value.getString(Constants.PREF_TOKEN) != null) {
         page = const HomeScreen();
       }
     });

@@ -7,7 +7,11 @@ class CustomTextField extends StatefulWidget {
   final IconData icon;
   final Function(String) callback;
 
-  const CustomTextField({Key? key, required this.hint, required this.icon, required this.callback})
+  const CustomTextField(
+      {Key? key,
+      required this.hint,
+      required this.icon,
+      required this.callback})
       : super(key: key);
 
   @override

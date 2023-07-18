@@ -26,8 +26,9 @@ class MandorDetailData {
     role = json['role'];
     profileUrl = json['profile_url'];
     rating = json['rating'];
-    details =
-        (json['details'] != null ? MandorDetailDetails.fromJson(json['details']) : null)!;
+    details = (json['details'] != null
+        ? MandorDetailDetails.fromJson(json['details'])
+        : null)!;
     if (json['images'] != null) {
       images = [];
       json['images'].forEach((v) {
@@ -64,15 +65,9 @@ class MandorDetailData {
     map['role'] = role;
     map['profile_url'] = profileUrl;
     map['rating'] = rating;
-    if (details != null) {
-      map['details'] = details.toJson();
-    }
-    if (images != null) {
-      map['images'] = images.map((v) => v.toJson()).toList();
-    }
-    if (comments != null) {
-      map['comments'] = comments.map((v) => v.toJson()).toList();
-    }
+    map['details'] = details.toJson();
+    map['images'] = images.map((v) => v.toJson()).toList();
+    map['comments'] = comments.map((v) => v.toJson()).toList();
     map['in_wishlist'] = inWishlist;
     return map;
   }

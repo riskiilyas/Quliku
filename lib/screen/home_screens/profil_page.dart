@@ -10,8 +10,14 @@ import '../../widget/custom_button.dart';
 import '../../widget/custom_profile_item.dart';
 import '../wishlist_screen.dart';
 
-class ProfilPage extends StatelessWidget {
-  ProfilPage({Key? key}) : super(key: key);
+class ProfilPage extends StatefulWidget {
+  const ProfilPage({Key? key}) : super(key: key);
+
+  @override
+  State<ProfilPage> createState() => _ProfilPageState();
+}
+
+class _ProfilPageState extends State<ProfilPage> {
   String name = "", username = "", email = "", profileUrl = "";
 
   void init(BuildContext context) async {
@@ -45,26 +51,30 @@ class ProfilPage extends StatelessWidget {
                         Expanded(
                           flex: 1,
                           child: SizedBox(
-                            width: 80,
-                            child: Image.network(
-                              profileUrl,
-                              fit: BoxFit.fill,
-                              loadingBuilder: (BuildContext context, Widget child,
-                                  ImageChunkEvent? loadingProgress) {
-                                if (loadingProgress == null) {
-                                  return child;
-                                }
-                                return Center(
-                                  child: CircularProgressIndicator(
-                                    value: loadingProgress.expectedTotalBytes != null
-                                        ? loadingProgress.cumulativeBytesLoaded /
-                                        loadingProgress.expectedTotalBytes!
-                                        : null,
-                                  ),
-                                );
-                              },
-                            )
-                          ),
+                              width: 80,
+                              child: Image.network(
+                                profileUrl,
+                                fit: BoxFit.fill,
+                                loadingBuilder: (BuildContext context,
+                                    Widget child,
+                                    ImageChunkEvent? loadingProgress) {
+                                  if (loadingProgress == null) {
+                                    return child;
+                                  }
+                                  return Center(
+                                    child: CircularProgressIndicator(
+                                      value:
+                                          loadingProgress.expectedTotalBytes !=
+                                                  null
+                                              ? loadingProgress
+                                                      .cumulativeBytesLoaded /
+                                                  loadingProgress
+                                                      .expectedTotalBytes!
+                                              : null,
+                                    ),
+                                  );
+                                },
+                              )),
                         ),
                         const SizedBox(
                           width: 16,

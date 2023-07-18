@@ -41,7 +41,7 @@ class Network {
   }
 
   Future<RegisterResponse> register(
-      name, username, email, password, password_conf) async {
+      name, username, email, password, passwordConfirmation) async {
     var baseurl = dotenv.env['BASE_URL'] ?? "";
 
     final response = await http.Client().post(
@@ -55,7 +55,7 @@ class Network {
         "username": username,
         "email": email,
         "password": password,
-        "password_confirmation": password_conf
+        "password_confirmation": passwordConfirmation
       },
     );
 

@@ -12,11 +12,18 @@ import 'package:quliku/widget/custom_mandor_item.dart';
 import '../../util/constants.dart';
 import '../../widget/custom_klasifikasi_button.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   final Function() onCariMandor;
 
-  HomePage({Key? key, required this.onCariMandor}) : super(key: key);
+  const HomePage({Key? key, required this.onCariMandor}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   List<MandorData> reccomendMandor = [];
+
   var name = "";
 
   void init(BuildContext context) async {
@@ -47,7 +54,7 @@ class HomePage extends StatelessWidget {
                 ),
                 Text(
                   "Halo, $name",
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Constants.COLOR_TITLE,
                       fontSize: 20,
                       fontWeight: FontWeight.bold),
@@ -66,7 +73,7 @@ class HomePage extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    onCariMandor();
+                    widget.onCariMandor();
                   },
                   child: Container(
                       padding: const EdgeInsets.all(16.0),
@@ -203,9 +210,7 @@ class HomePage extends StatelessWidget {
               .fetch(pref.getString(Constants.PREF_TOKEN) ?? "");
         });
         var response = context.watch<ReccomendMandorNotifier>().data;
-        if (response != null) {
-          reccomendMandor = response;
-        }
+        reccomendMandor = response;
       }
       return const SpinKitFadingCircle(
         color: Constants.COLOR_MAIN,

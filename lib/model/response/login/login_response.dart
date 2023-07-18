@@ -21,9 +21,7 @@ class LoginResponse {
     final map = <String, dynamic>{};
     map['success'] = success;
     map['message'] = message;
-    if (data != null) {
-      map['data'] = data.toJson();
-    }
+    map['data'] = data.toJson();
     return map;
   }
 }

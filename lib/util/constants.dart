@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 class Constants {
   static const COLOR_MAIN = Color(0xFFF88214);
@@ -24,9 +22,8 @@ class Constants {
   }
 
   static void popto(BuildContext context, Widget page) {
-    Navigator
-        .of(context)
-        .pushReplacement(MaterialPageRoute(builder: (BuildContext context) => page));
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (BuildContext context) => page));
   }
 
   static void showSnackbar(BuildContext context, String msg) {

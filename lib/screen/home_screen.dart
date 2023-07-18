@@ -9,7 +9,6 @@ import 'package:quliku/util/constants.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
-
   @override
   State<HomeScreen> createState() => _MyHomePageState();
 }
@@ -41,7 +40,7 @@ class _MyHomePageState extends State<HomeScreen> {
           IconButton(
               icon: const Icon(Icons.favorite),
               onPressed: () {
-                Get.to(() => WishListScreen());
+                Get.to(() => const WishListScreen());
               }),
           IconButton(icon: const Icon(Icons.location_city), onPressed: () {}),
         ],

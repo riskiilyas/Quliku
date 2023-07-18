@@ -43,9 +43,7 @@ class MandorSearchData {
     map['role'] = role;
     map['profile_url'] = profileUrl;
     map['rating'] = rating;
-    if (details != null) {
-      map['details'] = details.toJson();
-    }
+    map['details'] = details.toJson();
     return map;
   }
 }

@@ -10,6 +10,7 @@ class DetailMandorNotifier with ChangeNotifier {
   MandorDetailData? _data;
 
   MandorDetailData get data => _data!;
+
   FetchStatus get status => _status;
 
   Future<void> fetch(String token, String id) async {

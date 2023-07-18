@@ -1,28 +1,31 @@
-import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:quliku/notifier/detail_mandor_notifier.dart';
 import 'package:quliku/notifier/pref_notifier.dart';
-import 'package:quliku/screen/wishlist_screen.dart';
 import 'package:quliku/util/constants.dart';
 import 'package:quliku/util/fetch_status.dart';
-import 'package:quliku/widget/custom_button.dart';
-import 'package:quliku/widget/custom_profile_item.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class DetailMandorPage extends StatelessWidget {
-  DetailMandorPage({Key? key, required this.id}) : super(key: key);
+class DetailMandorPage extends StatefulWidget {
+  const DetailMandorPage({Key? key, required this.id}) : super(key: key);
   final String id;
+
+  @override
+  State<DetailMandorPage> createState() => _DetailMandorPageState();
+}
+
+class _DetailMandorPageState extends State<DetailMandorPage> {
   CarouselController sertifikatController = CarouselController();
+
   CarouselController portfolioController = CarouselController();
+
   PageController sertifikatPageController = PageController();
 
   Future<void> fetch(BuildContext context) async {
     String token = context.read<PrefNotifier>().token;
-    return context.read<DetailMandorNotifier>().fetch(token, id);
+    return context.read<DetailMandorNotifier>().fetch(token, widget.id);
   }
 
   Future<void> init(BuildContext context) async {
@@ -36,17 +39,10 @@ class DetailMandorPage extends StatelessWidget {
     var status = context.read<DetailMandorNotifier>().status;
     if (status == FetchStatus.SUCCESS) {
       if (context.read<DetailMandorNotifier>().data.inWishlist) {
-        return IconButton(
-            icon: const Icon(Icons.favorite),
-            onPressed: () {
-              Get.to(() => WishListScreen());
-            });
+        return IconButton(icon: const Icon(Icons.favorite), onPressed: () {});
       } else {
         return IconButton(
-            icon: const Icon(Icons.favorite_border),
-            onPressed: () {
-              Get.to(() => WishListScreen());
-            });
+            icon: const Icon(Icons.favorite_border), onPressed: () {});
       }
     } else {
       return const SizedBox();
@@ -92,7 +88,7 @@ class DetailMandorPage extends StatelessWidget {
                                   .profileUrl),
                               radius: 64,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 16,
                             ),
                             Text(
@@ -172,8 +168,9 @@ class DetailMandorPage extends StatelessWidget {
                             )
                           ],
                         ),
-                        SizedBox(
-                          height: 36,
+                        const Divider(),
+                        const SizedBox(
+                          height: 24,
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -185,7 +182,7 @@ class DetailMandorPage extends StatelessWidget {
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 4,
                             ),
                             Text(
@@ -239,9 +236,10 @@ class DetailMandorPage extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                SizedBox(
+                                const SizedBox(
                                   height: 24,
                                 ),
+                                const Divider(),
                                 const Text(
                                   "Sertifikasi",
                                   style: TextStyle(
@@ -249,7 +247,7 @@ class DetailMandorPage extends StatelessWidget {
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 8,
                                 ),
                                 CarouselSlider(

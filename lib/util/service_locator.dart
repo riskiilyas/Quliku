@@ -14,5 +14,4 @@ class ServiceLocator {
     _prefs ??= await SharedPreferences.getInstance();
     return _prefs as SharedPreferences;
   }
-
 }

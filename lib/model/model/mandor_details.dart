@@ -1,15 +1,16 @@
 class MandorDetails {
   MandorDetails({
-      required this.subscription,
-      required this.status,
-      required this.isWork,
-      required this.city,
-      required this.waNumber,
-      required this.classification,
-      required this.description,
-      required this.experience,
-      required this.minPeople,
-      required this.maxPeople,});
+    required this.subscription,
+    required this.status,
+    required this.isWork,
+    required this.city,
+    required this.waNumber,
+    required this.classification,
+    required this.description,
+    required this.experience,
+    required this.minPeople,
+    required this.maxPeople,
+  });
 
   MandorDetails.fromJson(dynamic json) {
     subscription = json['subscription'];
@@ -23,6 +24,7 @@ class MandorDetails {
     minPeople = json['min_people'];
     maxPeople = json['max_people'];
   }
+
   late String subscription;
   late String status;
   late String isWork;
@@ -48,5 +50,4 @@ class MandorDetails {
     map['max_people'] = maxPeople;
     return map;
   }
-
 }

@@ -135,7 +135,9 @@ class _MyHomePageState extends State<LoginScreen> {
                         textColor: Colors.white,
                         buttonColor: Constants.COLOR_MAIN,
                         onPressed: () => {
-                          context.read<LoginNotifier>().fetch(usernameOrEmail, password)
+                              context
+                                  .read<LoginNotifier>()
+                                  .fetch(usernameOrEmail, password)
                             }),
                     const SizedBox(
                       height: 12,
@@ -145,8 +147,7 @@ class _MyHomePageState extends State<LoginScreen> {
                         const Text(
                           'Belum Punya Akun? ',
                           style: TextStyle(
-                              color: Constants.COLOR_HINT_TEXT,
-                              fontSize: 16),
+                              color: Constants.COLOR_HINT_TEXT, fontSize: 16),
                         ),
                         InkWell(
                           onTap: () => {

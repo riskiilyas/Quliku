@@ -1,12 +1,14 @@
 class MandorDetailImages {
   MandorDetailImages({
-      required this.photoUrl,
-      required this.type,});
+    required this.photoUrl,
+    required this.type,
+  });
 
   MandorDetailImages.fromJson(dynamic json) {
     photoUrl = json['photo_url'];
     type = json['type'];
   }
+
   late String photoUrl;
   late String type;
 
@@ -16,5 +18,4 @@ class MandorDetailImages {
     map['type'] = type;
     return map;
   }
-
 }

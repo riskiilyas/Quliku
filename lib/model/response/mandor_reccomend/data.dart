@@ -2,14 +2,15 @@ import 'details.dart';
 
 class MandorReccoemndationData {
   MandorReccoemndationData({
-      required this.id,
+    required this.id,
     required this.name,
     required this.username,
     required this.email,
     required this.role,
     required this.profileUrl,
     required this.rating,
-    required this.details,});
+    required this.details,
+  });
 
   MandorReccoemndationData.fromJson(dynamic json) {
     id = json['id'];
@@ -19,8 +20,11 @@ class MandorReccoemndationData {
     role = json['role'];
     profileUrl = json['profile_url'];
     rating = json['rating'];
-    details = (json['details'] != null ? MandorReccomendationDetails.fromJson(json['details']) : null)!;
+    details = (json['details'] != null
+        ? MandorReccomendationDetails.fromJson(json['details'])
+        : null)!;
   }
+
   late String id;
   late String name;
   late MandorReccomendationDetails details;
@@ -39,10 +43,7 @@ class MandorReccoemndationData {
     map['role'] = role;
     map['profile_url'] = profileUrl;
     map['rating'] = rating;
-    if (details != null) {
-      map['details'] = details.toJson();
-    }
+    map['details'] = details.toJson();
     return map;
   }
-
 }

@@ -34,8 +34,7 @@ class _CustomTextFieldState extends State<CustomSearchBar> {
               icon: const Icon(Icons.cancel_outlined)),
           border: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(24)),
-              borderSide: BorderSide(color: Constants.COLOR_MAIN, width: 4)
-          )),
+              borderSide: BorderSide(color: Constants.COLOR_MAIN, width: 4))),
     );
   }
 }

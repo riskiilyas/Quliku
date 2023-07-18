@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:quliku/screen/login_screen.dart';
 import 'package:quliku/util/constants.dart';
 import 'package:quliku/util/fetch_status.dart';
 import 'package:quliku/widget/custom_button.dart';
@@ -152,7 +150,12 @@ class _MyHomePageState extends State<RegisterScreen> {
                                 textColor: Colors.white,
                                 buttonColor: Constants.COLOR_MAIN,
                                 onPressed: () {
-                                  context.read<RegisterNotifier>().fetch(fullname, username, email, password, confirmPassword);
+                                  context.read<RegisterNotifier>().fetch(
+                                      fullname,
+                                      username,
+                                      email,
+                                      password,
+                                      confirmPassword);
                                 })
                             : const SpinKitFadingCircle(
                                 color: Constants.COLOR_MAIN,
