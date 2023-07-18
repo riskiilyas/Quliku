@@ -1,4 +1,4 @@
-import 'package:quliku/model/response/mandor_detail/Comment.dart';
+import 'package:quliku/model/response/mandor_detail/comment.dart';
 
 import 'details.dart';
 import 'images.dart';
@@ -37,7 +37,7 @@ class MandorDetailData {
     if (json['comments'] != null) {
       comments = [];
       json['comments'].forEach((v) {
-        comments.add(Comment.fromJson(v));
+        comments.add(MandorDetailComment.fromJson(v));
       });
     }
     inWishlist = json['in_wishlist'];
@@ -52,7 +52,7 @@ class MandorDetailData {
   late int rating;
   late MandorDetailDetails details;
   late List<MandorDetailImages> images;
-  late List<Comment> comments;
+  late List<MandorDetailComment> comments;
   late bool inWishlist;
 
   Map<String, dynamic> toJson() {

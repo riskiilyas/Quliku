@@ -78,7 +78,7 @@ class ProfilPage extends StatelessWidget {
                                 name,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Constants.COLOR_TITLE,
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold),
@@ -88,7 +88,7 @@ class ProfilPage extends StatelessWidget {
                               ),
                               Text(
                                 '$username - $email',
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Constants.COLOR_TEXT,
                                     fontSize: 10,
                                     fontWeight: FontWeight.bold),

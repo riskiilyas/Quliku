@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+import 'package:quliku/notifier/detail_mandor_notifier.dart';
 import 'package:quliku/notifier/login_notifier.dart';
 import 'package:quliku/notifier/notifier_reccomend_mandor.dart';
 import 'package:quliku/notifier/register_notifier.dart';
@@ -22,6 +23,7 @@ void main() async{
     ChangeNotifierProvider(create: (_) => PrefNotifier()),
     ChangeNotifierProvider(create: (_) => ReccomendMandorNotifier()),
     ChangeNotifierProvider(create: (_) => SearchMandorNotifier()),
+    ChangeNotifierProvider(create: (_) => DetailMandorNotifier()),
     ChangeNotifierProvider(create: (_) => RegisterNotifier()),
     ChangeNotifierProvider(create: (_) => LoginNotifier()),
   ], child: MyApp()));

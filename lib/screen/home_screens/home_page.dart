@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:quliku/model/model/mandor_data.dart';
+import 'package:quliku/notifier/detail_mandor_notifier.dart';
 import 'package:quliku/notifier/notifier_reccomend_mandor.dart';
 import 'package:quliku/notifier/pref_notifier.dart';
+import 'package:quliku/screen/detail_mandor_screen.dart';
 import 'package:quliku/util/fetch_status.dart';
 import 'package:quliku/util/service_locator.dart';
 import 'package:quliku/widget/custom_mandor_item.dart';
@@ -183,7 +185,14 @@ class HomePage extends StatelessWidget {
                       "${reccomendMandor[index].details.minPeople} - ${reccomendMandor[index].details.maxPeople} kuli",
                   location: reccomendMandor[index].details.city,
                   imgUrl: reccomendMandor[index].profileUrl,
-                  onPressed: () => {},
+                  onPressed: () {
+                    context.read<DetailMandorNotifier>().init();
+                    Constants.goto(
+                        context,
+                        DetailMandorPage(
+                          id: reccomendMandor[index].id,
+                        ));
+                  },
                 )),
       );
     } else {

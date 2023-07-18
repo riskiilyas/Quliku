@@ -30,7 +30,7 @@ class Network {
     return MandorSearchResponse.fromJson(json.decode(response.body));
   }
 
-  Future<MandorDetailResponse> getDetailMandor(String token, int id) async {
+  Future<MandorDetailResponse> getDetailMandor(String token, String id) async {
     var baseurl = dotenv.env['BASE_URL'] ?? "";
 
     final response = await http.Client().get(
