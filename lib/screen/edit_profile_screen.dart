@@ -1,9 +1,10 @@
-import 'dart:html';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:quliku/notifier/pref_notifier.dart';
 import 'package:quliku/screen/login_screen.dart';
@@ -26,13 +27,13 @@ class _MyHomePageState extends State<EditProfileScreen> {
   String confirmPassword = "";
 
   File? image;
-  Future pickImage() async {
+
+  Future pickImage(ImageSource source) async {
     try {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      if(image == null) return;
-      final imageTemp = <XFile>[image];
-      setState(() => this.image = imageTemp);
-    } on PlatformException catch(e) {
+      final image = await ImagePicker().pickImage(source: source);
+      if (image == null) return;
+      setState(() => this.image = File(image.path));
+    } on PlatformException catch (e) {
       print('Failed to pick image: $e');
     }
   }
@@ -54,9 +55,7 @@ class _MyHomePageState extends State<EditProfileScreen> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Constants.COLOR_MAIN,
-        onPressed: (){
-
-        },
+        onPressed: () {},
         icon: Icon(Icons.save),
         label: Text('Update'),
       ),
@@ -84,16 +83,13 @@ class _MyHomePageState extends State<EditProfileScreen> {
               Expanded(
                 flex: 3,
                 child: Center(
-                  child: SizedBox(
-                    width: 160,
-                    child: CircleAvatar(
-                      backgroundImage:
-                          NetworkImage(context.read<PrefNotifier>().profileUrl),
+                  child:  CircleAvatar(
                       radius: 64,
-                    ),
+                      backgroundImage: image == null
+                  ? NetworkImage(context.read<PrefNotifier>().profileUrl)
+                      : Image.file(image!).image)
                   ),
                 ),
-              ),
               const SizedBox(
                 height: 16,
               ),
@@ -108,7 +104,9 @@ class _MyHomePageState extends State<EditProfileScreen> {
                           text: "Kamera",
                           textColor: Constants.COLOR_MAIN,
                           buttonColor: Colors.white,
-                          onPressed: () {}),
+                          onPressed: () {
+                            pickImage(ImageSource.camera);
+                          }),
                     ),
                     Expanded(
                       flex: 1,
@@ -116,7 +114,9 @@ class _MyHomePageState extends State<EditProfileScreen> {
                           text: "Galeri",
                           textColor: Colors.white,
                           buttonColor: Constants.COLOR_MAIN,
-                          onPressed: () {}),
+                          onPressed: () {
+                            pickImage(ImageSource.gallery);
+                          }),
                     ),
                   ],
                 ),
