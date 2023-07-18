@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:quliku/model/response/login/login_response.dart';
+import 'package:quliku/model/response/mandor_detail/mandor_detail_response.dart';
 import 'package:quliku/model/response/mandor_reccomend/mandor_reccomendation_response.dart';
 import 'package:quliku/model/response/mandor_search/mandor_search_response.dart';
 import 'package:quliku/model/response/register/register_response.dart';
@@ -27,6 +28,16 @@ class Network {
         '$baseurl/api/contractor/foreman/search?name=$name&classification=$classification&city=$city'));
     if (response.statusCode >= 400) throw Exception();
     return MandorSearchResponse.fromJson(json.decode(response.body));
+  }
+
+  Future<MandorDetailResponse> getDetailMandor(String token, int id) async {
+    var baseurl = dotenv.env['BASE_URL'] ?? "";
+
+    final response = await http.Client().get(
+        Uri.parse('$baseurl/api/contractor/foreman/detail/$id'),
+        headers: {"Authorization": "Bearer $token"});
+    if (response.statusCode >= 400) throw Exception();
+    return MandorDetailResponse.fromJson(json.decode(response.body));
   }
 
   Future<RegisterResponse> register(
