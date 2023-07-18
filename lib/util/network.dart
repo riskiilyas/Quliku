@@ -7,6 +7,7 @@ import 'package:quliku/model/response/mandor_search/mandor_search_response.dart'
 import 'package:quliku/model/response/register/register_response.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:quliku/model/response/wishlist/mandor_wishlist_response.dart';
 
 class Network {
   Future<MandorReccomendationResponse> getReccomendedMandor(
@@ -28,6 +29,17 @@ class Network {
         '$baseurl/api/contractor/foreman/search?name=$name&classification=$classification&city=$city'));
     if (response.statusCode >= 400) throw Exception();
     return MandorSearchResponse.fromJson(json.decode(response.body));
+  }
+
+  Future<MandorWishlistResponse> getWishlistMandor(String token) async {
+    var baseurl = dotenv.env['BASE_URL'] ?? "";
+
+    final response = await http.Client().get(
+        Uri.parse('$baseurl/api/contractor/foreman/wishlist'),
+        headers: {"Authorization": "Bearer $token"});
+
+    if (response.statusCode >= 400) throw Exception();
+    return MandorWishlistResponse.fromJson(json.decode(response.body));
   }
 
   Future<MandorDetailResponse> getDetailMandor(String token, String id) async {

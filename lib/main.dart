@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
     checkLoggedIn();
     return GetMaterialApp(
       home: MaterialApp(
-          title: 'Flutter Demo',
+          title: 'Quliku',
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
