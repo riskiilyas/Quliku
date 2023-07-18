@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:provider/provider.dart';
 import 'package:quliku/model/response/mandor_item.dart';
 import 'package:quliku/notifier/notifier_reccomend_mandor.dart';
 import 'package:quliku/util/fetch_status.dart';
 import 'package:quliku/widget/custom_mandor_item.dart';
 import '../../util/constants.dart';
 import '../../widget/custom_klasifikasi_button.dart';
-import '../../bloc/bloc_reccomend_mandor.dart';
 
 class HomePage extends StatelessWidget {
   final Function() onCariMandor;

@@ -16,6 +16,24 @@ void main() {
     });
 
     test(
+        'should register',
+            () async {
+          // Load the JSON file content
+          final jsonContent =
+          await rootBundle.loadString('assets/json/list_mandor.json');
+          final jsonData = json.decode(jsonContent);
+          final ReccomendMandorResponse mockResponse =
+          ReccomendMandorResponse.fromJson(jsonData);
+
+          // Call the getReccomendedMandor() method
+          final response = await network.getReccomendedMandor();
+
+          // Assert that the response is not null and of type ReccomendMandorResponse
+          expect(response, isNotNull);
+          expect(response, equals(mockResponse));
+        });
+
+    test(
         'getReccomendedMandor should return a valid ReccomendMandorResponse object',
         () async {
       // Load the JSON file content

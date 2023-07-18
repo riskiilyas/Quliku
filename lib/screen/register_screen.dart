@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -153,7 +152,7 @@ class _MyHomePageState extends State<RegisterScreen> {
                                 textColor: Colors.white,
                                 buttonColor: Constants.COLOR_MAIN,
                                 onPressed: () {
-                                  context.read<RegisterNotifier>().fetch();
+                                  context.read<RegisterNotifier>().fetch(fullname, username, email, password, confirmPassword);
                                 })
                             : const SpinKitFadingCircle(
                                 color: Constants.COLOR_MAIN,

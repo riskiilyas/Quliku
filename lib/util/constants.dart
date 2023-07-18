@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:quliku/bloc/bloc_reccomend_mandor.dart';
 
 class Constants {
   static const COLOR_MAIN = Color(0xFFF88214);
