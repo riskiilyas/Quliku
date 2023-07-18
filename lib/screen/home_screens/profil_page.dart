@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quliku/screen/welcome_screen.dart';
+import 'package:quliku/util/service_locator.dart';
 
 import '../../util/constants.dart';
 import '../../widget/custom_button.dart';
@@ -160,10 +162,26 @@ class ProfilPage extends StatelessWidget {
                     height: 24,
                   ),
                   CustomButton(
-                      text: "Keluar",
+                      text: "Log Out",
                       textColor: Colors.white,
                       buttonColor: Constants.COLOR_MAIN,
-                      onPressed: () => {})
+                      onPressed: () async {
+                        ServiceLocator.prefs.then((pref) {
+                          pref.remove(Constants.PREF_UID);
+                          pref.remove(Constants.PREF_NAME);
+                          pref.remove(Constants.PREF_USERNAME);
+                          pref.remove(Constants.PREF_EMAIL);
+                          pref.remove(Constants.PREF_ROLE);
+                          pref.remove(Constants.PREF_PROFILE_URL);
+                          pref.remove(Constants.PREF_TOKEN);
+                          Constants.showMyDialog(context, "Lanjutkan untuk keluar akun?", (result) {
+                            if(result) {
+                              Constants.showSnackbar(context, "Berhasil Keluar akun!");
+                              Constants.popto(context, const WelcomeScreen());
+                            }
+                          });
+                        });
+                      })
                 ],
               ),
             ),

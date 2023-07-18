@@ -74,7 +74,7 @@ class _MyHomePageState extends State<WelcomeScreen> {
                 textColor: Constants.COLOR_MAIN,
                 buttonColor: Colors.white,
                 onPressed: () => {
-                  Constants.popto(context, const RegisterScreen())
+                  Constants.goto(context, const RegisterScreen())
                 })
           ],
         ),
