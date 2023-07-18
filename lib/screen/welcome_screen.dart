@@ -63,7 +63,7 @@ class _MyHomePageState extends State<WelcomeScreen> {
                   textColor: Colors.white,
                   buttonColor: Constants.COLOR_MAIN,
                   onPressed: () => {
-                    Constants.goto(context, const LoginScreen())
+                    Constants.popto(context, const LoginScreen())
                       })
             ])),
             const SizedBox(
@@ -74,7 +74,7 @@ class _MyHomePageState extends State<WelcomeScreen> {
                 textColor: Constants.COLOR_MAIN,
                 buttonColor: Colors.white,
                 onPressed: () => {
-                  Constants.goto(context, const RegisterScreen())
+                  Constants.popto(context, const RegisterScreen())
                 })
           ],
         ),

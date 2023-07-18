@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:quliku/model/response/Reccomend_mandor_response.dart';
+import 'package:quliku/model/response/login/login_response.dart';
 import 'package:quliku/model/response/register/register_response.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -34,6 +35,28 @@ class Network {
       return RegisterResponse.fromJson(json.decode(response.body));
     } else {
       throw Exception("Gagal mendaftar, pastikan email dan password sudah pas");
+    }
+  }
+
+  Future<LoginResponse> login(email, password) async {
+    var baseurl = dotenv.env['BASE_URL'] ?? "";
+
+    final response = await http.Client().post(
+      Uri.parse("$baseurl/api/contractor/auth/login"),
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      encoding: Encoding.getByName('utf-8'),
+      body: {
+        "email": email,
+        "password": password,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return LoginResponse.fromJson(json.decode(response.body));
+    } else {
+      throw Exception("Gagal Login, pastikan email dan password sudah pas");
     }
   }
 }

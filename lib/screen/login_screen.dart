@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:quliku/animation/transitions.dart';
 import 'package:quliku/notifier/login_notifier.dart';
 import 'package:quliku/screen/home_screen.dart';
-import 'package:quliku/screen/register_screen.dart';
-import 'package:quliku/screen/welcome_screen.dart';
 import 'package:quliku/util/constants.dart';
 import 'package:quliku/util/fetch_status.dart';
+import 'package:quliku/util/service_locator.dart';
 import 'package:quliku/widget/custom_button.dart';
 import 'package:quliku/widget/custom_text_field.dart';
 
@@ -29,9 +26,19 @@ class _MyHomePageState extends State<LoginScreen> {
     status = context.read<LoginNotifier>().status;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (status == FetchStatus.SUCCESS) {
-        context.read<LoginNotifier>().init();
-        Constants.showSnackbar(context, "Selamat datang Riski!");
-        Constants.popto(context, const HomeScreen());
+        var data = context.read<LoginNotifier>().loginData!;
+        ServiceLocator.prefs.then((pref) {
+          pref.setInt(Constants.PREF_UID, data.id);
+          pref.setString(Constants.PREF_NAME, data.name);
+          pref.setString(Constants.PREF_USERNAME, data.username);
+          pref.setString(Constants.PREF_EMAIL, data.email);
+          pref.setString(Constants.PREF_ROLE, data.role);
+          pref.setString(Constants.PREF_PROFILE_URL, data.profileUrl);
+          pref.setString(Constants.PREF_TOKEN, data.token);
+          context.read<LoginNotifier>().init();
+          Constants.showSnackbar(context, "Selamat datang ${data.name}!");
+          Constants.popto(context, const HomeScreen());
+        });
       } else if (status == FetchStatus.ERROR) {
         context.read<LoginNotifier>().init();
         Constants.showSnackbar(context, "Gagal Login, Pastikan akun benar!");
@@ -97,7 +104,7 @@ class _MyHomePageState extends State<LoginScreen> {
                 child: Column(
                   children: [
                     CustomTextField(
-                      hint: "Email/Username",
+                      hint: "Email",
                       icon: Icons.email,
                       callback: (_) {
                         usernameOrEmail = _;
@@ -128,7 +135,7 @@ class _MyHomePageState extends State<LoginScreen> {
                         textColor: Colors.white,
                         buttonColor: Constants.COLOR_MAIN,
                         onPressed: () => {
-                          context.read<LoginNotifier>().fetch()
+                          context.read<LoginNotifier>().fetch(usernameOrEmail, password)
                             }),
                     const SizedBox(
                       height: 12,
