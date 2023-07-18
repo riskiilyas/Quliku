@@ -12,6 +12,7 @@ import 'package:quliku/screen/welcome_screen.dart';
 import 'package:quliku/util/constants.dart';
 import 'package:quliku/util/service_locator.dart';
 import 'package:quliku/notifier/pref_notifier.dart';
+import 'package:quliku/notifier/search_mandor_notifier.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +21,7 @@ void main() async{
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => PrefNotifier()),
     ChangeNotifierProvider(create: (_) => ReccomendMandorNotifier()),
+    ChangeNotifierProvider(create: (_) => SearchMandorNotifier()),
     ChangeNotifierProvider(create: (_) => RegisterNotifier()),
     ChangeNotifierProvider(create: (_) => LoginNotifier()),
   ], child: MyApp()));

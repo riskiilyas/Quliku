@@ -8,7 +8,7 @@ import 'package:quliku/model/model/mandor_data.dart';
 class ReccomendMandorNotifier with ChangeNotifier {
   FetchStatus _status = FetchStatus.INITIAL;
   Network network = ServiceLocator.network;
-  List<MandorData> _data = [];
+  final List<MandorData> _data = [];
 
   List<MandorData> get data => _data;
 

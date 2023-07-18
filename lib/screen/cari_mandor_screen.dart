@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:quliku/util/constants.dart';
 import 'package:quliku/widget/custom_mandor_item.dart';
 import 'package:quliku/widget/custom_search_bar.dart';
+import 'package:quliku/notifier/search_mandor_notifier.dart';
 
 class CariMandorScreen extends StatefulWidget {
   const CariMandorScreen({super.key});
@@ -11,10 +13,10 @@ class CariMandorScreen extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<CariMandorScreen> {
-  List<int> indices = [0, 1, 2, 3, 4, 5];
 
   @override
   Widget build(BuildContext context) {
+    context.watch<SearchMandorNotifier>();
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
@@ -31,14 +33,24 @@ class _MyHomePageState extends State<CariMandorScreen> {
       body: SafeArea(
         child: Expanded(
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-              child: Column(
-          children: [
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child: Column(
+            children: [
               Flexible(
                 flex: 1,
                 child: Column(
                   children: [
-                    Flexible(flex: 3,child: CustomSearchBar(hint: "Cari Mandor...", callback: (keyword) {})),
+                    Flexible(
+                        flex: 3,
+                        child: CustomSearchBar(
+                            hint: "Cari Mandor...",
+                            callback: (keyword) {
+                              String classification = context.read<SearchMandorNotifier>().classification;
+                              String city = context.read<SearchMandorNotifier>().city;
+                              context
+                                  .read<SearchMandorNotifier>()
+                                  .fetch(keyword, classification, city);
+                            })),
                     const Flexible(
                       flex: 1,
                       child: Divider(),
@@ -51,17 +63,20 @@ class _MyHomePageState extends State<CariMandorScreen> {
                               flex: 1,
                               child: Container(
                                 decoration: BoxDecoration(
-                                  borderRadius:
-                                      const BorderRadius.all(Radius.circular(4)),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(4)),
                                   border: Border.all(
-                                      width: 1, color: Constants.COLOR_HINT_TEXT),
+                                      width: 1,
+                                      color: Constants.COLOR_HINT_TEXT),
                                 ),
                                 child: Center(
                                   child: DropdownButton(
                                       icon: const Icon(Icons.construction),
-                                      value: "All",
+                                      value: context.read<SearchMandorNotifier>().classification,
                                       items: dropdownKlasifikasi,
-                                      onChanged: (_) {}),
+                                      onChanged: (_) {
+                                        if (_ != null) context.read<SearchMandorNotifier>().classification = _;
+                                      }),
                                 ),
                               )),
                           const SizedBox(
@@ -69,20 +84,22 @@ class _MyHomePageState extends State<CariMandorScreen> {
                           ),
                           Flexible(
                               child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      const BorderRadius.all(Radius.circular(4)),
-                                  border: Border.all(
-                                      width: 1, color: Constants.COLOR_HINT_TEXT),
-                                ),
-                                child: Center(
-                                  child: DropdownButton(
-                                      icon: const Icon(Icons.pin_drop),
-                                      value: "All",
-                                      items: dropdownLokasi,
-                                      onChanged: (_) {}),
-                                ),
-                              )),
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(4)),
+                              border: Border.all(
+                                  width: 1, color: Constants.COLOR_HINT_TEXT),
+                            ),
+                            child: Center(
+                              child: DropdownButton(
+                                  icon: const Icon(Icons.pin_drop),
+                                  value: context.read<SearchMandorNotifier>().city,
+                                  items: dropdownLokasi,
+                                  onChanged: (_) {
+                                    if (_ != null) context.read<SearchMandorNotifier>().city = _;
+                                  }),
+                            ),
+                          )),
                         ],
                       ),
                     ),
@@ -93,34 +110,41 @@ class _MyHomePageState extends State<CariMandorScreen> {
                 flex: 4,
                 child: ListView(
                   children: List.generate(
-                      10,
-                          (index) => MandorItem(
-                        fullname:
-                        "Muhammad Faris Akbar lailatul qadrin azhari $index",
-                        rating: 4,
-                        experience: "12",
-                        rangeKuli: "40 - 70 kuli",
-                        location: "Sidoarjo",
-                        imgUrl: "assets/dummy-profile.png",
-                        onPressed: () => {},
-                      )),
+                      context.read<SearchMandorNotifier>().data.length,
+                      (index) => MandorItem(
+                            fullname: context
+                                .read<SearchMandorNotifier>()
+                                .data[index]
+                                .name,
+                            rating: context
+                                .read<SearchMandorNotifier>()
+                                .data[index]
+                                .rating,
+                            experience: context
+                                .read<SearchMandorNotifier>()
+                                .data[index]
+                                .details
+                                .experience,
+                            rangeKuli:
+                                "${context.read<SearchMandorNotifier>().data[index].details.minPeople} - ${context.read<SearchMandorNotifier>().data[index].details.maxPeople} kuli",
+                            location: context.read<SearchMandorNotifier>().data[index].details.city,
+                            imgUrl: context.read<SearchMandorNotifier>().data[index].profileUrl,
+                            onPressed: () => {},
+                          )),
                 ),
               ),
-          ],
-        ),
-            )),
+            ],
+          ),
+        )),
       ),
     );
   }
 
   List<DropdownMenuItem<String>> get dropdownKlasifikasi {
     List<DropdownMenuItem<String>> menuItems = [
-      const DropdownMenuItem(value: "All", child: Text("All")),
-      const DropdownMenuItem(
-          value: "Infrastruktur", child: Text("Infrastruktur")),
-      const DropdownMenuItem(
-          value: "Sumber Daya Air", child: Text("Sumber Daya Air")),
-      const DropdownMenuItem(value: "Cipta Karya", child: Text("Cipta Karya")),
+      const DropdownMenuItem(value: "infra", child: Text("Infrastruktur")),
+      const DropdownMenuItem(value: "water", child: Text("Sumber Daya Air")),
+      const DropdownMenuItem(value: "craft", child: Text("Cipta Karya")),
     ];
     return menuItems;
   }
@@ -128,7 +152,6 @@ class _MyHomePageState extends State<CariMandorScreen> {
 
 List<DropdownMenuItem<String>> get dropdownLokasi {
   List<DropdownMenuItem<String>> menuItems = [
-    const DropdownMenuItem(value: "All", child: Text("All")),
     const DropdownMenuItem(value: "Surabaya", child: Text("Surabaya")),
     const DropdownMenuItem(value: "Sidoarjo", child: Text("Sidoarjo")),
     const DropdownMenuItem(value: "Malang", child: Text("Malang")),
