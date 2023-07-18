@@ -2,12 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:quliku/notifier/pref_notifier.dart';
-import 'package:quliku/screen/login_screen.dart';
 import 'package:quliku/util/constants.dart';
 import 'package:quliku/widget/custom_button.dart';
 import 'package:quliku/widget/custom_text_field.dart';
@@ -25,7 +22,6 @@ class _MyHomePageState extends State<EditProfileScreen> {
   String email = "";
   String password = "";
   String confirmPassword = "";
-
   File? image;
 
   Future pickImage(ImageSource source) async {

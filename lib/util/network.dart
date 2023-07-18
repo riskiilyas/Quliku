@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:quliku/model/response/login/login_response.dart';
 import 'package:quliku/model/response/mandor_detail/mandor_detail_response.dart';
@@ -7,6 +8,7 @@ import 'package:quliku/model/response/mandor_search/mandor_search_response.dart'
 import 'package:quliku/model/response/register/register_response.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:quliku/model/response/update_profile/update_profile_response.dart';
 import 'package:quliku/model/response/wishlist/mandor_wishlist_response.dart';
 
 class Network {
@@ -40,6 +42,31 @@ class Network {
 
     if (response.statusCode >= 400) throw Exception();
     return MandorWishlistResponse.fromJson(json.decode(response.body));
+  }
+
+  Future<UpdateProfileResponse> updateProfile(String token, String name, String email, String password, String password_confirmation, File img) async {
+    var baseurl = dotenv.env['BASE_URL'] ?? "";
+
+    final request = http.MultipartRequest('POST', Uri.parse('$baseurl/api/contractor/auth/update'));
+    request.headers.addAll({"Authorization": "Bearer $token"});
+    request.fields['name']=name;
+    request.fields['email']=email;
+    request.fields['password']=password;
+    request.fields['password_confirmation']=password_confirmation;
+    request.files.add(
+        http.MultipartFile(
+            'picture',
+            img.readAsBytes().asStream(),
+            img.lengthSync(),
+            filename: "profile.png"
+        )
+    );
+
+    var responseStream = await request.send();
+    var responseByte = await responseStream.stream.toBytes();
+    var response = String.fromCharCodes(responseByte);
+    if (responseStream.statusCode >= 400) throw Exception();
+    return UpdateProfileResponse.fromJson(json.decode(response));
   }
 
   Future<bool> deleteWishlistMandor(String token, int id) async {
