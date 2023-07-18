@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:quliku/notifier/pref_notifier.dart';
+import 'package:quliku/screen/edit_profile_screen.dart';
 import 'package:quliku/screen/welcome_screen.dart';
 import 'package:quliku/util/service_locator.dart';
 
@@ -111,7 +112,9 @@ class _ProfilPageState extends State<ProfilPage> {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   InkWell(
-                                    onTap: () => {},
+                                    onTap: () => {
+                                      Constants.goto(context, const EditProfileScreen())
+                                    },
                                     child: const Text(
                                       "Edit Profil",
                                       style: TextStyle(
