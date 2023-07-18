@@ -13,15 +13,6 @@ import 'package:quliku/notifier/register_notifier.dart';
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   @override
   State<RegisterScreen> createState() => _MyHomePageState();
 }
@@ -34,15 +25,16 @@ class _MyHomePageState extends State<RegisterScreen> {
   String confirmPassword = "";
   FetchStatus status = FetchStatus.INITIAL;
 
-  void _init() async {
+  void init() async {
     context.watch<RegisterNotifier>();
     status = context.read<RegisterNotifier>().status;
-    Future.delayed(const Duration(seconds: 1), () {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       if (status == FetchStatus.SUCCESS) {
         context.read<RegisterNotifier>().init();
         Constants.showSnackbar(context, "Successfully Register!");
         Navigator.pop(context);
       } else if (status == FetchStatus.ERROR) {
+        context.read<RegisterNotifier>().init();
         Constants.showSnackbar(context, "Failed to Register!");
       }
     });
@@ -50,7 +42,7 @@ class _MyHomePageState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _init();
+    init();
     return Scaffold(
       body: SafeArea(
           child: Container(

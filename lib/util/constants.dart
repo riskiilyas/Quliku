@@ -10,11 +10,21 @@ class Constants {
   static const COLOR_TITLE = Color(0xFF505050);
   static const COLOR_TEXT = Color(0xFF707070);
 
+  static const PREF_USERNAME = "username";
+  static const PREF_PASSWORD = "password";
+  static const PREF_TOKEN = "token";
+
   static void goto(BuildContext context, Widget page) {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => page),
     );
+  }
+
+  static void popto(BuildContext context, Widget page) {
+    Navigator
+        .of(context)
+        .pushReplacement(MaterialPageRoute(builder: (BuildContext context) => page));
   }
 
   static void showSnackbar(BuildContext context, String msg) {

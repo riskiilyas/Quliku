@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+import 'package:quliku/notifier/login_notifier.dart';
 import 'package:quliku/notifier/notifier_reccomend_mandor.dart';
 import 'package:quliku/notifier/register_notifier.dart';
 import 'package:quliku/screen/welcome_screen.dart';
@@ -13,6 +14,7 @@ void main() {
   runApp(MultiBlocProvider(providers: [
     ChangeNotifierProvider(create: (_) => ReccomendMandorNotifier()),
     ChangeNotifierProvider(create: (_) => RegisterNotifier()),
+    ChangeNotifierProvider(create: (_) => LoginNotifier()),
   ], child: const MyApp()));
 }
 

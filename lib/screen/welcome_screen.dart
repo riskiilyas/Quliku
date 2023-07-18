@@ -3,10 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:quliku/animation/transitions.dart';
+import 'package:quliku/screen/home_screen.dart';
 import 'package:quliku/screen/login_screen.dart';
 import 'package:quliku/screen/register_screen.dart';
 import 'package:quliku/util/constants.dart';
+import 'package:quliku/util/service_locator.dart';
 import 'package:quliku/widget/custom_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -16,6 +19,7 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<WelcomeScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,5 +81,19 @@ class _MyHomePageState extends State<WelcomeScreen> {
         ),
       ),
     ));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // do something
+      var prefs = ServiceLocator.prefs;
+      prefs.then((value) {
+        if(value.getString(Constants.PREF_TOKEN)!=null){
+          Constants.popto(context, const HomeScreen());
+        }
+      });
+    });
   }
 }

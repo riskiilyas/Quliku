@@ -4,10 +4,12 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:quliku/animation/transitions.dart';
 import 'package:quliku/bloc/bloc_reccomend_mandor.dart';
+import 'package:quliku/notifier/login_notifier.dart';
 import 'package:quliku/screen/home_screen.dart';
 import 'package:quliku/screen/register_screen.dart';
 import 'package:quliku/screen/welcome_screen.dart';
 import 'package:quliku/util/constants.dart';
+import 'package:quliku/util/fetch_status.dart';
 import 'package:quliku/widget/custom_button.dart';
 import 'package:quliku/widget/custom_text_field.dart';
 
@@ -21,10 +23,26 @@ class LoginScreen extends StatefulWidget {
 class _MyHomePageState extends State<LoginScreen> {
   String usernameOrEmail = "";
   String password = "";
-  bool isLoading = false;
+  FetchStatus status = FetchStatus.INITIAL;
+
+  void init() async {
+    context.watch<LoginNotifier>();
+    status = context.read<LoginNotifier>().status;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (status == FetchStatus.SUCCESS) {
+        context.read<LoginNotifier>().init();
+        Constants.showSnackbar(context, "Selamat datang Riski!");
+        Constants.popto(context, const HomeScreen());
+      } else if (status == FetchStatus.ERROR) {
+        context.read<LoginNotifier>().init();
+        Constants.showSnackbar(context, "Gagal Login, Pastikan akun benar!");
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    init();
     return Scaffold(
       body: SafeArea(
           child: Container(
@@ -113,7 +131,7 @@ class _MyHomePageState extends State<LoginScreen> {
                             textColor: Colors.white,
                             buttonColor: Constants.COLOR_MAIN,
                             onPressed: () => {
-                              Constants.goto(context, const HomeScreen())
+                              context.read<LoginNotifier>().fetch()
                                 }),
                         const SizedBox(
                           height: 12,
@@ -142,7 +160,7 @@ class _MyHomePageState extends State<LoginScreen> {
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 24),
-                          child: isLoading
+                          child: status == FetchStatus.LOADING
                               ? const SpinKitFadingCircle(
                                   color: Constants.COLOR_MAIN,
                                   size: 50.0,
