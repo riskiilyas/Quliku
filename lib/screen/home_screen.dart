@@ -23,7 +23,7 @@ class _MyHomePageState extends State<HomeScreen> {
     pages.add(HomePage(
       onCariMandor: () => Get.to(() => const CariMandorScreen()),
     ));
-    pages.add(const ProfilPage());
+    pages.add(ProfilPage());
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(

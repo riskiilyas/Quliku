@@ -11,12 +11,14 @@ import 'package:quliku/screen/home_screen.dart';
 import 'package:quliku/screen/welcome_screen.dart';
 import 'package:quliku/util/constants.dart';
 import 'package:quliku/util/service_locator.dart';
+import 'package:quliku/notifier/pref_notifier.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
 
   runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) => PrefNotifier()),
     ChangeNotifierProvider(create: (_) => ReccomendMandorNotifier()),
     ChangeNotifierProvider(create: (_) => RegisterNotifier()),
     ChangeNotifierProvider(create: (_) => LoginNotifier()),
@@ -39,6 +41,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    context.read<PrefNotifier>().init();
     checkLoggedIn();
     return GetMaterialApp(
       home: MaterialApp(

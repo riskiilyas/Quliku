@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:quliku/model/model/mandor_data.dart';
 import 'package:quliku/notifier/notifier_reccomend_mandor.dart';
+import 'package:quliku/notifier/pref_notifier.dart';
 import 'package:quliku/util/fetch_status.dart';
 import 'package:quliku/util/service_locator.dart';
 import 'package:quliku/widget/custom_mandor_item.dart';
@@ -14,9 +15,16 @@ class HomePage extends StatelessWidget {
 
   HomePage({Key? key, required this.onCariMandor}) : super(key: key);
   List<MandorData> reccomendMandor = [];
+  var name = "";
+
+  void init(BuildContext context) async {
+    context.watch<PrefNotifier>();
+    name = context.read<PrefNotifier>().name;
+  }
 
   @override
   Widget build(BuildContext context) {
+    init(context);
     return SafeArea(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
@@ -35,8 +43,8 @@ class HomePage extends StatelessWidget {
                 const SizedBox(
                   height: 24,
                 ),
-                const Text(
-                  "Halo, riskiilyas@gmail.com",
+                Text(
+                  "Halo, $name",
                   style: TextStyle(
                       color: Constants.COLOR_TITLE,
                       fontSize: 20,
@@ -174,7 +182,7 @@ class HomePage extends StatelessWidget {
                   rangeKuli:
                       "${reccomendMandor[index].details.minPeople} - ${reccomendMandor[index].details.maxPeople} kuli",
                   location: reccomendMandor[index].details.city,
-                  imgUrl: "assets/dummy-profile.png",
+                  imgUrl: reccomendMandor[index].profileUrl,
                   onPressed: () => {},
                 )),
       );
