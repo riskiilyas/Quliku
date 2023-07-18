@@ -8,6 +8,7 @@ import 'package:quliku/notifier/detail_mandor_notifier.dart';
 import 'package:quliku/notifier/login_notifier.dart';
 import 'package:quliku/notifier/notifier_reccomend_mandor.dart';
 import 'package:quliku/notifier/register_notifier.dart';
+import 'package:quliku/notifier/wishlist_mandor_notifier.dart';
 import 'package:quliku/screen/home_screen.dart';
 import 'package:quliku/screen/welcome_screen.dart';
 import 'package:quliku/util/constants.dart';
@@ -24,6 +25,7 @@ void main() async {
     ChangeNotifierProvider(create: (_) => ReccomendMandorNotifier()),
     ChangeNotifierProvider(create: (_) => SearchMandorNotifier()),
     ChangeNotifierProvider(create: (_) => DetailMandorNotifier()),
+    ChangeNotifierProvider(create: (_) => WishlistMandorNotifier()),
     ChangeNotifierProvider(create: (_) => RegisterNotifier()),
     ChangeNotifierProvider(create: (_) => LoginNotifier()),
   ], child: MyApp()));

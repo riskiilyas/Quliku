@@ -4,6 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:quliku/notifier/detail_mandor_notifier.dart';
 import 'package:quliku/notifier/pref_notifier.dart';
+import 'package:quliku/notifier/wishlist_mandor_notifier.dart';
 import 'package:quliku/util/constants.dart';
 import 'package:quliku/util/fetch_status.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -35,14 +36,36 @@ class _DetailMandorPageState extends State<DetailMandorPage> {
     }
   }
 
+  Future<bool> delete(BuildContext context, int id) async {
+    var token = context.read<PrefNotifier>().token;
+    return context.read<WishlistMandorNotifier>().delete(token, id);
+  }
+
+  Future<bool> add(BuildContext context, int id) async {
+    var token = context.read<PrefNotifier>().token;
+    return context.read<WishlistMandorNotifier>().add(token, id);
+  }
+
   Widget favIcon(BuildContext context) {
     var status = context.read<DetailMandorNotifier>().status;
     if (status == FetchStatus.SUCCESS) {
+      var id = context.read<DetailMandorNotifier>().data.id;
+      var token = context.read<PrefNotifier>().token;
       if (context.read<DetailMandorNotifier>().data.inWishlist) {
-        return IconButton(icon: const Icon(Icons.favorite), onPressed: () {});
+        return IconButton(icon: const Icon(Icons.favorite), onPressed: () {
+          delete(context, id).then((value) {
+            Constants.showSnackbar(context, "Berhasil Mendhapus dari Favorit!");
+            context.read<DetailMandorNotifier>().fetch(token, id.toString());
+          });
+        });
       } else {
         return IconButton(
-            icon: const Icon(Icons.favorite_border), onPressed: () {});
+            icon: const Icon(Icons.favorite_border), onPressed: () {
+          add(context, id).then((value) {
+            Constants.showSnackbar(context, "Berhasil Menambahkan ke Favorit!");
+            context.read<DetailMandorNotifier>().fetch(token, id.toString());
+          });
+        });
       }
     } else {
       return const SizedBox();

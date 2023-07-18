@@ -18,6 +18,7 @@ class WishlistMandorNotifier with ChangeNotifier {
     _status = FetchStatus.LOADING;
     notifyListeners();
     var response = await network.getWishlistMandor(token);
+    _data.clear();
     for (var _ in response.data) {
       var details = MandorDetails(
           subscription: _.details.subscription,
@@ -42,5 +43,20 @@ class WishlistMandorNotifier with ChangeNotifier {
     }
     _status = FetchStatus.SUCCESS;
     notifyListeners();
+  }
+
+  Future<bool> delete(String token, int id) async {
+    var result = await network.deleteWishlistMandor(token, id);
+    if(result) {
+      _data.remove(_data.where((element) => element.id==id.toString()).toList()[0]);
+    }
+    notifyListeners();
+    return result;
+  }
+
+  Future<bool> add(String token, int id) async {
+    var result = await network.addWishlistMandor(token, id);
+    fetch(token);
+    return result;
   }
 }

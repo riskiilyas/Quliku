@@ -42,6 +42,29 @@ class Network {
     return MandorWishlistResponse.fromJson(json.decode(response.body));
   }
 
+  Future<bool> deleteWishlistMandor(String token, int id) async {
+    var baseurl = dotenv.env['BASE_URL'] ?? "";
+
+    final response = await http.Client().delete(
+        Uri.parse('$baseurl/api/contractor/foreman/wishlist?foreman_id=$id'),
+        headers: {"Authorization": "Bearer $token"});
+
+    if (response.statusCode >= 400) return false;
+    return true;
+  }
+
+  Future<bool> addWishlistMandor(String token, int id) async {
+    var baseurl = dotenv.env['BASE_URL'] ?? "";
+
+    final response = await http.Client().post(
+        Uri.parse('$baseurl/api/contractor/foreman/wishlist?foreman_id=$id'),
+        headers: {"Authorization": "Bearer $token"});
+
+    if (response.statusCode >= 400) return false;
+    return true;
+  }
+
+
   Future<MandorDetailResponse> getDetailMandor(String token, String id) async {
     var baseurl = dotenv.env['BASE_URL'] ?? "";
 
