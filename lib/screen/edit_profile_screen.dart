@@ -34,6 +34,10 @@ class _MyHomePageState extends State<EditProfileScreen> {
     }
   }
 
+  Future<bool> validateForm() async {
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<PrefNotifier>();
@@ -51,9 +55,11 @@ class _MyHomePageState extends State<EditProfileScreen> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Constants.COLOR_MAIN,
-        onPressed: () {},
-        icon: Icon(Icons.save),
-        label: Text('Update'),
+        onPressed: () {
+
+        },
+        icon: const Icon(Icons.save),
+        label: const Text('Update'),
       ),
       body: SafeArea(
           child: Container(
