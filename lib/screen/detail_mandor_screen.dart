@@ -5,8 +5,10 @@ import 'package:provider/provider.dart';
 import 'package:quliku/notifier/detail_mandor_notifier.dart';
 import 'package:quliku/notifier/pref_notifier.dart';
 import 'package:quliku/notifier/wishlist_mandor_notifier.dart';
+import 'package:quliku/screen/pilih_mandor_screen.dart';
 import 'package:quliku/util/constants.dart';
 import 'package:quliku/util/fetch_status.dart';
+import 'package:quliku/widget/custom_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class DetailMandorPage extends StatefulWidget {
@@ -52,20 +54,29 @@ class _DetailMandorPageState extends State<DetailMandorPage> {
       var id = context.read<DetailMandorNotifier>().data.id;
       var token = context.read<PrefNotifier>().token;
       if (context.read<DetailMandorNotifier>().data.inWishlist) {
-        return IconButton(icon: const Icon(Icons.favorite), onPressed: () {
-          delete(context, id).then((value) {
-            Constants.showSnackbar(context, "Berhasil Mendhapus dari Favorit!");
-            context.read<DetailMandorNotifier>().fetch(token, id.toString());
-          });
-        });
+        return IconButton(
+            icon: const Icon(Icons.favorite),
+            onPressed: () {
+              delete(context, id).then((value) {
+                Constants.showSnackbar(
+                    context, "Berhasil Mendhapus dari Favorit!");
+                context
+                    .read<DetailMandorNotifier>()
+                    .fetch(token, id.toString());
+              });
+            });
       } else {
         return IconButton(
-            icon: const Icon(Icons.favorite_border), onPressed: () {
-          add(context, id).then((value) {
-            Constants.showSnackbar(context, "Berhasil Menambahkan ke Favorit!");
-            context.read<DetailMandorNotifier>().fetch(token, id.toString());
-          });
-        });
+            icon: const Icon(Icons.favorite_border),
+            onPressed: () {
+              add(context, id).then((value) {
+                Constants.showSnackbar(
+                    context, "Berhasil Menambahkan ke Favorit!");
+                context
+                    .read<DetailMandorNotifier>()
+                    .fetch(token, id.toString());
+              });
+            });
       }
     } else {
       return const SizedBox();
@@ -88,6 +99,24 @@ class _DetailMandorPageState extends State<DetailMandorPage> {
               color: Constants.COLOR_TITLE, fontWeight: FontWeight.bold),
         ),
         actions: <Widget>[favIcon(context)],
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Constants.COLOR_MAIN,
+        onPressed: () {Constants.goto(context, PilihMandorScreen(
+          fullname:    context
+              .read<DetailMandorNotifier>().data.name,
+          rating:    context
+              .read<DetailMandorNotifier>().data.rating,
+          experience:    context
+              .read<DetailMandorNotifier>().data.details.experience,
+          rangeKuli: " ${context.read<DetailMandorNotifier>().data.details.minPeople} - ${context.read<DetailMandorNotifier>().data.details.maxPeople} kuli",
+          location: context
+              .read<DetailMandorNotifier>().data.details.city,
+          imgUrl: context
+              .read<DetailMandorNotifier>().data.profileUrl,
+        ));},
+        icon: const Icon(Icons.add_home_work_outlined),
+        label: const Text('Pilih Mandor'),
       ),
       body: SafeArea(
         child: context.read<DetailMandorNotifier>().status ==
@@ -435,7 +464,8 @@ class _DetailMandorPageState extends State<DetailMandorPage> {
                               ],
                             ),
                           ],
-                        )
+                        ),
+                        SizedBox(height: 36,)
                       ],
                     ),
                   ),

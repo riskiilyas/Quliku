@@ -24,6 +24,7 @@ class RegisterNotifier with ChangeNotifier {
     } catch (e) {
       _status = FetchStatus.ERROR;
       error = e.toString();
+      print(error);
     } finally {
       notifyListeners();
     }

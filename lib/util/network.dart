@@ -99,6 +99,7 @@ class Network {
         Uri.parse('$baseurl/api/contractor/foreman/detail/$id'),
         headers: {"Authorization": "Bearer $token"});
     if (response.statusCode >= 400) throw Exception();
+    print('haloooo: fjkbafbawiofnawuoifnawfbwaiuef');
     return MandorDetailResponse.fromJson(json.decode(response.body));
   }
 
