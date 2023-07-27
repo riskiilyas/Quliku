@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:quliku/screen/agreement_screen.dart';
 import 'package:quliku/util/constants.dart';
@@ -33,6 +34,8 @@ class _MyHomePageState extends State<PilihMandorScreen> {
   String confirmPassword = "";
   FetchStatus status = FetchStatus.INITIAL;
   String loc = "Surabaya";
+  DateTime start = DateTime.now();
+  DateTime finish = DateTime.now();
 
   void init() async {
     context.watch<RegisterNotifier>();
@@ -177,39 +180,84 @@ class _MyHomePageState extends State<PilihMandorScreen> {
                             ),
                           ],
                         ),
+                        SizedBox(height: 12,),
                         Row(
                           children: [
                             Expanded(
                               flex: 1,
-                              child: TextField(
-                                  onChanged: (_) {},
-                                  decoration: const InputDecoration(
-                                      hintText: "Tanggal mulai",
-                                      hintStyle: TextStyle(
-                                          fontSize: 12,
-                                          color: Constants.COLOR_HINT_TEXT),
-                                      prefixIcon: Icon(Icons.date_range),
-                                      border: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Constants.COLOR_MAIN)))),
+                              child: InkWell(
+                                onTap: () {
+                                  showDatePicker(
+                                      context: context,
+                                      initialDate: start,
+                                      //get today's date
+                                      firstDate: DateTime(2000),
+                                      //DateTime.now() - not to allow to choose before today.
+                                      lastDate: DateTime(2101))
+                                      .then((value) {
+                                    if (value != null) {
+                                      setState(() {
+                                        start = value;
+                                      });
+                                    }
+                                  });
+                                },
+                                child: TextField(
+                                  enabled: false,
+                                    onChanged: (_) {},
+                                    decoration: InputDecoration(
+                                      helperText: "Tanggal Mulai",
+                                        helperStyle: const TextStyle(
+                                            fontSize: 12,
+                                            color: Constants.COLOR_TEXT),
+                                        hintText: DateFormat('dd/MM/yyyy').format(start),
+                                        hintStyle: const TextStyle(
+                                            fontSize: 12,
+                                            color: Constants.COLOR_TEXT),
+                                        prefixIcon: const Icon(Icons.date_range),
+                                        border: const OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: Constants.COLOR_MAIN)))),
+                              ),
                             ),
                             const SizedBox(
                               width: 12,
                             ),
                             Expanded(
                               flex: 1,
-                              child: TextField(
-                                  onChanged: (_) {},
-                                  decoration: const InputDecoration(
-                                      hintText: "Tanggal Selesai",
-                                      hintStyle: TextStyle(
-                                        fontSize: 12,
-                                        color: Constants.COLOR_HINT_TEXT,
-                                      ),
-                                      prefixIcon: Icon(Icons.date_range),
-                                      border: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Constants.COLOR_MAIN)))),
+                              child: InkWell(
+                                onTap: () {
+                                  showDatePicker(
+                                      context: context,
+                                      initialDate: finish,
+                                      firstDate: DateTime(2000),
+                                      lastDate: DateTime(2101))
+                                      .then((value) {
+                                    if (value != null) {
+                                      setState(() {
+                                        finish = value;
+                                      });
+                                    }
+                                  });
+                                },
+                                child: TextField(
+                                  enabled: false,
+                                    onChanged: (_) {},
+                                    decoration: InputDecoration(
+                                        helperText: "Tanggal Selesai",
+                                        helperStyle: const TextStyle(
+                                            fontSize: 12,
+                                            color: Constants.COLOR_TEXT),
+                                        hintText: DateFormat('dd/MM/yyyy').format(finish),
+                                        hintStyle: const TextStyle(
+                                          fontSize: 12,
+                                          color: Constants.COLOR_TEXT,
+                                        ),
+                                        prefixIcon: const Icon(Icons.date_range),
+                                        border: const OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: Constants.COLOR_MAIN)))),
+                              ),
                             ),
                           ],
                         ),
