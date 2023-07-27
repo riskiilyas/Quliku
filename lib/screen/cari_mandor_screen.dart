@@ -79,10 +79,11 @@ class _MyHomePageState extends State<CariMandorScreen> {
                                           .classification,
                                       items: dropdownKlasifikasi,
                                       onChanged: (_) {
-                                        if (_ != null)
+                                        if (_ != null) {
                                           context
                                               .read<SearchMandorNotifier>()
                                               .classification = _;
+                                        }
                                       }),
                                 ),
                               )),
@@ -104,10 +105,11 @@ class _MyHomePageState extends State<CariMandorScreen> {
                                       context.read<SearchMandorNotifier>().city,
                                   items: dropdownLokasi,
                                   onChanged: (_) {
-                                    if (_ != null)
+                                    if (_ != null) {
                                       context
                                           .read<SearchMandorNotifier>()
                                           .city = _;
+                                    }
                                   }),
                             ),
                           )),

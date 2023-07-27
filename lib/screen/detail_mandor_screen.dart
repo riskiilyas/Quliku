@@ -8,7 +8,6 @@ import 'package:quliku/notifier/wishlist_mandor_notifier.dart';
 import 'package:quliku/screen/pilih_mandor_screen.dart';
 import 'package:quliku/util/constants.dart';
 import 'package:quliku/util/fetch_status.dart';
-import 'package:quliku/widget/custom_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class DetailMandorPage extends StatefulWidget {
@@ -102,19 +101,24 @@ class _DetailMandorPageState extends State<DetailMandorPage> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Constants.COLOR_MAIN,
-        onPressed: () {Constants.goto(context, PilihMandorScreen(
-          fullname:    context
-              .read<DetailMandorNotifier>().data.name,
-          rating:    context
-              .read<DetailMandorNotifier>().data.rating,
-          experience:    context
-              .read<DetailMandorNotifier>().data.details.experience,
-          rangeKuli: " ${context.read<DetailMandorNotifier>().data.details.minPeople} - ${context.read<DetailMandorNotifier>().data.details.maxPeople} kuli",
-          location: context
-              .read<DetailMandorNotifier>().data.details.city,
-          imgUrl: context
-              .read<DetailMandorNotifier>().data.profileUrl,
-        ));},
+        onPressed: () {
+          Constants.goto(
+              context,
+              PilihMandorScreen(
+                fullname: context.read<DetailMandorNotifier>().data.name,
+                rating: context.read<DetailMandorNotifier>().data.rating,
+                experience: context
+                    .read<DetailMandorNotifier>()
+                    .data
+                    .details
+                    .experience,
+                rangeKuli:
+                    " ${context.read<DetailMandorNotifier>().data.details.minPeople} - ${context.read<DetailMandorNotifier>().data.details.maxPeople} kuli",
+                location:
+                    context.read<DetailMandorNotifier>().data.details.city,
+                imgUrl: context.read<DetailMandorNotifier>().data.profileUrl,
+              ));
+        },
         icon: const Icon(Icons.add_home_work_outlined),
         label: const Text('Pilih Mandor'),
       ),
@@ -465,7 +469,9 @@ class _DetailMandorPageState extends State<DetailMandorPage> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 36,)
+                        const SizedBox(
+                          height: 36,
+                        )
                       ],
                     ),
                   ),

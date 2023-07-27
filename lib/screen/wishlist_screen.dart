@@ -91,19 +91,28 @@ class _MyHomePageState extends State<WishListScreen> {
                                 .data[index]
                                 .profileUrl,
                             onPressed: () {
-                            context.read<DetailMandorNotifier>().init();
+                              context.read<DetailMandorNotifier>().init();
                               Constants.goto(
-                              context,
-                              DetailMandorPage(
-                                id: context.read<WishlistMandorNotifier>().data[index].id,
-                              ));
+                                  context,
+                                  DetailMandorPage(
+                                    id: context
+                                        .read<WishlistMandorNotifier>()
+                                        .data[index]
+                                        .id,
+                                  ));
                             },
                             onRemoved: () {
                               Constants.showMyDialog(
                                   context, "Ingin Hapus dari mandor favorit?",
                                   (result) {
                                 if (result) {
-                                  delete(context, int.parse(context.read<WishlistMandorNotifier>().data[index].id)).then((value) {
+                                  delete(
+                                          context,
+                                          int.parse(context
+                                              .read<WishlistMandorNotifier>()
+                                              .data[index]
+                                              .id))
+                                      .then((value) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                         const SnackBar(
                                             content: Text('Mandor Dihapus')));

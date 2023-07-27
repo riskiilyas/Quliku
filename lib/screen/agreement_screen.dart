@@ -9,7 +9,6 @@ import 'package:quliku/screen/bukti_transfer_screen.dart';
 import 'package:quliku/util/constants.dart';
 import 'package:quliku/util/user_agreement.dart';
 import 'package:quliku/widget/custom_button.dart';
-import 'package:quliku/widget/custom_text_field.dart';
 
 class AgreementScreen extends StatefulWidget {
   const AgreementScreen({super.key});
@@ -31,8 +30,8 @@ class _MyHomePageState extends State<AgreementScreen> {
       final image = await ImagePicker().pickImage(source: source);
       if (image == null) return;
       setState(() => this.image = File(image.path));
-    } on PlatformException catch (e) {
-      print('Failed to pick image: $e');
+    } on PlatformException {
+      // print('Failed to pick image: $e');
     }
   }
 
@@ -57,49 +56,67 @@ class _MyHomePageState extends State<AgreementScreen> {
       ),
       body: SafeArea(
           child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-            child: Expanded(
-              child: ListView(
+        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+        child: Expanded(
+          child: ListView(
+            children: [
+              const Text(
+                "[ Pengguna Jasa diwajibkan untuk membaca dan memehami USER AGREEMENT yang telah ditetapkan oleh Quliku sebelum menyetujui USER AGREEMENT berikut. ]",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    "[ Pengguna Jasa diwajibkan untuk membaca dan memehami USER AGREEMENT yang telah ditetapkan oleh Quliku sebelum menyetujui USER AGREEMENT berikut. ]",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
+                  const SizedBox(
+                    height: 16,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(height: 16,),
-                      Text(
-                        "USER AGREEMENT",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                    color: Constants.COLOR_MAIN
-                        ),
-                      ),
-                      const SizedBox(height: 12,),
-                      const Text(
-                        UserAgreement.TEXT
-                      ),
-                      Container(
-                        decoration: BoxDecoration(color: Colors.white),
-                        padding: EdgeInsets.only(top: 12),
-                        child: Row(
-                          children: [
-                            Expanded(flex: 1,child: CustomButton(text: "Tidak Setuju", textColor: Colors.white, buttonColor: Constants.COLOR_MAIN, onPressed: (){Navigator.pop(context);})),
-                            Expanded(flex: 1,child: CustomButton(text: "Setuju", textColor: Colors.white, buttonColor: Constants.COLOR_MAIN, onPressed: (){Constants.goto(context, BuktiTransferScreen());})),
-                          ],
-                        ),
-                      )
-                    ],
+                  const Text(
+                    "USER AGREEMENT",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Constants.COLOR_MAIN),
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  const Text(UserAgreement.TEXT),
+                  Container(
+                    decoration: const BoxDecoration(color: Colors.white),
+                    padding: const EdgeInsets.only(top: 12),
+                    child: Row(
+                      children: [
+                        Expanded(
+                            flex: 1,
+                            child: CustomButton(
+                                text: "Tidak Setuju",
+                                textColor: Colors.white,
+                                buttonColor: Constants.COLOR_MAIN,
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                })),
+                        Expanded(
+                            flex: 1,
+                            child: CustomButton(
+                                text: "Setuju",
+                                textColor: Colors.white,
+                                buttonColor: Constants.COLOR_MAIN,
+                                onPressed: () {
+                                  Constants.goto(
+                                      context, const BuktiTransferScreen());
+                                })),
+                      ],
+                    ),
                   )
                 ],
-              ),
-            ),
-          )),
+              )
+            ],
+          ),
+        ),
+      )),
     );
   }
 }

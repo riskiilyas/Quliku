@@ -44,23 +44,25 @@ class Network {
     return MandorWishlistResponse.fromJson(json.decode(response.body));
   }
 
-  Future<UpdateProfileResponse> updateProfile(String token, String name, String email, String password, String password_confirmation, File img) async {
+  Future<UpdateProfileResponse> updateProfile(
+      String token,
+      String name,
+      String email,
+      String password,
+      String password_confirmation,
+      File img) async {
     var baseurl = dotenv.env['BASE_URL'] ?? "";
 
-    final request = http.MultipartRequest('POST', Uri.parse('$baseurl/api/contractor/auth/update'));
+    final request = http.MultipartRequest(
+        'POST', Uri.parse('$baseurl/api/contractor/auth/update'));
     request.headers.addAll({"Authorization": "Bearer $token"});
-    request.fields['name']=name;
-    request.fields['email']=email;
-    request.fields['password']=password;
-    request.fields['password_confirmation']=password_confirmation;
-    request.files.add(
-        http.MultipartFile(
-            'picture',
-            img.readAsBytes().asStream(),
-            img.lengthSync(),
-            filename: "profile.png"
-        )
-    );
+    request.fields['name'] = name;
+    request.fields['email'] = email;
+    request.fields['password'] = password;
+    request.fields['password_confirmation'] = password_confirmation;
+    request.files.add(http.MultipartFile(
+        'picture', img.readAsBytes().asStream(), img.lengthSync(),
+        filename: "profile.png"));
 
     var responseStream = await request.send();
     var responseByte = await responseStream.stream.toBytes();
@@ -91,7 +93,6 @@ class Network {
     return true;
   }
 
-
   Future<MandorDetailResponse> getDetailMandor(String token, String id) async {
     var baseurl = dotenv.env['BASE_URL'] ?? "";
 
@@ -99,7 +100,6 @@ class Network {
         Uri.parse('$baseurl/api/contractor/foreman/detail/$id'),
         headers: {"Authorization": "Bearer $token"});
     if (response.statusCode >= 400) throw Exception();
-    print('haloooo: fjkbafbawiofnawuoifnawfbwaiuef');
     return MandorDetailResponse.fromJson(json.decode(response.body));
   }
 

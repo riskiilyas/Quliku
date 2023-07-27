@@ -47,8 +47,9 @@ class WishlistMandorNotifier with ChangeNotifier {
 
   Future<bool> delete(String token, int id) async {
     var result = await network.deleteWishlistMandor(token, id);
-    if(result) {
-      _data.remove(_data.where((element) => element.id==id.toString()).toList()[0]);
+    if (result) {
+      _data.remove(
+          _data.where((element) => element.id == id.toString()).toList()[0]);
     }
     notifyListeners();
     return result;

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:quliku/screen/cari_mandor_screen.dart';
 import 'package:quliku/screen/home_screens/home_page.dart';
 import 'package:quliku/screen/home_screens/profil_page.dart';
@@ -23,7 +22,7 @@ class _MyHomePageState extends State<HomeScreen> {
     pages.add(HomePage(
       onCariMandor: () => Get.to(() => const CariMandorScreen()),
     ));
-    pages.add(ProfilPage());
+    pages.add(const ProfilPage());
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(

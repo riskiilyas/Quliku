@@ -113,7 +113,8 @@ class _ProfilPageState extends State<ProfilPage> {
                                 children: [
                                   InkWell(
                                     onTap: () => {
-                                      Constants.goto(context, const EditProfileScreen())
+                                      Constants.goto(
+                                          context, const EditProfileScreen())
                                     },
                                     child: const Text(
                                       "Edit Profil",

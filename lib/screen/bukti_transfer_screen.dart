@@ -30,8 +30,8 @@ class _MyHomePageState extends State<BuktiTransferScreen> {
       final image = await ImagePicker().pickImage(source: source);
       if (image == null) return;
       setState(() => this.image = File(image.path));
-    } on PlatformException catch (e) {
-      print('Failed to pick image: $e');
+    } on PlatformException {
+      // print('Failed to pick image: $e');
     }
   }
 
@@ -56,98 +56,141 @@ class _MyHomePageState extends State<BuktiTransferScreen> {
       ),
       body: SafeArea(
           child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-            child: Expanded(
-              child: ListView(
-                children: [
-                  Text("Total Pembayaran:", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
-                  Text("Rp.12.000.000", style: TextStyle(fontSize: 20),),
-                  SizedBox(height: 12,),
-                  Text("Kirim ke Rekening BCA Quliku:", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
-                  Text("1234567890", style: TextStyle(fontSize: 20),),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Center(
-                        child: image!=null ? Image(image: Image.file(image!).image) : Row(mainAxisAlignment: MainAxisAlignment.center,children: const [Icon(Icons.camera_enhance), Text("  Masukkan Bukti Transfer", style: TextStyle(color: Constants.COLOR_HINT_TEXT),)])
+        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+        child: Expanded(
+          child: ListView(
+            children: [
+              const Text(
+                "Total Pembayaran:",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+              const Text(
+                "Rp.12.000.000",
+                style: TextStyle(fontSize: 20),
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              const Text(
+                "Kirim ke Rekening BCA Quliku:",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+              const Text(
+                "1234567890",
+                style: TextStyle(fontSize: 20),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              Expanded(
+                flex: 3,
+                child: Center(
+                    child: image != null
+                        ? Image(image: Image.file(image!).image)
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                                Icon(Icons.camera_enhance),
+                                Text(
+                                  "  Masukkan Bukti Transfer",
+                                  style: TextStyle(
+                                      color: Constants.COLOR_HINT_TEXT),
+                                )
+                              ])),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              Expanded(
+                flex: 1,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: CustomButton(
+                          text: "Kamera",
+                          textColor: Constants.COLOR_MAIN,
+                          buttonColor: Colors.white,
+                          onPressed: () {
+                            pickImage(ImageSource.camera);
+                          }),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: CustomButton(
-                              text: "Kamera",
-                              textColor: Constants.COLOR_MAIN,
-                              buttonColor: Colors.white,
-                              onPressed: () {
-                                pickImage(ImageSource.camera);
-                              }),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: CustomButton(
-                              text: "Galeri",
-                              textColor: Colors.white,
-                              buttonColor: Constants.COLOR_MAIN,
-                              onPressed: () {
-                                pickImage(ImageSource.gallery);
-                              }),
-                        ),
-                      ],
+                    Expanded(
+                      flex: 1,
+                      child: CustomButton(
+                          text: "Galeri",
+                          textColor: Colors.white,
+                          buttonColor: Constants.COLOR_MAIN,
+                          onPressed: () {
+                            pickImage(ImageSource.gallery);
+                          }),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Expanded(
-                    flex: 7,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Nominal:", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
-                        SizedBox(height: 8,),
-                        CustomTextField(
-                          hint: "Nominal",
-                          icon: Icons.money,
-                          callback: (_) => fullname = _,
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        Text("Deskripsi:", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
-                        SizedBox(height: 8,),
-                        TextField(
-                            onChanged: (_) {},
-                            maxLines: 3,
-                            decoration: const InputDecoration(
-                                hintText: "Deskripsi",
-                                hintStyle:
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              Expanded(
+                flex: 7,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Nominal:",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    CustomTextField(
+                      hint: "Nominal",
+                      icon: Icons.money,
+                      callback: (_) => fullname = _,
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    const Text(
+                      "Deskripsi:",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    TextField(
+                        onChanged: (_) {},
+                        maxLines: 3,
+                        decoration: const InputDecoration(
+                            hintText: "Deskripsi",
+                            hintStyle:
                                 TextStyle(color: Constants.COLOR_HINT_TEXT),
-                                prefixIcon: Icon(Icons.text_fields),
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Constants.COLOR_MAIN)))),
-                        SizedBox(height: 16,),
-                        CustomButton(text: "Upload", textColor: Colors.white, buttonColor: Constants.COLOR_MAIN, onPressed: (){
-                          Constants.showSnackbar(context, "Proyek Berhasil dibuat!");
+                            prefixIcon: Icon(Icons.text_fields),
+                            border: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Constants.COLOR_MAIN)))),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    CustomButton(
+                        text: "Upload",
+                        textColor: Colors.white,
+                        buttonColor: Constants.COLOR_MAIN,
+                        onPressed: () {
+                          Constants.showSnackbar(
+                              context, "Proyek Berhasil dibuat!");
                           Constants.goto(context, const HomeScreen());
                         })
-                      ],
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          )),
+            ],
+          ),
+        ),
+      )),
     );
   }
 }

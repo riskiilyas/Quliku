@@ -29,8 +29,8 @@ class _MyHomePageState extends State<EditProfileScreen> {
       final image = await ImagePicker().pickImage(source: source);
       if (image == null) return;
       setState(() => this.image = File(image.path));
-    } on PlatformException catch (e) {
-      print('Failed to pick image: $e');
+    } on PlatformException {
+      // print('Failed to pick image: $e');
     }
   }
 
@@ -55,9 +55,7 @@ class _MyHomePageState extends State<EditProfileScreen> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Constants.COLOR_MAIN,
-        onPressed: () {
-
-        },
+        onPressed: () {},
         icon: const Icon(Icons.save),
         label: const Text('Update'),
       ),
@@ -85,13 +83,13 @@ class _MyHomePageState extends State<EditProfileScreen> {
               Expanded(
                 flex: 3,
                 child: Center(
-                  child:  CircleAvatar(
-                      radius: 64,
-                      backgroundImage: image == null
-                  ? NetworkImage(context.read<PrefNotifier>().profileUrl)
-                      : Image.file(image!).image)
-                  ),
-                ),
+                    child: CircleAvatar(
+                        radius: 64,
+                        backgroundImage: image == null
+                            ? NetworkImage(
+                                context.read<PrefNotifier>().profileUrl)
+                            : Image.file(image!).image)),
+              ),
               const SizedBox(
                 height: 16,
               ),

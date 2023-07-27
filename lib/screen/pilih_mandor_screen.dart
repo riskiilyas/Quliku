@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:quliku/screen/agreement_screen.dart';
 import 'package:quliku/util/constants.dart';
@@ -159,8 +158,8 @@ class _MyHomePageState extends State<PilihMandorScreen> {
                                 maxLines: 10,
                                 decoration: const InputDecoration(
                                     hintText: "Deskripsi",
-                                    hintStyle:
-                                    TextStyle(color: Constants.COLOR_HINT_TEXT),
+                                    hintStyle: TextStyle(
+                                        color: Constants.COLOR_HINT_TEXT),
                                     prefixIcon: Icon(Icons.text_fields),
                                     border: OutlineInputBorder(
                                         borderSide: BorderSide(
@@ -194,7 +193,9 @@ class _MyHomePageState extends State<PilihMandorScreen> {
                                           borderSide: BorderSide(
                                               color: Constants.COLOR_MAIN)))),
                             ),
-                            SizedBox(width: 12,),
+                            const SizedBox(
+                              width: 12,
+                            ),
                             Expanded(
                               flex: 1,
                               child: TextField(
@@ -203,7 +204,7 @@ class _MyHomePageState extends State<PilihMandorScreen> {
                                       hintText: "Tanggal Selesai",
                                       hintStyle: TextStyle(
                                         fontSize: 12,
-                                          color: Constants.COLOR_HINT_TEXT,
+                                        color: Constants.COLOR_HINT_TEXT,
                                       ),
                                       prefixIcon: Icon(Icons.date_range),
                                       border: OutlineInputBorder(
@@ -233,29 +234,50 @@ class _MyHomePageState extends State<PilihMandorScreen> {
                                 icon: const Icon(Icons.pin_drop),
                                 value: loc,
                                 items: dropdownLokasi,
-                                onChanged: (_) {setState(() {
-                                  loc = _??"Surabaya";
-                                });}),
+                                onChanged: (_) {
+                                  setState(() {
+                                    loc = _ ?? "Surabaya";
+                                  });
+                                }),
                             TextField(
                                 onChanged: (_) {},
                                 maxLines: 2,
                                 decoration: const InputDecoration(
                                     hintText: "Alamat Lengkap",
-                                    hintStyle:
-                                    TextStyle(color: Constants.COLOR_HINT_TEXT),
+                                    hintStyle: TextStyle(
+                                        color: Constants.COLOR_HINT_TEXT),
                                     prefixIcon: Icon(Icons.home),
                                     border: OutlineInputBorder(
                                         borderSide: BorderSide(
                                             color: Constants.COLOR_MAIN)))),
-                            SizedBox(height: 16,),
+                            const SizedBox(
+                              height: 16,
+                            ),
                             Container(
-                              decoration: BoxDecoration(color: Colors.white),
-                              padding: EdgeInsets.only(top: 12),
+                              decoration:
+                                  const BoxDecoration(color: Colors.white),
+                              padding: const EdgeInsets.only(top: 12),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Expanded(flex: 1,child: const Text("Rp.12.000.000", style: TextStyle(fontWeight: FontWeight.bold),)),
-                                  Expanded(flex: 1,child: CustomButton(text: "Tawarkan Proyek", textColor: Colors.white, buttonColor: Constants.COLOR_MAIN, onPressed: (){Constants.goto(context, AgreementScreen());}))
+                                  const Expanded(
+                                      flex: 1,
+                                      child: Text(
+                                        "Rp.12.000.000",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                  Expanded(
+                                      flex: 1,
+                                      child: CustomButton(
+                                          text: "Tawarkan Proyek",
+                                          textColor: Colors.white,
+                                          buttonColor: Constants.COLOR_MAIN,
+                                          onPressed: () {
+                                            Constants.goto(context,
+                                                const AgreementScreen());
+                                          }))
                                 ],
                               ),
                             )

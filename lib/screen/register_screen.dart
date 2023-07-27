@@ -32,7 +32,8 @@ class _MyHomePageState extends State<RegisterScreen> {
         Navigator.pop(context);
       } else if (status == FetchStatus.ERROR) {
         context.read<RegisterNotifier>().init();
-        Constants.showSnackbar(context, "Failed to Register! " + context.read<RegisterNotifier>().error);
+        Constants.showSnackbar(context,
+            "Failed to Register! ${context.read<RegisterNotifier>().error}");
       }
     });
   }
