@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
       home: MaterialApp(
           title: 'Quliku',
           theme: ThemeData(
-            primarySwatch: Colors.blue,
+            primarySwatch: Colors.orange,
           ),
           home: AnimatedSplashScreen(
             duration: 2000,
