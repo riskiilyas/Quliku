@@ -180,7 +180,7 @@ class _MyHomePageState extends State<PilihMandorScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 12,),
+                        const SizedBox(height: 12,),
                         Row(
                           children: [
                             Expanded(

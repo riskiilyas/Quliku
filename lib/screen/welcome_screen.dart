@@ -17,62 +17,77 @@ class _MyHomePageState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Constants.COLOR_MAIN,
         body: SafeArea(
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 16),
-        child: Column(
-          children: [
-            Expanded(
-              child: Center(
-                child: SizedBox(
-                  width: 128,
-                  child: Image.asset(
-                    'assets/logo_quliku.png',
-                    fit: BoxFit.fill,
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 24),
+            child: Column(
+              children: [
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: SizedBox(
+                          width: 200,
+                          child: Image.asset(
+                            'assets/logo_quliku_new.png',
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 48,
+                      ),
+                      Column(
+                        children: [
+                          CustomButton(
+                              text: "Daftar",
+                              width: 200,
+                              textColor: Constants.COLOR_MAIN,
+                              buttonColor: Colors.white,
+                              onPressed: () => {
+                                    Constants.goto(
+                                        context, const RegisterScreen())
+                                  }),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                "Sudah punya akun? ",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Constants.goto(context, const LoginScreen());
+                                },
+                                child: const Text(
+                                  "Masuk",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      )
+                    ],
                   ),
                 ),
-              ),
+                const Text(
+                  "Dengan melanjutkan, Anda dianggap telah menyetujui Ketentuan  Penggunaan dan Kebijakan Privasi",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white),
+                )
+              ],
             ),
-            const SizedBox(
-              height: 24,
-            ),
-            Expanded(
-              child: Center(
-                child: SizedBox(
-                  width: 256,
-                  child: Image.asset(
-                    'assets/homepage_img.png',
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 48,
-            ),
-            Expanded(
-                child:
-                    Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-              CustomButton(
-                  text: "Masuk",
-                  textColor: Colors.white,
-                  buttonColor: Constants.COLOR_MAIN,
-                  onPressed: () =>
-                      {Constants.popto(context, const LoginScreen())})
-            ])),
-            const SizedBox(
-              height: 4,
-            ),
-            CustomButton(
-                text: "Daftar",
-                textColor: Constants.COLOR_MAIN,
-                buttonColor: Colors.white,
-                onPressed: () =>
-                    {Constants.goto(context, const RegisterScreen())})
-          ],
-        ),
-      ),
-    ));
+          ),
+        ));
   }
 
   @override

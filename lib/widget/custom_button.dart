@@ -5,9 +5,11 @@ class CustomButton extends StatelessWidget {
   final Color textColor;
   final Color buttonColor;
   final Function() onPressed;
+  final double width;
 
   const CustomButton(
       {Key? key,
+      this.width = double.infinity,
       required this.text,
       required this.textColor,
       required this.buttonColor,
@@ -19,7 +21,7 @@ class CustomButton extends StatelessWidget {
     return Card(
       elevation: 4,
       child: SizedBox(
-        width: double.infinity,
+        width: width,
         child: InkWell(
           onTap: onPressed,
           child: Container(

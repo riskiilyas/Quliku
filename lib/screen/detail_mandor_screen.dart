@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:popup_banner/popup_banner.dart';
 import 'package:provider/provider.dart';
 import 'package:quliku/notifier/detail_mandor_notifier.dart';
 import 'package:quliku/notifier/pref_notifier.dart';
@@ -315,35 +316,55 @@ class _DetailMandorPageState extends State<DetailMandorPage> {
                                           .where((element) =>
                                               element.type == "certificate")
                                           .length, (index) {
-                                    return Image.network(
-                                      context
-                                          .read<DetailMandorNotifier>()
-                                          .data
-                                          .images
-                                          .where((element) =>
-                                              element.type == "certificate")
-                                          .toList(growable: true)[index]
-                                          .photoUrl,
-                                      fit: BoxFit.fitWidth,
-                                      loadingBuilder: (BuildContext context,
-                                          Widget child,
-                                          ImageChunkEvent? loadingProgress) {
-                                        if (loadingProgress == null) {
-                                          return child;
-                                        }
-                                        return Center(
-                                          child: CircularProgressIndicator(
-                                            value: loadingProgress
-                                                        .expectedTotalBytes !=
-                                                    null
-                                                ? loadingProgress
-                                                        .cumulativeBytesLoaded /
-                                                    loadingProgress
-                                                        .expectedTotalBytes!
-                                                : null,
-                                          ),
-                                        );
+                                    return InkWell(
+                                      onTap: () {
+                                        PopupBanner(
+                                          height: null,
+                                          fit: BoxFit.fitWidth,
+                                          context: context,
+                                          images: [
+                                            context
+                                                .read<DetailMandorNotifier>()
+                                                .data
+                                                .images
+                                                .where((element) =>
+                                            element.type == "certificate")
+                                                .toList(growable: true)[index]
+                                                .photoUrl,
+                                          ],
+                                          onClick: (index) {},
+                                        ).show();
                                       },
+                                      child: Image.network(
+                                          context
+                                              .read<DetailMandorNotifier>()
+                                              .data
+                                              .images
+                                              .where((element) =>
+                                                  element.type == "certificate")
+                                              .toList(growable: true)[index]
+                                              .photoUrl,
+                                          fit: BoxFit.fitWidth,
+                                          loadingBuilder: (BuildContext context,
+                                              Widget child,
+                                              ImageChunkEvent? loadingProgress) {
+                                            if (loadingProgress == null) {
+                                              return child;
+                                            }
+                                            return Center(
+                                              child: CircularProgressIndicator(
+                                                value: loadingProgress
+                                                            .expectedTotalBytes !=
+                                                        null
+                                                    ? loadingProgress
+                                                            .cumulativeBytesLoaded /
+                                                        loadingProgress
+                                                            .expectedTotalBytes!
+                                                    : null,
+                                              ),
+                                            );
+                                          },
+                                        ),
                                     );
                                   }),
                                   carouselController: sertifikatController,
@@ -352,7 +373,6 @@ class _DetailMandorPageState extends State<DetailMandorPage> {
                                       sertifikatPageController.jumpToPage(_);
                                     },
                                     autoPlay: false,
-                                    enableInfiniteScroll: false,
                                     enlargeCenterPage: true,
                                     viewportFraction: 0.9,
                                     aspectRatio: 2.0,
@@ -438,7 +458,6 @@ class _DetailMandorPageState extends State<DetailMandorPage> {
                                       sertifikatPageController.jumpToPage(_);
                                     },
                                     autoPlay: false,
-                                    enableInfiniteScroll: false,
                                     enlargeCenterPage: true,
                                     viewportFraction: 0.9,
                                     aspectRatio: 2.0,
