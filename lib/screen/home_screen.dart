@@ -31,11 +31,7 @@ class _MyHomePageState extends State<HomeScreen> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         centerTitle: false,
-        title: Text(
-          _index == 0 ? "Quliku" : "Profil Saya",
-          style: const TextStyle(
-              color: Constants.COLOR_TITLE, fontWeight: FontWeight.bold),
-        ),
+        title: Image.asset("assets/logo_appbar.png", fit: BoxFit.contain,height: 36,),
         actions: <Widget>[
           IconButton(
               icon: const Icon(Icons.favorite),
@@ -52,7 +48,7 @@ class _MyHomePageState extends State<HomeScreen> {
         tooltip: 'Increment',
         backgroundColor: Constants.COLOR_MAIN,
         elevation: 2.0,
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.search, color: Colors.white,),
       ),
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
@@ -61,22 +57,25 @@ class _MyHomePageState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             IconButton(
+              iconSize: 30,
                 onPressed: () => {
                       setState(() => {_index = 0})
                     },
-                icon: Icon(
-                  Icons.home,
-                  size: 30,
-                  color: _index == 0 ? Constants.COLOR_MAIN : Colors.black,
+                icon: SizedBox(
+                  height: double.infinity,
+                  child: Icon(
+                    Icons.home,
+                    color: _index == 0 ? Constants.COLOR_MAIN : Colors.grey[700],
+                  ),
                 )),
             IconButton(
                 onPressed: () => {
                       setState(() => {_index = 1})
                     },
                 icon: Icon(
-                  Icons.person,
+                  Icons.account_circle,
                   size: 30,
-                  color: _index == 1 ? Constants.COLOR_MAIN : Colors.black,
+                  color: _index == 1 ? Constants.COLOR_MAIN : Colors.grey[700],
                 )),
           ],
         ),

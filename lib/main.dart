@@ -59,10 +59,11 @@ class MyApp extends StatelessWidget {
           home: AnimatedSplashScreen(
             duration: 2000,
             splashIconSize: 180,
-            splash: 'assets/logo_quliku.png',
+            backgroundColor: Constants.COLOR_MAIN,
+            splash: 'assets/logo_quliku_new.png',
             splashTransition: SplashTransition.slideTransition,
             pageTransitionType: PageTransitionType.bottomToTop,
-            nextScreen: page,
+            nextScreen: const HomeScreen(),
           )),
     );
   }

@@ -55,118 +55,111 @@ class _MyHomePageState extends State<LoginScreen> {
         padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
         child: ListView(
           children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Masuk',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24,
-                            color: Constants.COLOR_MAIN),
-                      ),
-                      InkWell(
-                        onTap: () {},
-                        child: const Icon(
-                          Icons.arrow_back,
-                          color: Constants.COLOR_MAIN,
-                        ),
-                      )
-                    ],
-                  ),
-                  const Divider(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Masuk',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                      color: Constants.COLOR_MAIN),
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: const Icon(
+                    Icons.arrow_back,
                     color: Constants.COLOR_MAIN,
                   ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  const Text(
-                    'Gunakan akun yang telah didaftarkan!',
-                    style: TextStyle(color: Constants.COLOR_TEXT),
-                  ),
-                  const SizedBox(
-                    height: 48,
-                  ),
-                  Center(
-                    child: SizedBox(
-                      width: 280,
-                      child: Image.asset(
-                        'assets/login_img.png',
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 48,
-                  ),
-                  CustomTextField(
-                    hint: "Email",
-                    icon: Icons.email,
-                    callback: (_) {
-                      usernameOrEmail = _;
-                    },
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  CustomTextField(
-                    hint: "Password",
-                    icon: Icons.password,
-                    callback: (_) {
-                      password = _;
-                    },
-                  ),
-                  const SizedBox(
-                    height: 32,
-                  ),
-                  CustomButton(
-                      text: "MASUK",
-                      textColor: Colors.white,
-                      buttonColor: Constants.COLOR_MAIN,
-                      onPressed: () => {
-                            context
-                                .read<LoginNotifier>()
-                                .fetch(usernameOrEmail, password)
-                          }),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Row(
-                    children: [
-                      const Text(
-                        'Belum Punya Akun? ',
-                        style: TextStyle(
-                            color: Constants.COLOR_HINT_TEXT, fontSize: 16),
-                      ),
-                      InkWell(
-                        onTap: () => {
-                          // Constants.goto(RegisterScreen(blocContext: widget.blocContext,))
-                        },
-                        child: const Text(
-                          'Yuk Daftar!',
-                          style: TextStyle(
-                              color: Constants.COLOR_MAIN,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 24),
-                    child: status == FetchStatus.LOADING
-                        ? const SpinKitFadingCircle(
-                            color: Constants.COLOR_MAIN,
-                            size: 50.0,
-                          )
-                        : null,
-                  ),
-                ],
+                )
+              ],
+            ),
+            const Divider(
+              color: Constants.COLOR_MAIN,
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            const Text(
+              'Gunakan akun yang telah didaftarkan!',
+              style: TextStyle(color: Constants.COLOR_TEXT),
+            ),
+            const SizedBox(
+              height: 48,
+            ),
+            Center(
+              child: SizedBox(
+                width: 280,
+                child: Image.asset(
+                  'assets/login_img.png',
+                  fit: BoxFit.fill,
+                ),
               ),
+            ),
+            const SizedBox(
+              height: 48,
+            ),
+            CustomTextField(
+              hint: "Email",
+              icon: Icons.email,
+              callback: (_) {
+                usernameOrEmail = _;
+              },
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            CustomTextField(
+              hint: "Password",
+              icon: Icons.password,
+              callback: (_) {
+                password = _;
+              },
+            ),
+            const SizedBox(
+              height: 32,
+            ),
+            CustomButton(
+                text: "MASUK",
+                textColor: Colors.white,
+                buttonColor: Constants.COLOR_MAIN,
+                onPressed: () => {
+                      context
+                          .read<LoginNotifier>()
+                          .fetch(usernameOrEmail, password)
+                    }),
+            const SizedBox(
+              height: 12,
+            ),
+            Row(
+              children: [
+                const Text(
+                  'Belum Punya Akun? ',
+                  style: TextStyle(
+                      color: Constants.COLOR_HINT_TEXT, fontSize: 16),
+                ),
+                InkWell(
+                  onTap: () => {
+                    // Constants.goto(RegisterScreen(blocContext: widget.blocContext,))
+                  },
+                  child: const Text(
+                    'Yuk Daftar!',
+                    style: TextStyle(
+                        color: Constants.COLOR_MAIN,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 24),
+              child: status == FetchStatus.LOADING
+                  ? const SpinKitFadingCircle(
+                      color: Constants.COLOR_MAIN,
+                      size: 50.0,
+                    )
+                  : null,
             ),
           ],
         ),
