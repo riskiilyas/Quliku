@@ -124,9 +124,10 @@ class _MyHomePageState extends State<LoginScreen> {
                 textColor: Colors.white,
                 buttonColor: Constants.COLOR_MAIN,
                 onPressed: () => {
-                      context
-                          .read<LoginNotifier>()
-                          .fetch(usernameOrEmail, password)
+                  Constants.goto(context, HomeScreen())
+                      // context
+                      //     .read<LoginNotifier>()
+                      //     .fetch(usernameOrEmail, password)
                     }),
             const SizedBox(
               height: 12,

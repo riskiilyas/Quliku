@@ -5,9 +5,13 @@ class KlasifikasiButton extends StatelessWidget {
   final String text;
   final String imgUrl;
   final Function() onPressed;
+  final double size;
+  final double space;
 
   const KlasifikasiButton(
       {Key? key,
+        this.size = 56,
+        this.space = 8,
       required this.text,
       required this.imgUrl,
       required this.onPressed})
@@ -23,15 +27,16 @@ class KlasifikasiButton extends StatelessWidget {
         children: [
           Center(
             child: SizedBox(
-              width: 56,
+              width: size,
+              height: size,
               child: Image.asset(
                 imgUrl,
                 fit: BoxFit.fill,
               ),
             ),
           ),
-          const SizedBox(
-            height: 4,
+          SizedBox(
+            height: space,
           ),
           Text(
             text,

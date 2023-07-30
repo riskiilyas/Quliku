@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
             splash: 'assets/logo_quliku_new.png',
             splashTransition: SplashTransition.slideTransition,
             pageTransitionType: PageTransitionType.bottomToTop,
-            nextScreen: const HomeScreen(),
+            nextScreen: const WelcomeScreen(),
           )),
     );
   }
