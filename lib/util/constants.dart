@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 class Constants {
@@ -71,6 +73,38 @@ class Constants {
               },
             ),
           ],
+        );
+      },
+    );
+  }
+
+  static Future<void> showImage(BuildContext context, File img) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return Center(
+          child: Stack(children: [
+            Image.file(img),
+            Positioned(
+              top: 0,
+              right: 0,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey.shade200.withOpacity(0.8)),
+                  child: const Icon(
+                    Icons.cancel_outlined,
+                    size: 32,
+                    color: Constants.COLOR_MAIN_TEXT,
+                  ),
+                ),
+              ),
+            ),
+          ]),
         );
       },
     );

@@ -1,12 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:quliku/screen/agreement_screen.dart';
 import 'package:quliku/util/constants.dart';
 import 'package:quliku/util/fetch_status.dart';
 import 'package:quliku/widget/custom_button.dart';
-import 'package:quliku/widget/custom_mandor_item.dart';
-import 'package:quliku/widget/custom_text_field.dart';
 import 'package:quliku/notifier/register_notifier.dart';
 
 class RegistrasiProyekScreen extends StatefulWidget {
@@ -26,6 +28,18 @@ class _MyHomePageState extends State<RegistrasiProyekScreen> {
   String loc = "Surabaya";
   DateTime start = DateTime.now();
   DateTime finish = DateTime.now();
+  int tCat = 1;
+  List<File> imgs = [];
+
+  Future pickImage() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (image == null) return;
+      setState(() => imgs.add(File(image.path)));
+    } on PlatformException {
+      // print('Failed to pick image: $e');
+    }
+  }
 
   void init() async {
     context.watch<RegisterNotifier>();
@@ -57,34 +71,24 @@ class _MyHomePageState extends State<RegistrasiProyekScreen> {
   Widget build(BuildContext context) {
     init();
     return Scaffold(
-        // appBar: AppBar(
-        //   iconTheme: const IconThemeData(
-        //     color: Constants.COLOR_MAIN, //change your color here
-        //   ),
-        //   backgroundColor: Colors.white,
-        //   centerTitle: false,
-        //   title: const Text(
-        //     "Form Penawaran Proyek",
-        //     style: TextStyle(
-        //         color: Constants.COLOR_TITLE, fontWeight: FontWeight.bold),
-        //   ),
-        // ),
         body: SafeArea(
             child: Container(
       color: Constants.COLOR_MAIN,
-      padding: const EdgeInsets.symmetric(vertical: 8,horizontal: 16),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: Column(
         children: [
           Container(
             width: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
             decoration: BoxDecoration(
                 color: Colors.white, borderRadius: BorderRadius.circular(16)),
             child: Stack(
               children: [
                 InkWell(
-                  onTap: () {},
-                  child: Icon(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Icon(
                     Icons.arrow_back,
                     color: Constants.COLOR_MAIN_TEXT,
                   ),
@@ -98,98 +102,307 @@ class _MyHomePageState extends State<RegistrasiProyekScreen> {
                         child: Text(
                       "Membuat Pesanan",
                       textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Constants.COLOR_MAIN_TEXT),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Constants.COLOR_MAIN_TEXT),
                     )),
                   ],
                 )
               ],
             ),
           ),
+          const SizedBox(
+            height: 12,
+          ),
           Expanded(
             child: ListView(
               children: [
-                Expanded(
-                  flex: 1,
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'Mandor yang dipilih',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24,
-                              color: Constants.COLOR_TITLE),
-                        ),
-                        const SizedBox(
-                          height: 32,
-                        ),
-                        const Text(
-                          'Nama Proyek',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Constants.COLOR_TITLE),
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 5,
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8)),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                      const Text(
+                        "Cat",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18),
+                      ),
+                      TextField(
+                          onChanged: (_) {},
+                          decoration: const InputDecoration(
+                            hintText: "Detail perbaikan yang dibutuhkan",
+                            hintStyle:
+                                TextStyle(color: Constants.COLOR_HINT_TEXT),
+                          )),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          CustomTextField(
-                            hint: "Proyek Rumah Minimalis",
-                            icon: Icons.abc,
-                            callback: (_) => fullname = _,
-                          ),
-                          const SizedBox(
-                            height: 12,
-                          ),
-                          const Text(
-                            'Deskripsi',
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                                color: Constants.COLOR_TITLE),
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          TextField(
-                              onChanged: (_) {},
-                              maxLines: 10,
-                              decoration: const InputDecoration(
-                                  hintText: "Deskripsi",
-                                  hintStyle: TextStyle(
-                                      color: Constants.COLOR_HINT_TEXT),
-                                  prefixIcon: Icon(Icons.text_fields),
-                                  border: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Constants.COLOR_MAIN)))),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          const Text(
-                            'Durasi',
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                                color: Constants.COLOR_TITLE),
-                          ),
+                          const Text("Kelupas cat lama"),
+                          Checkbox(value: false, onChanged: (_) {})
                         ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text("Cat ulang"),
+                          Checkbox(value: false, onChanged: (_) {})
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text("Cat pagar"),
+                          Checkbox(value: false, onChanged: (_) {})
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8)),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Deskripsi detail kerusakan",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      TextField(
+                          onChanged: (_) {},
+                          minLines: 10,
+                          maxLines: 20,
+                          decoration: const InputDecoration(
+                              hintText: "Deskripsi",
+                              hintStyle:
+                                  TextStyle(color: Constants.COLOR_HINT_TEXT),
+                              prefixIcon: Icon(Icons.text_fields),
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Constants.COLOR_MAIN)))),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8)),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      InkWell(
+                        onTap: pickImage,
+                        child: Card(
+                          color: Constants.COLOR_MAIN_TEXT,
+                          elevation: 8,
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Constants.COLOR_MAIN_TEXT,
+                                borderRadius: BorderRadius.circular(8)),
+                            padding: const EdgeInsets.all(12),
+                            child: Row(
+                              children: const [
+                                Icon(
+                                  Icons.upload,
+                                  color: Colors.white,
+                                ),
+                                SizedBox(
+                                  width: 12,
+                                ),
+                                Text(
+                                  "Upload foto kerusakan",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 18),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      SizedBox(
+                        height: imgs.isNotEmpty ? 150 : 0,
+                        child: ListView(
+                          // This next line does the trick.
+                          scrollDirection: Axis.horizontal,
+                          children: List.generate(
+                              imgs.length,
+                              (index) => Padding(
+                                    padding: const EdgeInsets.only(right: 4),
+                                    child: SizedBox(
+                                      height: 150,
+                                      child: Stack(children: [
+                                        InkWell(
+                                            onTap: () {
+                                              Constants.showImage(
+                                                  context, imgs[index]);
+                                            },
+                                            child: Image.file(imgs[index])),
+                                        Positioned(
+                                            top: 0,
+                                            left: 0,
+                                            child: InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  imgs.remove(imgs[index]);
+                                                });
+                                              },
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                    color: Colors.grey.shade200
+                                                        .withOpacity(0.8)),
+                                                child: const Icon(
+                                                  Icons.delete,
+                                                  color:
+                                                      Constants.COLOR_MAIN_TEXT,
+                                                ),
+                                              ),
+                                            )),
+                                      ]),
+                                    ),
+                                  )),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8)),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Alamat",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Row(
+                        children: [
+                          const Text("Kota : "),
+                          DropdownButton(
+                              icon: const Icon(Icons.pin_drop),
+                              value: loc,
+                              items: dropdownLokasi,
+                              onChanged: (_) {
+                                setState(() {
+                                  loc = _ ?? "Surabaya";
+                                });
+                              }),
+                        ],
+                      ),
+                      TextField(
+                          onChanged: (_) {},
+                          minLines: 3,
+                          maxLines: 10,
+                          decoration: const InputDecoration(
+                              hintText: "Masukkan Alamat Anda",
+                              hintStyle:
+                                  TextStyle(color: Constants.COLOR_HINT_TEXT),
+                              prefixIcon: Icon(Icons.home),
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Constants.COLOR_MAIN)))),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8)),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        "Estimasi",
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Constants.COLOR_MAIN_TEXT,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8)),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        "Tanggal",
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Constants.COLOR_MAIN_TEXT,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8)),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Durasi",
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Constants.COLOR_MAIN_TEXT,
+                            fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(
                         height: 12,
@@ -276,78 +489,162 @@ class _MyHomePageState extends State<RegistrasiProyekScreen> {
                           ),
                         ],
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8)),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
                         children: [
+                          Image.asset(
+                            "assets/mandor.png",
+                            width: 20,
+                          ),
                           const SizedBox(
-                            height: 16,
+                            width: 12,
                           ),
                           const Text(
-                            'Lokasi Proyek',
-                            textAlign: TextAlign.start,
+                            "Jenis Tukang",
                             style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                                color: Constants.COLOR_TITLE),
+                                fontSize: 18,
+                                color: Constants.COLOR_MAIN_TEXT,
+                                fontWeight: FontWeight.bold),
                           ),
-                          const SizedBox(
-                            height: 4,
-                          ),
-                          DropdownButton(
-                              icon: const Icon(Icons.pin_drop),
-                              value: loc,
-                              items: dropdownLokasi,
-                              onChanged: (_) {
-                                setState(() {
-                                  loc = _ ?? "Surabaya";
-                                });
-                              }),
-                          TextField(
-                              onChanged: (_) {},
-                              maxLines: 2,
-                              decoration: const InputDecoration(
-                                  hintText: "Alamat Lengkap",
-                                  hintStyle: TextStyle(
-                                      color: Constants.COLOR_HINT_TEXT),
-                                  prefixIcon: Icon(Icons.home),
-                                  border: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Constants.COLOR_MAIN)))),
-                          const SizedBox(
-                            height: 16,
-                          ),
-                          Container(
-                            decoration:
-                                const BoxDecoration(color: Colors.white),
-                            padding: const EdgeInsets.only(top: 12),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Expanded(
-                                    flex: 1,
-                                    child: Text(
-                                      "Rp.12.000.000",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                                Expanded(
-                                    flex: 1,
-                                    child: CustomButton(
-                                        text: "Tawarkan Proyek",
-                                        textColor: Colors.white,
-                                        buttonColor: Constants.COLOR_MAIN,
-                                        onPressed: () {
-                                          Constants.goto(
-                                              context, const AgreementScreen());
-                                        }))
-                              ],
-                            ),
-                          )
                         ],
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: Colors.grey, width: 1)),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Image.asset(
+                                  "assets/cat.png",
+                                  width: 36,
+                                ),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                const Expanded(
+                                    child: Text("Tukang Cat",
+                                        style: TextStyle(fontSize: 18))),
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      tCat++;
+                                    });
+                                  },
+                                  child: Container(
+                                      width: 32,
+                                      height: 32,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(64),
+                                          color: Colors.grey),
+                                      child: const Center(
+                                          child: Text(
+                                        "+",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 24),
+                                      ))),
+                                ),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                Text("$tCat",
+                                    style: const TextStyle(fontSize: 24)),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      if (tCat > 0) tCat--;
+                                    });
+                                  },
+                                  child: Container(
+                                      width: 32,
+                                      height: 32,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(64),
+                                          color: Colors.grey),
+                                      child: const Center(
+                                          child: Text(
+                                        "-",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 24),
+                                      ))),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          Container(
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(16)),
+            padding: const EdgeInsets.all(8),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text("Jumlah Biaya:"),
+                      SizedBox(
+                        height: 4,
+                      ),
+                      Text(
+                        "Rp. 100.000.000",
+                        style: TextStyle(
+                            color: Constants.COLOR_MAIN,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16),
                       )
                     ],
                   ),
                 ),
+                const SizedBox(
+                  width: 12,
+                ),
+                Expanded(
+                    flex: 1,
+                    child: CustomButton(
+                        text: "Pembayaran",
+                        textColor: Colors.white,
+                        buttonColor: Constants.COLOR_MAIN_TEXT,
+                        onPressed: () {
+                          Constants.goto(context, const AgreementScreen());
+                        })),
               ],
             ),
           ),
