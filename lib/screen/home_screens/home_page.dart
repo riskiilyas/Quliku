@@ -7,6 +7,7 @@ import 'package:quliku/notifier/detail_mandor_notifier.dart';
 import 'package:quliku/notifier/notifier_reccomend_mandor.dart';
 import 'package:quliku/notifier/pref_notifier.dart';
 import 'package:quliku/screen/detail_mandor_screen.dart';
+import 'package:quliku/screen/registrasi_proyek_screen.dart';
 import 'package:quliku/util/dev.dart';
 import 'package:quliku/util/fetch_status.dart';
 import 'package:quliku/util/service_locator.dart';
@@ -143,7 +144,9 @@ class _HomePageState extends State<HomePage> {
                       KlasifikasiButton(
                           text: "Konsultan",
                           imgUrl: "assets/konsultan.png",
-                          onPressed: () => {}),
+                          onPressed: () => {
+                            Constants.goto(context, RegistrasiProyekScreen())
+                          }),
                       KlasifikasiButton(
                           text: "Tukang",
                           imgUrl: "assets/tukang.png",

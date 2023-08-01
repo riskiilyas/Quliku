@@ -1,0 +1,358 @@
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:quliku/screen/agreement_screen.dart';
+import 'package:quliku/util/constants.dart';
+import 'package:quliku/util/fetch_status.dart';
+import 'package:quliku/widget/custom_button.dart';
+import 'package:quliku/widget/custom_mandor_item.dart';
+import 'package:quliku/widget/custom_text_field.dart';
+import 'package:quliku/notifier/register_notifier.dart';
+
+class RegistrasiProyekScreen extends StatefulWidget {
+  const RegistrasiProyekScreen({super.key});
+
+  @override
+  State<RegistrasiProyekScreen> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<RegistrasiProyekScreen> {
+  String fullname = "";
+  String username = "";
+  String email = "";
+  String password = "";
+  String confirmPassword = "";
+  FetchStatus status = FetchStatus.INITIAL;
+  String loc = "Surabaya";
+  DateTime start = DateTime.now();
+  DateTime finish = DateTime.now();
+
+  void init() async {
+    context.watch<RegisterNotifier>();
+    status = context.read<RegisterNotifier>().status;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (status == FetchStatus.SUCCESS) {
+        context.read<RegisterNotifier>().init();
+        Constants.showSnackbar(context, "Successfully Register!");
+        Navigator.pop(context);
+      } else if (status == FetchStatus.ERROR) {
+        context.read<RegisterNotifier>().init();
+        Constants.showSnackbar(context, "Failed to Register!");
+      }
+    });
+  }
+
+  List<DropdownMenuItem<String>> get dropdownLokasi {
+    List<DropdownMenuItem<String>> menuItems = [
+      const DropdownMenuItem(value: "Surabaya", child: Text("Surabaya")),
+      const DropdownMenuItem(value: "Sidoarjo", child: Text("Sidoarjo")),
+      const DropdownMenuItem(value: "Malang", child: Text("Malang")),
+      const DropdownMenuItem(value: "Gresik", child: Text("Gresik")),
+      const DropdownMenuItem(value: "Mojokerto", child: Text("Mojokerto")),
+    ];
+    return menuItems;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    init();
+    return Scaffold(
+        // appBar: AppBar(
+        //   iconTheme: const IconThemeData(
+        //     color: Constants.COLOR_MAIN, //change your color here
+        //   ),
+        //   backgroundColor: Colors.white,
+        //   centerTitle: false,
+        //   title: const Text(
+        //     "Form Penawaran Proyek",
+        //     style: TextStyle(
+        //         color: Constants.COLOR_TITLE, fontWeight: FontWeight.bold),
+        //   ),
+        // ),
+        body: SafeArea(
+            child: Container(
+      color: Constants.COLOR_MAIN,
+      padding: const EdgeInsets.symmetric(vertical: 8,horizontal: 16),
+      child: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(16)),
+            child: Stack(
+              children: [
+                InkWell(
+                  onTap: () {},
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: Constants.COLOR_MAIN_TEXT,
+                  ),
+                ),
+                const SizedBox(
+                  width: 16,
+                ),
+                Row(
+                  children: const [
+                    Expanded(
+                        child: Text(
+                      "Membuat Pesanan",
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Constants.COLOR_MAIN_TEXT),
+                    )),
+                  ],
+                )
+              ],
+            ),
+          ),
+          Expanded(
+            child: ListView(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Mandor yang dipilih',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24,
+                              color: Constants.COLOR_TITLE),
+                        ),
+                        const SizedBox(
+                          height: 32,
+                        ),
+                        const Text(
+                          'Nama Proyek',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Constants.COLOR_TITLE),
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 5,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          CustomTextField(
+                            hint: "Proyek Rumah Minimalis",
+                            icon: Icons.abc,
+                            callback: (_) => fullname = _,
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          const Text(
+                            'Deskripsi',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Constants.COLOR_TITLE),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          TextField(
+                              onChanged: (_) {},
+                              maxLines: 10,
+                              decoration: const InputDecoration(
+                                  hintText: "Deskripsi",
+                                  hintStyle: TextStyle(
+                                      color: Constants.COLOR_HINT_TEXT),
+                                  prefixIcon: Icon(Icons.text_fields),
+                                  border: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Constants.COLOR_MAIN)))),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          const Text(
+                            'Durasi',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Constants.COLOR_TITLE),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: InkWell(
+                              onTap: () {
+                                showDatePicker(
+                                        context: context,
+                                        initialDate: start,
+                                        //get today's date
+                                        firstDate: DateTime(2000),
+                                        //DateTime.now() - not to allow to choose before today.
+                                        lastDate: DateTime(2101))
+                                    .then((value) {
+                                  if (value != null) {
+                                    setState(() {
+                                      start = value;
+                                    });
+                                  }
+                                });
+                              },
+                              child: TextField(
+                                  enabled: false,
+                                  onChanged: (_) {},
+                                  decoration: InputDecoration(
+                                      helperText: "Tanggal Mulai",
+                                      helperStyle: const TextStyle(
+                                          fontSize: 12,
+                                          color: Constants.COLOR_TEXT),
+                                      hintText: DateFormat('dd/MM/yyyy')
+                                          .format(start),
+                                      hintStyle: const TextStyle(
+                                          fontSize: 12,
+                                          color: Constants.COLOR_TEXT),
+                                      prefixIcon: const Icon(Icons.date_range),
+                                      border: const OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: Constants.COLOR_MAIN)))),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 12,
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: InkWell(
+                              onTap: () {
+                                showDatePicker(
+                                        context: context,
+                                        initialDate: finish,
+                                        firstDate: DateTime(2000),
+                                        lastDate: DateTime(2101))
+                                    .then((value) {
+                                  if (value != null) {
+                                    setState(() {
+                                      finish = value;
+                                    });
+                                  }
+                                });
+                              },
+                              child: TextField(
+                                  enabled: false,
+                                  onChanged: (_) {},
+                                  decoration: InputDecoration(
+                                      helperText: "Tanggal Selesai",
+                                      helperStyle: const TextStyle(
+                                          fontSize: 12,
+                                          color: Constants.COLOR_TEXT),
+                                      hintText: DateFormat('dd/MM/yyyy')
+                                          .format(finish),
+                                      hintStyle: const TextStyle(
+                                        fontSize: 12,
+                                        color: Constants.COLOR_TEXT,
+                                      ),
+                                      prefixIcon: const Icon(Icons.date_range),
+                                      border: const OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: Constants.COLOR_MAIN)))),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          const Text(
+                            'Lokasi Proyek',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Constants.COLOR_TITLE),
+                          ),
+                          const SizedBox(
+                            height: 4,
+                          ),
+                          DropdownButton(
+                              icon: const Icon(Icons.pin_drop),
+                              value: loc,
+                              items: dropdownLokasi,
+                              onChanged: (_) {
+                                setState(() {
+                                  loc = _ ?? "Surabaya";
+                                });
+                              }),
+                          TextField(
+                              onChanged: (_) {},
+                              maxLines: 2,
+                              decoration: const InputDecoration(
+                                  hintText: "Alamat Lengkap",
+                                  hintStyle: TextStyle(
+                                      color: Constants.COLOR_HINT_TEXT),
+                                  prefixIcon: Icon(Icons.home),
+                                  border: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Constants.COLOR_MAIN)))),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          Container(
+                            decoration:
+                                const BoxDecoration(color: Colors.white),
+                            padding: const EdgeInsets.only(top: 12),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Expanded(
+                                    flex: 1,
+                                    child: Text(
+                                      "Rp.12.000.000",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                                Expanded(
+                                    flex: 1,
+                                    child: CustomButton(
+                                        text: "Tawarkan Proyek",
+                                        textColor: Colors.white,
+                                        buttonColor: Constants.COLOR_MAIN,
+                                        onPressed: () {
+                                          Constants.goto(
+                                              context, const AgreementScreen());
+                                        }))
+                              ],
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    )));
+  }
+}
