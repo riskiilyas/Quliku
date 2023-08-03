@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:quliku/screen/agreement_screen.dart';
 import 'package:quliku/util/constants.dart';
 import 'package:quliku/util/fetch_status.dart';
+import 'package:quliku/util/routes.dart';
 import 'package:quliku/widget/custom_button.dart';
 import 'package:quliku/notifier/register_notifier.dart';
 
@@ -643,7 +644,7 @@ class _MyHomePageState extends State<RegistrasiProyekScreen> {
                         textColor: Colors.white,
                         buttonColor: Constants.COLOR_MAIN_TEXT,
                         onPressed: () {
-                          Constants.goto(context, const AgreementScreen());
+                          Navigator.pushNamed(context, Routes.AGREEMENT);
                         })),
               ],
             ),

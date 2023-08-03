@@ -10,6 +10,7 @@ import 'package:quliku/screen/detail_mandor_screen.dart';
 import 'package:quliku/screen/registrasi_proyek_screen.dart';
 import 'package:quliku/util/dev.dart';
 import 'package:quliku/util/fetch_status.dart';
+import 'package:quliku/util/routes.dart';
 import 'package:quliku/util/service_locator.dart';
 import 'package:quliku/widget/custom_mandor_item.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -145,16 +146,20 @@ class _HomePageState extends State<HomePage> {
                           text: "Konsultan",
                           imgUrl: "assets/konsultan.png",
                           onPressed: () => {
-                            Constants.goto(context, RegistrasiProyekScreen())
+                            Navigator.of(context).pushNamed(Routes.OFFERING)
                           }),
                       KlasifikasiButton(
                           text: "Tukang",
                           imgUrl: "assets/tukang.png",
-                          onPressed: () => {}),
+                          onPressed: () => {
+                            Navigator.of(context).pushNamed(Routes.OFFERING)
+                          }),
                       KlasifikasiButton(
                           text: "Mandor",
                           imgUrl: "assets/mandor.png",
-                          onPressed: () => {})
+                          onPressed: () => {
+                            Navigator.of(context).pushNamed(Routes.OFFERING)
+                          })
                     ],
                   ),
                 ),

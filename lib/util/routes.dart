@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:quliku/screen/agreement_screen.dart';
+import 'package:quliku/screen/bukti_transfer_screen.dart';
+import 'package:quliku/screen/edit_profile_screen.dart';
 import 'package:quliku/screen/home_screen.dart';
 import 'package:quliku/screen/login_screen.dart';
 import 'package:quliku/screen/register_screen.dart';
@@ -13,6 +16,9 @@ class Routes {
   static const LOGIN = '/login';
   static const REGISTER = '/register';
   static const OFFERING = '/offering';
+  static const AGREEMENT = '/agreement';
+  static const PAYMENT = '/payment';
+  static const EDIT_PROFILE = '/edit_profile';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
@@ -30,6 +36,12 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const RegisterScreen(),);
       case OFFERING:
         return MaterialPageRoute(builder: (_) => const RegistrasiProyekScreen(),);
+      case AGREEMENT:
+        return MaterialPageRoute(builder: (_) => const AgreementScreen(),);
+      case PAYMENT:
+        return MaterialPageRoute(builder: (_) => const BuktiTransferScreen(),);
+      case EDIT_PROFILE:
+        return MaterialPageRoute(builder: (_) => const EditProfileScreen(),);
       default:
         return _errorRoute();
     }

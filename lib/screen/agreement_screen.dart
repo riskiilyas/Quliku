@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:quliku/notifier/pref_notifier.dart';
 import 'package:quliku/screen/bukti_transfer_screen.dart';
 import 'package:quliku/util/constants.dart';
+import 'package:quliku/util/routes.dart';
 import 'package:quliku/util/user_agreement.dart';
 import 'package:quliku/widget/custom_button.dart';
 
@@ -105,8 +106,7 @@ class _MyHomePageState extends State<AgreementScreen> {
                                 textColor: Colors.white,
                                 buttonColor: Constants.COLOR_MAIN,
                                 onPressed: () {
-                                  Constants.goto(
-                                      context, const BuktiTransferScreen());
+                                  Navigator.pushNamed(context, Routes.PAYMENT);
                                 })),
                       ],
                     ),

@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:quliku/notifier/pref_notifier.dart';
 import 'package:quliku/screen/home_screen.dart';
 import 'package:quliku/util/constants.dart';
+import 'package:quliku/util/routes.dart';
 import 'package:quliku/widget/custom_button.dart';
 import 'package:quliku/widget/custom_text_field.dart';
 
@@ -182,7 +183,7 @@ class _MyHomePageState extends State<BuktiTransferScreen> {
                         onPressed: () {
                           Constants.showSnackbar(
                               context, "Proyek Berhasil dibuat!");
-                          Constants.goto(context, const HomeScreen());
+                          Navigator.pushNamedAndRemoveUntil(context, Routes.HOME, (route) => false);
                         })
                   ],
                 ),
