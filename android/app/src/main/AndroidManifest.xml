@@ -6,7 +6,7 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-permission android:name="android.permission.CAMERA" />
     <application
-        android:label="quliku"
+        android:label="Quliku"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
