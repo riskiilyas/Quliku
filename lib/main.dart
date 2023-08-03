@@ -1,8 +1,5 @@
-import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:get/get.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:quliku/notifier/detail_mandor_notifier.dart';
 import 'package:quliku/notifier/login_notifier.dart';
@@ -12,6 +9,7 @@ import 'package:quliku/notifier/wishlist_mandor_notifier.dart';
 import 'package:quliku/screen/home_screen.dart';
 import 'package:quliku/screen/welcome_screen.dart';
 import 'package:quliku/util/constants.dart';
+import 'package:quliku/util/routes.dart';
 import 'package:quliku/util/service_locator.dart';
 import 'package:quliku/notifier/pref_notifier.dart';
 import 'package:quliku/notifier/search_mandor_notifier.dart';
@@ -50,21 +48,23 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<PrefNotifier>().init();
     checkLoggedIn();
-    return GetMaterialApp(
-      home: MaterialApp(
+    return MaterialApp(
           title: 'Quliku',
           theme: ThemeData(
             primarySwatch: Colors.orange,
           ),
-          home: AnimatedSplashScreen(
-            duration: 2000,
-            splashIconSize: 180,
-            backgroundColor: Constants.COLOR_MAIN,
-            splash: 'assets/logo_quliku_new.png',
-            splashTransition: SplashTransition.slideTransition,
-            pageTransitionType: PageTransitionType.bottomToTop,
-            nextScreen: const WelcomeScreen(),
-          )),
+          initialRoute: Routes.ROOT,
+          onGenerateRoute: Routes.generateRoute,
+          debugShowCheckedModeBanner: false,
+          // home: AnimatedSplashScreen(
+          //   duration: 2000,
+          //   splashIconSize: 180,
+          //   backgroundColor: Constants.COLOR_MAIN,
+          //   splash: 'assets/logo_quliku_new.png',
+          //   splashTransition: SplashTransition.slideTransition,
+          //   pageTransitionType: PageTransitionType.bottomToTop,
+          //   nextScreen: const WelcomeScreen(),
+          // )
     );
   }
 }

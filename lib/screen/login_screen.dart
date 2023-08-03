@@ -5,6 +5,7 @@ import 'package:quliku/notifier/login_notifier.dart';
 import 'package:quliku/screen/home_screen.dart';
 import 'package:quliku/util/constants.dart';
 import 'package:quliku/util/fetch_status.dart';
+import 'package:quliku/util/routes.dart';
 import 'package:quliku/util/service_locator.dart';
 import 'package:quliku/widget/custom_button.dart';
 import 'package:quliku/widget/custom_text_field.dart';
@@ -124,7 +125,8 @@ class _MyHomePageState extends State<LoginScreen> {
                 textColor: Colors.white,
                 buttonColor: Constants.COLOR_MAIN,
                 onPressed: () => {
-                  Constants.goto(context, HomeScreen())
+                      Navigator.of(context)
+                          .pushNamedAndRemoveUntil(Routes.HOME, (_) => false)
                       // context
                       //     .read<LoginNotifier>()
                       //     .fetch(usernameOrEmail, password)
@@ -136,11 +138,13 @@ class _MyHomePageState extends State<LoginScreen> {
               children: [
                 const Text(
                   'Belum Punya Akun? ',
-                  style: TextStyle(
-                      color: Constants.COLOR_HINT_TEXT, fontSize: 16),
+                  style:
+                      TextStyle(color: Constants.COLOR_HINT_TEXT, fontSize: 16),
                 ),
                 InkWell(
                   onTap: () => {
+                    Navigator.of(context)
+                        .pushReplacementNamed(Routes.REGISTER)
                     // Constants.goto(RegisterScreen(blocContext: widget.blocContext,))
                   },
                   child: const Text(

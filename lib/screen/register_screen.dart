@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:quliku/util/constants.dart';
 import 'package:quliku/util/fetch_status.dart';
+import 'package:quliku/util/routes.dart';
 import 'package:quliku/widget/custom_button.dart';
 import 'package:quliku/widget/custom_text_field.dart';
 import 'package:quliku/notifier/register_notifier.dart';
@@ -112,17 +113,19 @@ class _MyHomePageState extends State<RegisterScreen> {
                 ),
                 status != FetchStatus.LOADING && status != FetchStatus.SUCCESS
                     ? CustomButton(
-                    text: "DAFTAR",
-                    textColor: Colors.white,
-                    buttonColor: Constants.COLOR_MAIN,
-                    onPressed: () {
-                      context.read<RegisterNotifier>().fetch(fullname,
-                          username, email, password, confirmPassword);
-                    })
+                        text: "DAFTAR",
+                        textColor: Colors.white,
+                        buttonColor: Constants.COLOR_MAIN,
+                        onPressed: () {
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                              Routes.WELCOME, (_) => false);
+                          // context.read<RegisterNotifier>().fetch(fullname,
+                          //     username, email, password, confirmPassword);
+                        })
                     : const SpinKitFadingCircle(
-                  color: Constants.COLOR_MAIN,
-                  size: 50.0,
-                ),
+                        color: Constants.COLOR_MAIN,
+                        size: 50.0,
+                      ),
                 const SizedBox(
                   height: 12,
                 ),
@@ -135,7 +138,9 @@ class _MyHomePageState extends State<RegisterScreen> {
                     ),
                     InkWell(
                       onTap: () => {
-                        // Constants.goto(LoginScreen(blocContext: widget.blocContext))
+                        Navigator.of(context).pushReplacementNamed(
+                            Routes.LOGIN
+                        )
                       },
                       child: const Text(
                         'Masuk',

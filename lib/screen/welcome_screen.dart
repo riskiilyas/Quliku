@@ -3,6 +3,7 @@ import 'package:quliku/screen/home_screen.dart';
 import 'package:quliku/screen/login_screen.dart';
 import 'package:quliku/screen/register_screen.dart';
 import 'package:quliku/util/constants.dart';
+import 'package:quliku/util/routes.dart';
 import 'package:quliku/util/service_locator.dart';
 import 'package:quliku/widget/custom_button.dart';
 
@@ -47,8 +48,9 @@ class _MyHomePageState extends State<WelcomeScreen> {
                               textColor: Constants.COLOR_MAIN,
                               buttonColor: Colors.white,
                               onPressed: () => {
-                                    Constants.goto(
-                                        context, const RegisterScreen())
+                                    Navigator.of(context).pushNamed(
+                                      Routes.REGISTER,
+                                    )
                                   }),
                           const SizedBox(
                             height: 12,
@@ -62,7 +64,9 @@ class _MyHomePageState extends State<WelcomeScreen> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  Constants.goto(context, const LoginScreen());
+                                  Navigator.of(context).pushNamed(
+                                    Routes.LOGIN,
+                                  );
                                 },
                                 child: const Text(
                                   "Masuk",
