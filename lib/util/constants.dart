@@ -13,6 +13,7 @@ class Constants {
   static const PREF_NAME = "name";
   static const PREF_USERNAME = "username";
   static const PREF_EMAIL = "email";
+  static const PREF_PASSWORD = "password";
   static const PREF_ROLE = "role";
   static const PREF_PROFILE_URL = "profile_url";
   static const PREF_TOKEN = "token";

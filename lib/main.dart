@@ -56,15 +56,6 @@ class MyApp extends StatelessWidget {
           initialRoute: Routes.ROOT,
           onGenerateRoute: Routes.generateRoute,
           debugShowCheckedModeBanner: false,
-          // home: AnimatedSplashScreen(
-          //   duration: 2000,
-          //   splashIconSize: 180,
-          //   backgroundColor: Constants.COLOR_MAIN,
-          //   splash: 'assets/logo_quliku_new.png',
-          //   splashTransition: SplashTransition.slideTransition,
-          //   pageTransitionType: PageTransitionType.bottomToTop,
-          //   nextScreen: const WelcomeScreen(),
-          // )
     );
   }
 }

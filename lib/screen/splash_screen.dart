@@ -1,13 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:quliku/screen/home_screen.dart';
-import 'package:quliku/screen/login_screen.dart';
-import 'package:quliku/screen/register_screen.dart';
 import 'package:quliku/util/constants.dart';
+import 'package:quliku/util/extensions.dart';
+import 'package:quliku/util/fetch_status.dart';
 import 'package:quliku/util/routes.dart';
-import 'package:quliku/util/service_locator.dart';
-import 'package:quliku/widget/custom_button.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -17,8 +16,36 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<SplashScreen> {
+
+  void checkLoggedIn() async {
+    prefNotifier.init().then((value) {
+      var email = prefNotifier.email;
+      var password = prefNotifier.password;
+
+      loginNotifier.fetch(email, password).then((data) {
+        Future.delayed(1.5.seconds, () {
+          if(loginNotifier.status==FetchStatus.SUCCESS) {
+            prefNotifier.setEmail(email);
+            prefNotifier.setUsername(loginNotifier.loginData!.username);
+            prefNotifier.setPassword(password);
+            prefNotifier.setId(loginNotifier.loginData!.id);
+            prefNotifier.setName(loginNotifier.loginData!.name);
+            prefNotifier.setProfileUrl(loginNotifier.loginData!.profileUrl);
+            prefNotifier.setRole(loginNotifier.loginData!.role);
+            prefNotifier.setToken(loginNotifier.loginData!.token);
+
+            popTo(Routes.HOME);
+          } else {
+            popTo(Routes.WELCOME);
+          }
+        });
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    checkLoggedIn();
     return Scaffold(
         backgroundColor: Constants.COLOR_MAIN,
         body: SafeArea(
@@ -55,24 +82,5 @@ class _MyHomePageState extends State<SplashScreen> {
             ),
           ),
         ));
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      // do something
-      // var prefs = ServiceLocator.prefs;
-      // prefs.then((value) {
-      //   if (value.getString(Constants.PREF_TOKEN) != null) {
-      //     Constants.popto(context, const HomeScreen());
-      //   }
-      // });
-
-      Future.delayed(1.5.seconds, () {
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil(Routes.WELCOME, (_) => false);
-      });
-    });
   }
 }

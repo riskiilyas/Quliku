@@ -10,6 +10,7 @@ class PrefNotifier with ChangeNotifier {
   String _name = "";
   String _username = "";
   String _email = "";
+  String _password = "";
   String _role = "";
   String _profileUrl = "";
   String _token = "";
@@ -18,17 +19,12 @@ class PrefNotifier with ChangeNotifier {
   FetchStatus get status => _status;
 
   int get id => _id;
-
   String get name => _name;
-
   String get username => _name;
-
   String get email => _email;
-
+  String get password => _password;
   String get role => _role;
-
   String get profileUrl => _profileUrl;
-
   String get token => _token;
 
   Future<void> init() async {
@@ -37,6 +33,7 @@ class PrefNotifier with ChangeNotifier {
     _name = _pref!.getString(Constants.PREF_NAME) ?? "";
     _username = _pref!.getString(Constants.PREF_USERNAME) ?? "";
     _email = _pref!.getString(Constants.PREF_EMAIL) ?? "";
+    _password = _pref!.getString(Constants.PREF_PASSWORD) ?? "";
     _role = _pref!.getString(Constants.PREF_ROLE) ?? "";
     _profileUrl = _pref!.getString(Constants.PREF_PROFILE_URL) ?? "";
     _token = _pref!.getString(Constants.PREF_TOKEN) ?? "";
@@ -68,6 +65,13 @@ class PrefNotifier with ChangeNotifier {
   Future<void> setEmail(String email) async {
     _pref!.setString(Constants.PREF_EMAIL, email);
     _email = _pref!.getString(Constants.PREF_EMAIL) ?? "";
+    _status = FetchStatus.SUCCESS;
+    notifyListeners();
+  }
+
+  Future<void> setPassword(String password) async {
+    _pref!.setString(Constants.PREF_PROFILE_URL, password);
+    _password = _pref!.getString(Constants.PREF_PASSWORD) ?? "";
     _status = FetchStatus.SUCCESS;
     notifyListeners();
   }

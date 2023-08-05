@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quliku/animation/transitions.dart';
 import 'package:quliku/screen/agreement_screen.dart';
 import 'package:quliku/screen/bukti_transfer_screen.dart';
 import 'package:quliku/screen/edit_profile_screen.dart';
@@ -27,21 +28,21 @@ class Routes {
       case ROOT:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case WELCOME:
-        return MaterialPageRoute(builder: (_) => const WelcomeScreen());
+        return Transitions.welcomeRouteTransition(const WelcomeScreen());
       case HOME:
-        return MaterialPageRoute(builder: (_) => const HomeScreen(),);
+        return Transitions.welcomeRouteTransition(const HomeScreen());
       case LOGIN:
-        return MaterialPageRoute(builder: (_) => const LoginScreen(),);
+        return Transitions.pageRouteTransition(const LoginScreen());
       case REGISTER:
-        return MaterialPageRoute(builder: (_) => const RegisterScreen(),);
+        return Transitions.pageRouteTransition(const RegisterScreen());
       case OFFERING:
-        return MaterialPageRoute(builder: (_) => const RegistrasiProyekScreen(),);
+        return Transitions.pageRouteTransition(const RegistrasiProyekScreen());
       case AGREEMENT:
-        return MaterialPageRoute(builder: (_) => const AgreementScreen(),);
+        return Transitions.pageRouteTransition(const AgreementScreen());
       case PAYMENT:
-        return MaterialPageRoute(builder: (_) => const BuktiTransferScreen(),);
+        return Transitions.pageRouteTransition(const BuktiTransferScreen());
       case EDIT_PROFILE:
-        return MaterialPageRoute(builder: (_) => const EditProfileScreen(),);
+        return Transitions.pageRouteTransition(const EditProfileScreen());
       default:
         return _errorRoute();
     }
