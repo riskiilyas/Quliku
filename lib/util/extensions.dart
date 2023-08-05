@@ -26,7 +26,7 @@ extension Notifier on State {
   }
 
   void popTo(String routes) {
-    Navigator.pushNamedAndRemoveUntil(context, routes, (_)=>false);
+    Navigator.pushNamedAndRemoveUntil(context, routes, (_) => false);
   }
 
   void goBack() {

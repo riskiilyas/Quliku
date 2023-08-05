@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:quliku/util/constants.dart';
+import 'package:quliku/util/extensions.dart';
 import 'package:quliku/util/fetch_status.dart';
 import 'package:quliku/util/routes.dart';
 import 'package:quliku/widget/custom_button.dart';
@@ -30,7 +31,7 @@ class _MyHomePageState extends State<RegisterScreen> {
       if (status == FetchStatus.SUCCESS) {
         context.read<RegisterNotifier>().init();
         Constants.showSnackbar(context, "Successfully Register!");
-        Navigator.pop(context);
+        goBack();
       } else if (status == FetchStatus.ERROR) {
         context.read<RegisterNotifier>().init();
         Constants.showSnackbar(context,
@@ -51,12 +52,24 @@ class _MyHomePageState extends State<RegisterScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Daftar',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                      color: Constants.COLOR_MAIN),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Daftar',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                          color: Constants.COLOR_MAIN),
+                    ),
+                    InkWell(
+                      onTap: () => goBack(),
+                      child: const Icon(
+                        Icons.arrow_back,
+                        color: Constants.COLOR_MAIN,
+                      ),
+                    )
+                  ],
                 ),
                 const Divider(
                   color: Constants.COLOR_MAIN,
@@ -116,12 +129,10 @@ class _MyHomePageState extends State<RegisterScreen> {
                         text: "DAFTAR",
                         textColor: Colors.white,
                         buttonColor: Constants.COLOR_MAIN,
-                        onPressed: () {
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              Routes.WELCOME, (_) => false);
-                          // context.read<RegisterNotifier>().fetch(fullname,
-                          //     username, email, password, confirmPassword);
-                        })
+                        onPressed: () => goTo(Routes.VERIFICATION)
+                        // context.read<RegisterNotifier>().fetch(fullname,
+                        //     username, email, password, confirmPassword);
+                        )
                     : const SpinKitFadingCircle(
                         color: Constants.COLOR_MAIN,
                         size: 50.0,
@@ -137,11 +148,7 @@ class _MyHomePageState extends State<RegisterScreen> {
                           color: Constants.COLOR_HINT_TEXT, fontSize: 16),
                     ),
                     InkWell(
-                      onTap: () => {
-                        Navigator.of(context).pushReplacementNamed(
-                            Routes.LOGIN
-                        )
-                      },
+                      onTap: () => jumpTo(Routes.LOGIN),
                       child: const Text(
                         'Masuk',
                         style: TextStyle(

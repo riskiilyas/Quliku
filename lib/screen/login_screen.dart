@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:quliku/notifier/login_notifier.dart';
 import 'package:quliku/screen/home_screen.dart';
 import 'package:quliku/util/constants.dart';
+import 'package:quliku/util/extensions.dart';
 import 'package:quliku/util/fetch_status.dart';
 import 'package:quliku/util/routes.dart';
 import 'package:quliku/util/service_locator.dart';
@@ -67,7 +68,7 @@ class _MyHomePageState extends State<LoginScreen> {
                       color: Constants.COLOR_MAIN),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () => goBack(),
                   child: const Icon(
                     Icons.arrow_back,
                     color: Constants.COLOR_MAIN,
@@ -124,13 +125,7 @@ class _MyHomePageState extends State<LoginScreen> {
                 text: "MASUK",
                 textColor: Colors.white,
                 buttonColor: Constants.COLOR_MAIN,
-                onPressed: () => {
-                      Navigator.of(context)
-                          .pushNamedAndRemoveUntil(Routes.HOME, (_) => false)
-                      // context
-                      //     .read<LoginNotifier>()
-                      //     .fetch(usernameOrEmail, password)
-                    }),
+                onPressed: () => {popTo(Routes.HOME)}),
             const SizedBox(
               height: 12,
             ),
@@ -142,11 +137,7 @@ class _MyHomePageState extends State<LoginScreen> {
                       TextStyle(color: Constants.COLOR_HINT_TEXT, fontSize: 16),
                 ),
                 InkWell(
-                  onTap: () => {
-                    Navigator.of(context)
-                        .pushReplacementNamed(Routes.REGISTER)
-                    // Constants.goto(RegisterScreen(blocContext: widget.blocContext,))
-                  },
+                  onTap: () => jumpTo(Routes.REGISTER),
                   child: const Text(
                     'Yuk Daftar!',
                     style: TextStyle(

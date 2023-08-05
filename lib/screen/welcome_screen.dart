@@ -3,6 +3,7 @@ import 'package:quliku/screen/home_screen.dart';
 import 'package:quliku/screen/login_screen.dart';
 import 'package:quliku/screen/register_screen.dart';
 import 'package:quliku/util/constants.dart';
+import 'package:quliku/util/extensions.dart';
 import 'package:quliku/util/routes.dart';
 import 'package:quliku/util/service_locator.dart';
 import 'package:quliku/widget/custom_button.dart';
@@ -48,9 +49,7 @@ class _MyHomePageState extends State<WelcomeScreen> {
                               textColor: Constants.COLOR_MAIN,
                               buttonColor: Colors.white,
                               onPressed: () => {
-                                    Navigator.of(context).pushNamed(
-                                      Routes.REGISTER,
-                                    )
+                                   goTo(Routes.REGISTER)
                                   }),
                           const SizedBox(
                             height: 12,
@@ -63,10 +62,8 @@ class _MyHomePageState extends State<WelcomeScreen> {
                                 style: TextStyle(color: Colors.white),
                               ),
                               InkWell(
-                                onTap: () {
-                                  Navigator.of(context).pushNamed(
-                                    Routes.LOGIN,
-                                  );
+                                onTap: () => {
+                                  goTo(Routes.LOGIN)
                                 },
                                 child: const Text(
                                   "Masuk",
@@ -92,19 +89,5 @@ class _MyHomePageState extends State<WelcomeScreen> {
             ),
           ),
         ));
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      // do something
-      var prefs = ServiceLocator.prefs;
-      prefs.then((value) {
-        if (value.getString(Constants.PREF_TOKEN) != null) {
-          Constants.popto(context, const HomeScreen());
-        }
-      });
-    });
   }
 }

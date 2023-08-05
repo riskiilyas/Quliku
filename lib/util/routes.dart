@@ -8,6 +8,7 @@ import 'package:quliku/screen/login_screen.dart';
 import 'package:quliku/screen/register_screen.dart';
 import 'package:quliku/screen/registrasi_proyek_screen.dart';
 import 'package:quliku/screen/splash_screen.dart';
+import 'package:quliku/screen/verifikasi_akun.dart';
 import 'package:quliku/screen/welcome_screen.dart';
 
 class Routes {
@@ -20,13 +21,14 @@ class Routes {
   static const AGREEMENT = '/agreement';
   static const PAYMENT = '/payment';
   static const EDIT_PROFILE = '/edit_profile';
+  static const VERIFICATION = '/verification';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
 
     switch (settings.name) {
       case ROOT:
-        return MaterialPageRoute(builder: (_) => const SplashScreen());
+        return MaterialPageRoute(builder: (_)=>const SplashScreen());
       case WELCOME:
         return Transitions.welcomeRouteTransition(const WelcomeScreen());
       case HOME:
@@ -43,6 +45,8 @@ class Routes {
         return Transitions.pageRouteTransition(const BuktiTransferScreen());
       case EDIT_PROFILE:
         return Transitions.pageRouteTransition(const EditProfileScreen());
+      case VERIFICATION:
+        return Transitions.pageRouteTransition(const VerifikasiAkunScreen());
       default:
         return _errorRoute();
     }
