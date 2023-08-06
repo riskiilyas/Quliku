@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +21,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<LoginScreen> {
-  String usernameOrEmail = "";
+  String email = "";
   String password = "";
   FetchStatus status = FetchStatus.INITIAL;
 
@@ -30,20 +32,16 @@ class _MyHomePageState extends State<LoginScreen> {
       if (status == FetchStatus.SUCCESS) {
         var data = context.read<LoginNotifier>().loginData!;
         ServiceLocator.prefs.then((pref) {
-          pref.setInt(Constants.PREF_UID, data.id);
-          pref.setString(Constants.PREF_NAME, data.name);
-          pref.setString(Constants.PREF_USERNAME, data.username);
-          pref.setString(Constants.PREF_EMAIL, data.email);
           pref.setString(Constants.PREF_ROLE, data.role);
-          pref.setString(Constants.PREF_PROFILE_URL, data.profileUrl);
           pref.setString(Constants.PREF_TOKEN, data.token);
+          pref.setString(Constants.PREF_EMAIL, email);
+          pref.setString(Constants.PREF_PASSWORD, password);
           context.read<LoginNotifier>().init();
-          Constants.showSnackbar(context, "Selamat datang ${data.name}!");
           Constants.popto(context, const HomeScreen());
         });
       } else if (status == FetchStatus.ERROR) {
         context.read<LoginNotifier>().init();
-        Constants.showSnackbar(context, "Gagal Login, Pastikan akun benar!");
+        Constants.showSnackbar(context, loginNotifier.error);
       }
     });
   }
@@ -105,7 +103,7 @@ class _MyHomePageState extends State<LoginScreen> {
               hint: "Email",
               icon: Icons.email,
               callback: (_) {
-                usernameOrEmail = _;
+                email = _;
               },
             ),
             const SizedBox(
@@ -125,7 +123,7 @@ class _MyHomePageState extends State<LoginScreen> {
                 text: "MASUK",
                 textColor: Colors.white,
                 buttonColor: Constants.COLOR_MAIN,
-                onPressed: () => {popTo(Routes.HOME)}),
+                onPressed: () => {loginNotifier.fetch(email, password)}),
             const SizedBox(
               height: 12,
             ),

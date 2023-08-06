@@ -31,15 +31,9 @@ class _MyHomePageState extends State<VerifikasiAkunScreen> {
       if (status == FetchStatus.SUCCESS) {
         var data = context.read<LoginNotifier>().loginData!;
         ServiceLocator.prefs.then((pref) {
-          pref.setInt(Constants.PREF_UID, data.id);
-          pref.setString(Constants.PREF_NAME, data.name);
-          pref.setString(Constants.PREF_USERNAME, data.username);
-          pref.setString(Constants.PREF_EMAIL, data.email);
           pref.setString(Constants.PREF_ROLE, data.role);
-          pref.setString(Constants.PREF_PROFILE_URL, data.profileUrl);
           pref.setString(Constants.PREF_TOKEN, data.token);
           context.read<LoginNotifier>().init();
-          Constants.showSnackbar(context, "Selamat datang ${data.name}!");
           Constants.popto(context, const HomeScreen());
         });
       } else if (status == FetchStatus.ERROR) {

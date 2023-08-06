@@ -132,22 +132,25 @@ class Network {
   Future<LoginResponse> login(email, password) async {
     var baseurl = dotenv.env['BASE_URL'] ?? "";
 
+    print(email + " " + password + " $baseurl/user/login");
+
     final response = await http.Client().post(
-      Uri.parse("$baseurl/api/contractor/auth/login"),
+      Uri.parse("$baseurl/user/login"),
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Access-Control-Allow-Origin": "*",
+        'Content-Type': 'application/json; charset=UTF-8',
       },
       encoding: Encoding.getByName('utf-8'),
-      body: {
+      body: jsonEncode({
         "email": email,
         "password": password,
-      },
+      }),
     );
 
     if (response.statusCode == 200) {
       return LoginResponse.fromJson(json.decode(response.body));
     } else {
-      throw Exception("Gagal Login, pastikan email dan password sudah pas");
+      throw Exception("Gagal Login, pastikan email dan password sudah pas ${response.statusCode}");
     }
   }
 }

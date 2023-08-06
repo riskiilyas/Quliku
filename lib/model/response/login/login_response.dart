@@ -2,25 +2,29 @@ import 'data.dart';
 
 class LoginResponse {
   LoginResponse({
-    required this.success,
+    required this.status,
     required this.message,
+    required this.error,
     required this.data,
   });
 
   LoginResponse.fromJson(dynamic json) {
-    success = json['success'];
+    status = json['status'];
     message = json['message'];
+    error = json['error'];
     data = (json['data'] != null ? LoginData.fromJson(json['data']) : null)!;
   }
 
-  late bool success;
+  late bool status;
   late String message;
+  late String error;
   late LoginData data;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['success'] = success;
+    map['status'] = status;
     map['message'] = message;
+    map['error'] = message;
     map['data'] = data.toJson();
     return map;
   }

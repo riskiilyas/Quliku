@@ -23,14 +23,10 @@ class _MyHomePageState extends State<SplashScreen> {
       var password = prefNotifier.password;
 
       loginNotifier.fetch(email, password).then((data) {
-        Future.delayed(1.5.seconds, () {
+        Future.delayed(1.seconds, () {
           if(loginNotifier.status==FetchStatus.SUCCESS) {
             prefNotifier.setEmail(email);
-            prefNotifier.setUsername(loginNotifier.loginData!.username);
             prefNotifier.setPassword(password);
-            prefNotifier.setId(loginNotifier.loginData!.id);
-            prefNotifier.setName(loginNotifier.loginData!.name);
-            prefNotifier.setProfileUrl(loginNotifier.loginData!.profileUrl);
             prefNotifier.setRole(loginNotifier.loginData!.role);
             prefNotifier.setToken(loginNotifier.loginData!.token);
 
