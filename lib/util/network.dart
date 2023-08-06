@@ -131,9 +131,7 @@ class Network {
 
   Future<LoginResponse> login(email, password) async {
     var baseurl = dotenv.env['BASE_URL'] ?? "";
-
-    print(email + " " + password + " $baseurl/user/login");
-
+    
     final response = await http.Client().post(
       Uri.parse("$baseurl/user/login"),
       headers: {
