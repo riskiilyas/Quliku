@@ -104,22 +104,24 @@ class Network {
   }
 
   Future<RegisterResponse> register(
-      name, username, email, password, passwordConfirmation) async {
+      name, username, noTelp, email, password, passwordConfirmation) async {
     var baseurl = dotenv.env['BASE_URL'] ?? "";
 
     final response = await http.Client().post(
-      Uri.parse("$baseurl/api/contractor/auth/register"),
+      Uri.parse("$baseurl/user"),
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Access-Control-Allow-Origin": "*",
+        'Content-Type': 'application/json; charset=UTF-8',
       },
       encoding: Encoding.getByName('utf-8'),
-      body: {
-        "name": name,
+      body: jsonEncode({
+        "nama_lengkap": name,
         "username": username,
+        "no_telp": noTelp,
         "email": email,
         "password": password,
-        "password_confirmation": passwordConfirmation
-      },
+        "confirm_password": passwordConfirmation
+      }),
     );
 
     if (response.statusCode == 200) {
@@ -131,7 +133,7 @@ class Network {
 
   Future<LoginResponse> login(email, password) async {
     var baseurl = dotenv.env['BASE_URL'] ?? "";
-    
+
     final response = await http.Client().post(
       Uri.parse("$baseurl/user/login"),
       headers: {

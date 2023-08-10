@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -28,6 +29,7 @@ class _MyHomePageState extends State<BuktiTransferScreen> {
 
   Future pickImage(ImageSource source) async {
     try {
+      print('nninjnini');
       final image = await ImagePicker().pickImage(source: source);
       if (image == null) return;
       setState(() => this.image = File(image.path));
@@ -50,148 +52,179 @@ class _MyHomePageState extends State<BuktiTransferScreen> {
         ),
         backgroundColor: Colors.white,
         title: const Text(
-          "Upload Bukti Transfer",
+          "Lakukan Pembayaran",
           style: TextStyle(
-              color: Constants.COLOR_TITLE, fontWeight: FontWeight.bold),
+              color: Constants.COLOR_MAIN, fontWeight: FontWeight.bold),
         ),
       ),
       body: SafeArea(
-          child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-        child: Expanded(
-          child: ListView(
+          child: Column(
             children: [
-              const Text(
-                "Total Pembayaran:",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-              const Text(
-                "Rp.12.000.000",
-                style: TextStyle(fontSize: 20),
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              const Text(
-                "Kirim ke Rekening BCA Quliku:",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-              const Text(
-                "1234567890",
-                style: TextStyle(fontSize: 20),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
               Expanded(
-                flex: 3,
-                child: Center(
-                    child: image != null
-                        ? Image(image: Image.file(image!).image)
-                        : Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                                Icon(Icons.camera_enhance),
-                                Text(
-                                  "  Masukkan Bukti Transfer",
+                child: ListView(
+                  children: [
+                    Card(
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                        child: Column(
+                          children: const [
+                            Text(
+                              "Transfer pada na rekeninng yang tertera, kemudian kirimkan "
+                              "bukti transfer",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            SizedBox(
+                              height: 12,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Card(
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Image.asset(
+                                      'assets/bank/bri.png',
+                                      width: 16,
+                                    ),
+                                    const SizedBox(
+                                      width: 4,
+                                    ),
+                                    const Text(
+                                      "BANK BRI",
+                                      style: TextStyle(
+                                          color: Constants.COLOR_TITLE,
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  ],
+                                ),
+                                const Text(
+                                  "QulikuIndonesia",
                                   style: TextStyle(
-                                      color: Constants.COLOR_HINT_TEXT),
+                                      color: Constants.COLOR_TITLE,
+                                      fontWeight: FontWeight.bold),
                                 )
-                              ])),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Expanded(
-                flex: 1,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: CustomButton(
-                          text: "Kamera",
-                          textColor: Constants.COLOR_MAIN,
-                          buttonColor: Colors.white,
-                          onPressed: () {
-                            pickImage(ImageSource.camera);
-                          }),
+                              ],
+                            ),
+                            const Text(
+                              "No. Rekening",
+                              style: TextStyle(
+                                  color: Constants.COLOR_TITLE,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(
+                              height: 12,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                const Text(
+                                  "0111-01-058258-50-71",
+                                  style: TextStyle(
+                                      color: Constants.COLOR_TITLE,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 24),
+                                ),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    Constants.showSnackbar(
+                                        context,
+                                        "Rekening "
+                                        "Tersalin");
+                                  },
+                                  child: const Icon(
+                                    Icons.copy,
+                                    color: Constants.COLOR_HINT_TEXT,
+                                  ),
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 32,
+                            )
+                          ],
+                        ),
+                      ),
                     ),
-                    Expanded(
-                      flex: 1,
-                      child: CustomButton(
-                          text: "Galeri",
-                          textColor: Colors.white,
-                          buttonColor: Constants.COLOR_MAIN,
-                          onPressed: () {
-                            pickImage(ImageSource.gallery);
-                          }),
+                    Card(
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                        child: Column(
+                          children: [
+                            const Text(
+                              "Upload Bukti Pembayaran",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Constants.COLOR_MAIN,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(
+                              height: 12,
+                            ),
+                            InkWell(
+                                onTap: () {},
+                                child: image == null ? DottedBorder(
+                                  borderType: BorderType.RRect,
+                                  color: Constants.COLOR_MAIN,
+                                  child: Container(
+                                    color: Colors.grey.shade200,
+                                    width: double.infinity,
+                                    height: 160,
+                                    child: const Center(child: Icon(Icons.add, size: 48,
+                                      color: Constants.COLOR_MAIN,)),
+                                  ),
+                                ) : Image(image: Image.file(image!).image)),
+                            const SizedBox(height: 16,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  flex: 1,
+                                  child: CustomButton(
+                                      text: "Kamera",
+                                      textColor: Constants.COLOR_MAIN,
+                                      buttonColor: Colors.white,
+                                      onPressed: () {
+                                        pickImage(ImageSource.camera);
+                                      }),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: CustomButton(
+                                      text: "Galeri",
+                                      textColor: Colors.white,
+                                      buttonColor: Constants.COLOR_MAIN,
+                                      onPressed: () {
+                                        pickImage(ImageSource.gallery);
+                                      }),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 16,
-              ),
-              Expanded(
-                flex: 7,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Nominal:",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    CustomTextField(
-                      hint: "Nominal",
-                      icon: Icons.money,
-                      callback: (_) => fullname = _,
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    const Text(
-                      "Deskripsi:",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    TextField(
-                        onChanged: (_) {},
-                        maxLines: 3,
-                        decoration: const InputDecoration(
-                            hintText: "Deskripsi",
-                            hintStyle:
-                                TextStyle(color: Constants.COLOR_HINT_TEXT),
-                            prefixIcon: Icon(Icons.text_fields),
-                            border: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Constants.COLOR_MAIN)))),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    CustomButton(
-                        text: "Upload",
-                        textColor: Colors.white,
-                        buttonColor: Constants.COLOR_MAIN,
-                        onPressed: () {
-                          Constants.showSnackbar(
-                              context, "Proyek Berhasil dibuat!");
-                          Navigator.pushNamedAndRemoveUntil(context, Routes.HOME, (route) => false);
-                        })
-                  ],
-                ),
-              ),
+              CustomButton(text: "Kirim", textColor: Colors.white, buttonColor:
+              Constants.COLOR_MAIN, onPressed: (){})
             ],
-          ),
-        ),
-      )),
+          )),
     );
   }
 }

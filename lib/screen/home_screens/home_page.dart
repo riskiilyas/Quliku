@@ -201,18 +201,22 @@ class _HomePageState extends State<HomePage> {
                           KlasifikasiButton(
                               text: "Pipa",
                               imgUrl: "assets/pipa.png",
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).pushNamed(Routes.OFFERING);
+                              },
                               space: 0),
                           KlasifikasiButton(
                               text: "Pagar",
                               imgUrl: "assets/pagar.png",
-                              onPressed: () {},
-                              space: 0),
+                              onPressed: () {
+                                Navigator.of(context).pushNamed(Routes.OFFERING);
+                              },                              space: 0),
                           KlasifikasiButton(
                               text: "Cat",
                               imgUrl: "assets/cat.png",
-                              onPressed: () {},
-                              space: 0),
+                              onPressed: () {
+                                Navigator.of(context).pushNamed(Routes.OFFERING);
+                              },                              space: 0),
                         ],
                       ),
                       const SizedBox(
@@ -224,19 +228,22 @@ class _HomePageState extends State<HomePage> {
                           KlasifikasiButton(
                             text: "Dinding",
                             imgUrl: "assets/dinding.png",
-                            onPressed: () {},
-                            space: 0,
+                            onPressed: () {
+                              Navigator.of(context).pushNamed(Routes.OFFERING);
+                            },                            space: 0,
                           ),
                           KlasifikasiButton(
                               text: "Keramik",
                               imgUrl: "assets/keramik.png",
-                              onPressed: () {},
-                              space: 0),
+                              onPressed: () {
+                                Navigator.of(context).pushNamed(Routes.OFFERING);
+                              },                              space: 0),
                           KlasifikasiButton(
                               text: "Genteng",
                               imgUrl: "assets/genteng.png",
-                              onPressed: () {},
-                              space: 0),
+                              onPressed: () {
+                                Navigator.of(context).pushNamed(Routes.OFFERING);
+                              },                              space: 0),
                         ],
                       ),
                       const SizedBox(
@@ -258,18 +265,21 @@ class _HomePageState extends State<HomePage> {
                           KlasifikasiButton(
                               text: "AC",
                               imgUrl: "assets/ac.png",
-                              onPressed: () {},
-                              space: 0),
+                              onPressed: () {
+                                Navigator.of(context).pushNamed(Routes.OFFERING);
+                              },                              space: 0),
                           KlasifikasiButton(
                               text: "Listrik",
                               imgUrl: "assets/listrik.png",
-                              onPressed: () {},
-                              space: 0),
+                              onPressed: () {
+                                Navigator.of(context).pushNamed(Routes.OFFERING);
+                              },                              space: 0),
                           KlasifikasiButton(
                               text: "Kipas Angin",
                               imgUrl: "assets/kipas.png",
-                              onPressed: () {},
-                              space: 0),
+                              onPressed: () {
+                                Navigator.of(context).pushNamed(Routes.OFFERING);
+                              },                              space: 0),
                         ],
                       ),
                     ],
@@ -371,46 +381,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
-// Widget _reccomendMandorWidget(BuildContext context) {
-//   var status = context.watch<ReccomendMandorNotifier>().status;
-//   if (status == FetchStatus.SUCCESS) {
-//     reccomendMandor = context.watch<ReccomendMandorNotifier>().data;
-//     return Column(
-//       children: List.generate(
-//           reccomendMandor.length,
-//           (index) => MandorItem(
-//                 fullname: reccomendMandor[index].name,
-//                 rating: reccomendMandor[index].rating,
-//                 experience: reccomendMandor[index].details.experience,
-//                 rangeKuli:
-//                     "${reccomendMandor[index].details.minPeople} - ${reccomendMandor[index].details.maxPeople} kuli",
-//                 location: reccomendMandor[index].details.city,
-//                 imgUrl: reccomendMandor[index].profileUrl,
-//                 onPressed: () {
-//                   context.read<DetailMandorNotifier>().init();
-//                   Constants.goto(
-//                       context,
-//                       DetailMandorPage(
-//                         id: reccomendMandor[index].id,
-//                       ));
-//                 },
-//               )),
-//     );
-//   } else {
-//     if (status == FetchStatus.INITIAL) {
-//       ServiceLocator.prefs.then((pref) {
-//         context
-//             .read<ReccomendMandorNotifier>()
-//             .fetch(pref.getString(Constants.PREF_TOKEN) ?? "");
-//       });
-//       var response = context.watch<ReccomendMandorNotifier>().data;
-//       reccomendMandor = response;
-//     }
-//     return const SpinKitFadingCircle(
-//       color: Constants.COLOR_MAIN,
-//       size: 50.0,
-//     );
-//   }
-// }
 }

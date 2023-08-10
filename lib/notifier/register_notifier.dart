@@ -12,22 +12,22 @@ class RegisterNotifier with ChangeNotifier {
 
   FetchStatus get status => _status;
 
-  Future<void> fetch(String name, String username, String email,
-      String password, String passwordConfirmation) async {
-    _status = FetchStatus.LOADING;
-    notifyListeners();
-    try {
-      var response = await network.register(
-          name, username, email, password, passwordConfirmation);
-      data = response.data;
-      _status = FetchStatus.SUCCESS;
-    } catch (e) {
-      _status = FetchStatus.ERROR;
-      error = e.toString();
-    } finally {
-      notifyListeners();
-    }
-  }
+  // Future<void> fetch(String name, String username, String email,
+  //     String password, String passwordConfirmation) async {
+  //   _status = FetchStatus.LOADING;
+  //   notifyListeners();
+  //   try {
+  //     var response = await network.register(
+  //         name, username, email, password, passwordConfirmation);
+  //     data = response.data;
+  //     _status = FetchStatus.SUCCESS;
+  //   } catch (e) {
+  //     _status = FetchStatus.ERROR;
+  //     error = e.toString();
+  //   } finally {
+  //     notifyListeners();
+  //   }
+  // }
 
   Future<void> init() async {
     _status = FetchStatus.INITIAL;

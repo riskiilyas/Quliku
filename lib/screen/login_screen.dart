@@ -123,7 +123,10 @@ class _MyHomePageState extends State<LoginScreen> {
                 text: "MASUK",
                 textColor: Colors.white,
                 buttonColor: Constants.COLOR_MAIN,
-                onPressed: () => {loginNotifier.fetch(email, password)}),
+                onPressed: () => {
+                Constants.popto(context, const HomeScreen())
+                // loginNotifier.fetch(email, password)
+                }),
             const SizedBox(
               height: 12,
             ),
