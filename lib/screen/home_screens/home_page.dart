@@ -54,119 +54,118 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 24,
               ),
-              Container(
-                padding: const EdgeInsets.only(left: 12, right: 12, top: 12),
-                decoration: BoxDecoration(
-                  color: Constants.COLOR_MAIN,
-                  borderRadius: const BorderRadius.all(Radius.circular(8)),
-                  border: Border.all(width: 4, color: Constants.COLOR_MAIN),
-                ),
-                child: Stack(
-                    clipBehavior: Clip.none,
-                    fit: StackFit.passthrough,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Image.asset(
-                            "assets/mandor_home_page.png",
-                            width: 69,
-                          ),
-                          const SizedBox(
-                            width: 16,
-                          ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text(
-                                  "Hai, $name Riski Ilyas",
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 2,
-                                  textAlign: TextAlign.end,
-                                  style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(
-                                  height: 16,
-                                ),
-                                const Text(
-                                  "Ada yang perlu diperbaiki?",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 18),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                      Positioned(
-                        right: 0.0,
-                        bottom: -30,
-                        child: InkWell(
-                          onTap: () {},
-                          child: Image.asset("assets/logo_wa.png"),
+              Stack(
+                clipBehavior: Clip.none,
+                fit: StackFit.passthrough,
+                children: [
+                  Container(
+                    padding:
+                        const EdgeInsets.only(left: 12, right: 12, top: 12),
+                    decoration: BoxDecoration(
+                      color: Constants.COLOR_MAIN,
+                      borderRadius: const BorderRadius.all(Radius.circular(8)),
+                      border: Border.all(width: 4, color: Constants.COLOR_MAIN),
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Image.asset(
+                          "assets/mandor_home_page.png",
+                          width: 69,
                         ),
-                      ),
-                    ]),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              const Text(
-                "Jasa Layanan Kami",
-                style: TextStyle(
-                    color: Constants.COLOR_TITLE,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(
-                height: 4,
-              ),
-              const Text(
-                "Apa permasalahan anda?",
-                style: TextStyle(
-                  color: Constants.COLOR_TEXT,
-                ),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Card(
-                elevation: 2,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      KlasifikasiButton(
-                          text: "Konsultan",
-                          imgUrl: "assets/konsultan.png",
-                          onPressed: () => {
-                            Navigator.of(context).pushNamed(Routes.OFFERING)
-                          }),
-                      KlasifikasiButton(
-                          text: "Tukang",
-                          imgUrl: "assets/tukang.png",
-                          onPressed: () => {
-                            Navigator.of(context).pushNamed(Routes.OFFERING)
-                          }),
-                      KlasifikasiButton(
-                          text: "Mandor",
-                          imgUrl: "assets/mandor.png",
-                          onPressed: () => {
-                            Navigator.of(context).pushNamed(Routes.OFFERING)
-                          })
-                    ],
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                "Hai, $name Riski Ilyas",
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                                textAlign: TextAlign.end,
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              const SizedBox(
+                                height: 16,
+                              ),
+                              const Text(
+                                "Ada yang perlu diperbaiki?",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 18),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
+                  Positioned(
+                    bottom: -50,
+                    left: 0,
+                    right: 0,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(8),
+                            child: KlasifikasiButton(
+                                text: "Konsultan",
+                                imgUrl: "assets/konsultan.png",
+                                onPressed: () => {
+                                      Navigator.of(context)
+                                          .pushNamed(Routes.OFFERING)
+                                    }),
+                          ),
+                        ),
+                        Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: KlasifikasiButton(
+                                text: "Tukang",
+                                imgUrl: "assets/tukang.png",
+                                onPressed: () => {
+                                      Navigator.of(context)
+                                          .pushNamed(Routes.OFFERING)
+                                    }),
+                          ),
+                        ),
+                        Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: KlasifikasiButton(
+                                text: "Mandor",
+                                imgUrl: "assets/mandor.png",
+                                onPressed: () => {
+                                      Navigator.of(context)
+                                          .pushNamed(Routes.OFFERING)
+                                    }),
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
               ),
               const SizedBox(
-                height: 12,
+                height: 64,
               ),
+              Divider(),
               const Text(
                 "Pesan Tukang Langsung",
                 style: TextStyle(
@@ -177,111 +176,117 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 8,
               ),
-              Card(
-                elevation: 2,
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+              SizedBox(
+                height: 100,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    KlasifikasiButton(
+                        text: "Pipa",
+                        imgUrl: "assets/pipa.png",
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed(Routes.OFFERING);
+                        },
+                        space: 0),
+                    const SizedBox(width: 16,),
+                    KlasifikasiButton(
+                        text: "Pagar",
+                        imgUrl: "assets/pagar.png",
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed(Routes.OFFERING);
+                        },
+                        space: 0),
+                    const SizedBox(width: 16,),
+                    KlasifikasiButton(
+                        text: "Cat",
+                        imgUrl: "assets/cat.png",
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed(Routes.OFFERING);
+                        },
+                        space: 0),
+                    const SizedBox(width: 16,),
+                    KlasifikasiButton(
+                      text: "Dinding",
+                      imgUrl: "assets/dinding.png",
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(Routes.OFFERING);
+                      },
+                      space: 0,
+                    ),
+                    const SizedBox(width: 16,),
+                    KlasifikasiButton(
+                        text: "Keramik",
+                        imgUrl: "assets/keramik.png",
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed(Routes.OFFERING);
+                        },
+                        space: 0),
+                    const SizedBox(width: 16,),
+                    KlasifikasiButton(
+                        text: "Genteng",
+                        imgUrl: "assets/genteng.png",
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed(Routes.OFFERING);
+                        },
+                        space: 0),
+                    const SizedBox(width: 16,),
+                    KlasifikasiButton(
+                        text: "AC",
+                        imgUrl: "assets/ac.png",
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed(Routes.OFFERING);
+                        },
+                        space: 0),
+                    const SizedBox(width: 16,),
+                    KlasifikasiButton(
+                        text: "Listrik",
+                        imgUrl: "assets/listrik.png",
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed(Routes.OFFERING);
+                        },
+                        space: 0),
+                    const SizedBox(width: 16,),
+                    KlasifikasiButton(
+                        text: "Kipas Angin",
+                        imgUrl: "assets/kipas.png",
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed(Routes.OFFERING);
+                        },
+                        space: 0),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              Divider(),
+              InkWell(
+                onTap: (){},
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  color: Colors.grey[200],
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        "Renovasi",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Constants.COLOR_MAIN,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          KlasifikasiButton(
-                              text: "Pipa",
-                              imgUrl: "assets/pipa.png",
-                              onPressed: () {
-                                Navigator.of(context).pushNamed(Routes.OFFERING);
-                              },
-                              space: 0),
-                          KlasifikasiButton(
-                              text: "Pagar",
-                              imgUrl: "assets/pagar.png",
-                              onPressed: () {
-                                Navigator.of(context).pushNamed(Routes.OFFERING);
-                              },                              space: 0),
-                          KlasifikasiButton(
-                              text: "Cat",
-                              imgUrl: "assets/cat.png",
-                              onPressed: () {
-                                Navigator.of(context).pushNamed(Routes.OFFERING);
-                              },                              space: 0),
+                      Image.asset('assets/logo_wa.png'),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          Text("Kebingungan? Ada Pertanyaan?", style: TextStyle
+                            (color: Constants.COLOR_TITLE, fontWeight: FontWeight.bold),),
+                          Text("Hubungi kami untuk konsultasi gratis")
                         ],
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          KlasifikasiButton(
-                            text: "Dinding",
-                            imgUrl: "assets/dinding.png",
-                            onPressed: () {
-                              Navigator.of(context).pushNamed(Routes.OFFERING);
-                            },                            space: 0,
-                          ),
-                          KlasifikasiButton(
-                              text: "Keramik",
-                              imgUrl: "assets/keramik.png",
-                              onPressed: () {
-                                Navigator.of(context).pushNamed(Routes.OFFERING);
-                              },                              space: 0),
-                          KlasifikasiButton(
-                              text: "Genteng",
-                              imgUrl: "assets/genteng.png",
-                              onPressed: () {
-                                Navigator.of(context).pushNamed(Routes.OFFERING);
-                              },                              space: 0),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      const Text(
-                        "Elektronik",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Constants.COLOR_MAIN,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          KlasifikasiButton(
-                              text: "AC",
-                              imgUrl: "assets/ac.png",
-                              onPressed: () {
-                                Navigator.of(context).pushNamed(Routes.OFFERING);
-                              },                              space: 0),
-                          KlasifikasiButton(
-                              text: "Listrik",
-                              imgUrl: "assets/listrik.png",
-                              onPressed: () {
-                                Navigator.of(context).pushNamed(Routes.OFFERING);
-                              },                              space: 0),
-                          KlasifikasiButton(
-                              text: "Kipas Angin",
-                              imgUrl: "assets/kipas.png",
-                              onPressed: () {
-                                Navigator.of(context).pushNamed(Routes.OFFERING);
-                              },                              space: 0),
-                        ],
-                      ),
+                      )
                     ],
                   ),
                 ),
@@ -289,6 +294,7 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 12,
               ),
+              Divider(),
               const Text(
                 "Cari tau, info untuk rumah impianmu",
                 style: TextStyle(

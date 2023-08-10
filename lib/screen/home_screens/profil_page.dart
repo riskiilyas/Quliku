@@ -53,29 +53,30 @@ class _ProfilPageState extends State<ProfilPage> {
                           flex: 1,
                           child: SizedBox(
                               width: 80,
-                              child: Image.network(
-                                profileUrl,
-                                fit: BoxFit.fill,
-                                loadingBuilder: (BuildContext context,
-                                    Widget child,
-                                    ImageChunkEvent? loadingProgress) {
-                                  if (loadingProgress == null) {
-                                    return child;
-                                  }
-                                  return Center(
-                                    child: CircularProgressIndicator(
-                                      value:
-                                          loadingProgress.expectedTotalBytes !=
-                                                  null
-                                              ? loadingProgress
-                                                      .cumulativeBytesLoaded /
-                                                  loadingProgress
-                                                      .expectedTotalBytes!
-                                              : null,
-                                    ),
-                                  );
-                                },
-                              )),
+                              child: Image.asset('assets/dummy.png'),)
+                              // child: Image.network(
+                              //   profileUrl,
+                              //   fit: BoxFit.fill,
+                              //   loadingBuilder: (BuildContext context,
+                              //       Widget child,
+                              //       ImageChunkEvent? loadingProgress) {
+                              //     if (loadingProgress == null) {
+                              //       return child;
+                              //     }
+                              //     return Center(
+                              //       child: CircularProgressIndicator(
+                              //         value:
+                              //             loadingProgress.expectedTotalBytes !=
+                              //                     null
+                              //                 ? loadingProgress
+                              //                         .cumulativeBytesLoaded /
+                              //                     loadingProgress
+                              //                         .expectedTotalBytes!
+                              //                 : null,
+                              //       ),
+                              //     );
+                              //   },
+                              // )),
                         ),
                         const SizedBox(
                           width: 16,
@@ -86,7 +87,7 @@ class _ProfilPageState extends State<ProfilPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                name,
+                                "Riski Ilyas",
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
@@ -98,7 +99,7 @@ class _ProfilPageState extends State<ProfilPage> {
                                 height: 2,
                               ),
                               Text(
-                                '$username - $email',
+                                'riskiilyas03 - riskiilyas03@gmail.com',
                                 style: const TextStyle(
                                     color: Constants.COLOR_TEXT,
                                     fontSize: 10,
@@ -144,21 +145,21 @@ class _ProfilPageState extends State<ProfilPage> {
                             title: "Proyek Saya",
                             icon: Icons.location_city,
                             onPressed: () => {}),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        ProfileItem(
-                            title: "Wishllist Saya",
-                            icon: Icons.favorite,
-                            onPressed: () =>
-                                {Get.to(() => const WishListScreen())}),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        ProfileItem(
-                            title: "Cari Mandor",
-                            icon: Icons.search,
-                            onPressed: () => {}),
+                        // const SizedBox(
+                        //   height: 12,
+                        // ),
+                        // ProfileItem(
+                        //     title: "Wishllist Saya",
+                        //     icon: Icons.favorite,
+                        //     onPressed: () =>
+                        //         {Get.to(() => const WishListScreen())}),
+                        // const SizedBox(
+                        //   height: 12,
+                        // ),
+                        // ProfileItem(
+                        //     title: "Cari Mandor",
+                        //     icon: Icons.search,
+                        //     onPressed: () => {}),
                       ],
                     ),
                   ),

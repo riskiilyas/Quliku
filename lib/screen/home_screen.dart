@@ -17,12 +17,19 @@ class _MyHomePageState extends State<HomeScreen> {
   int _index = 0;
   List<Widget> pages = [];
 
+
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+    print('newwwww');
     pages.add(HomePage(
       onCariMandor: () => Get.to(() => const CariMandorScreen()),
     ));
     pages.add(const ProfilPage());
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
@@ -33,11 +40,11 @@ class _MyHomePageState extends State<HomeScreen> {
         centerTitle: false,
         title: Image.asset("assets/logo_appbar.png", fit: BoxFit.contain,height: 36,),
         actions: <Widget>[
-          IconButton(
-              icon: const Icon(Icons.favorite),
-              onPressed: () {
-                Get.to(() => const WishListScreen());
-              }),
+          // IconButton(
+          //     icon: const Icon(Icons.favorite),
+          //     onPressed: () {
+          //       Get.to(() => const WishListScreen());
+          //     }),
           IconButton(icon: const Icon(Icons.location_city), onPressed: () {}),
         ],
       ),
